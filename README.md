@@ -3,6 +3,7 @@
 ### Начало работы:
 
 <b>Посмотрите видео: <a href="https://youtu.be/mIs-X63CH78" target="_blank">Tutorial:QuickStart</a></b>
+<b>Для новых версий IDEA (2020 и выше) есть дополнительное видео: <a href="https://youtu.be/0Q8oADdp90Q" target="_blank">Tutorial:QuickStart Git && Idea 2020+</a></b>
 
 1. Инициализация. Нажмите Fork на странице https://github.com/Khmelov/JD2020-09-07/
 2. У вас в аккаунте fork появится тут  https://github.com/ваш_логин/JD2020-09-07
