@@ -20,5 +20,5 @@ public class TaskB {
     }
 
 
-        //авттьцкньцнкьцктьertnwrnwr
+        //sfnsrnwавттьцкньцнкьцктьertnwrnwr
 }}
