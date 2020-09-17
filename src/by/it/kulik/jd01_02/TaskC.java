@@ -8,11 +8,17 @@ public class TaskC {
         Scanner scanner = new Scanner(System.in);
         int n;
         n = scanner.nextInt();
-        int a[][] = new int [1][1];}
+        int arr[][] = new int[n][n];
+
+
+      }
+
+
+    }
 
 
 
-}
+
 
 
 

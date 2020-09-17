@@ -1,8 +1,7 @@
 package by.it.kulik.jd01_01;
 
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /*
@@ -38,18 +37,19 @@ class TaskC3 {
 
 
     public static void main(String[] args) {
-        int a;
+        int earthWeight;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите:");
-         a = sc.nextInt();
-
-        System.out.println(getWeight(a));}
-
-
-    public static double getWeight(int earthWeight) {
-        double moonWeight = earthWeight*3.86/9.81;
-        BigDecimal bd = new BigDecimal(earthWeight).setScale(2, RoundingMode.HALF_UP);
-        earthWeight = (int) bd.doubleValue();
-        return moonWeight;
+        System.out.println("Введите вес на земле:");
+        earthWeight = sc.nextInt();
+        double marsWeight = getWeight(earthWeight);
+        double marsWeight100 = (double) Math.round(marsWeight*100)/100;
+        System.out.println(marsWeight100);
     }
+
+    private static double getWeight(int earthWeight) {
+double marsWeight= earthWeight*3.86/9.81;
+
+return marsWeight;
+    }
+
 }
