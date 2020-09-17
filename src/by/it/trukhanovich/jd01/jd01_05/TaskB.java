@@ -11,8 +11,8 @@ public class TaskB {
 
     private static void step2() {
         int y=-6;
-        for (double x = y+Double.MIN_VALUE; x < 2; x = x + 0.5) {
-                if (x == y+Double.MIN_VALUE) {x=-5.5; continue;}
+        for (double x = -6; x < 2; x = x + 0.5) {
+                if (x <= -6) continue;
                 if (x / 2 > -2 && x / 2 <= -1) {
                 double b = sin(x * x);
                 double a = log(abs(b + 2.74));
@@ -29,7 +29,7 @@ public class TaskB {
                 System.out.printf("При x/2=%f; a=%e\n", x / 2, a);
             continue;}
             System.out.printf("При x/2=%f; вычисления не определены\n", x/2);
-        }
+            }
     }
 
         private static void step1 () {
