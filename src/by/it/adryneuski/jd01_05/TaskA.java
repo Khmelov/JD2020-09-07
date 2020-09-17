@@ -8,7 +8,12 @@ public class TaskA {
         double a = 756.13;
         double x = 0.3;
 
-        System.out.println(cos1(x) - sqrt1(x,a) - log1(x,a));
+        double k = cos(pow((x * x + PI / 6), 5));
+        double k1 = sqrt(x * pow(a, 3));
+        double k2 = log((a - 1.12 * x) / 4);
+        System.out.println(k-k1-k2);
+
+        //System.out.println(cos1(x) - sqrt1(x,a) - log1(x,a));
 
         double z = cos(pow((x * x + PI / 6), 5)) - sqrt(x * pow(a, 3)) - log((a - 1.12 * x) / 4);
         System.out.println(z);
