@@ -47,7 +47,6 @@ public class TaskC {
 //        System.out.printf("Длинна массива:%d\n", j);
         b=getArrayTwo(a,b);
         printArrayTwo(b);
-
     }
 
     private static int[] getArrayTwo(int[] a, int[] b) {
