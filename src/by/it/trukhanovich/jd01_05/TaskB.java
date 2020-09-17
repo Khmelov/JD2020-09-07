@@ -10,27 +10,35 @@ public class TaskB {
     }
 
     private static void step2() {
-        int y=-6;
-        for (double x = -6; x < 2; x = x + 0.5) {
-                if (x <= -6) continue;
-                if (x / 2 > -2 && x / 2 <= -1) {
+        double x = (Math.random() * (8) - 6);
+        if (x == -6) x = x + Double.MIN_VALUE;
+        do {
+            System.out.printf("double x=%2.1f\n", x);
+//        for (double x = -5.5; x < 2; x = x + 0.5) {
+//                if (x <= -6) continue;
+            if (x / 2 > -2 && x / 2 <= -1) {
                 double b = sin(x * x);
                 double a = log(abs(b + 2.74));
                 System.out.printf("При x/2=%f; a=%e\n", x / 2, a);
-            continue;}
+            }
             if (x / 2 > -1 && x / 2 <= 0.2) {
                 double b = cos(x * x);
                 double a = log(abs(b + 2.74));
                 System.out.printf("При x/2=%f; a=%e\n", x / 2, a);
-            continue;}
+            }
             if (x / 2 == 0.2) {
                 double b = cos(x * x);
                 double a = log(abs(b + 2.74));
                 System.out.printf("При x/2=%f; a=%e\n", x / 2, a);
-            continue;}
-            System.out.printf("При x/2=%f; вычисления не определены\n", x/2);
             }
+            if ((x / 2 <= -2) || (x / 2 > 0.2)) {
+                System.out.printf("При x/2=%f; вычисления не определены\n", x / 2);
+            }
+            x=x+0.5;
+        } while (x<2);
     }
+
+
 
         private static void step1 () {
             for (double a = 0; a <= 2; a = a + 0.2) {
