@@ -5,34 +5,48 @@ import static java.lang.Math.*;
 public class TaskA {
     public static void main(String[] args)
     {
+        step1();
+        step2();
+        step3();
+
+    }
+
+    private static void step1()
+    {
         double a = 756.13;
         double x = 0.3;
 
-        double k = cos(pow((x * x + PI / 6), 5));
-        double k1 = sqrt(x * pow(a, 3));
-        double k2 = log((a - 1.12 * x) / 4);
-        System.out.println(k-k1-k2);
+        double z = cos(pow((x*x + PI/6), 5));
+        z = z - sqrt(x * pow(a, 3));
+        z = z - log(abs((a - 1.12 * x) / 4));
+        System.out.println("z = "+z);
 
-        //System.out.println(cos1(x) - sqrt1(x,a) - log1(x,a));
-
-        double z = cos(pow((x * x + PI / 6), 5)) - sqrt(x * pow(a, 3)) - log((a - 1.12 * x) / 4);
-        System.out.println(z);
 
     }
-
-    static double cos1(double x)
+    private static void step2()
     {
-        return cos(pow((x * x + PI / 6), 5));
+          double a = 1.21;
+          double b = 0.371;
+
+          double y = tan((a+b)*(a+b)) - cbrt(a+1.5) + a*pow(b,5) - b/log(a*a);
+//          y = y - cbrt(a+1.5);
+//          y = y + a*pow(b,5);
+//          y = y - b/log(a*a);
+
+        System.out.println("y = "+y);
 
     }
-    static double sqrt1(double x, double a)
+    private static void step3()
     {
-        return sqrt(x * pow(a, 3));
+        double x = 12.1;
 
-    }
-    static double log1(double x, double a)
-    {
-        return log((a - 1.12 * x) / 4);
+        for (double a = -5; a <= 12; a+=3.75)
+        {
+            double f = exp(a*x) - 3.45*a;
+            System.out.printf("при a =%6.2f f = %g",a,f);
+            System.out.println();
+
+        }
 
     }
 }
