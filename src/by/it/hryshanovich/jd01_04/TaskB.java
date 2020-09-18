@@ -4,38 +4,48 @@ import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
-        Scanner a = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         System.out.println("Введите количество людей: ");
-        int n = a.nextInt();
-        String[] peoples = new String[n]; //определяем сам массив
-        for (int i = 0; i < peoples.length; i++) {
-            System.out.println("Введите фамилии: ");
-            peoples[i] = a.next(); //вводим фамилии людей
-        }
-        int[][] mas = new int[n][4];
-        for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas[i].length; j++) {
-                System.out.print("Введите зп для " + " " + peoples[i] + " ");
-                mas[i][j] = a.nextInt();
+        int n = scan.nextInt();
+        String[] surname = new String[n];
+        System.out.println("Введите фамилии: ");
+        getSurname(scan, surname);
+        int[][] salary = new int[n][4];
+        getSalary(scan, surname, salary);
+
+        int allResult=0;
+        for (int i = 0; i < salary.length; i++) {
+            System.out.printf("%9s  ", surname[i]);
+            int result=0;
+            for (int j = 0; j < salary[i].length; j++) {
+                result=salary[i][j]+result;
+                System.out.printf("%-10d", salary[i][j]);
             }
-        }
-        System.out.println();
-        for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas[i].length; j++) {
-                System.out.printf(mas[i][j] + "\t");
-            }
+            System.out.printf("%-10d", result);
             System.out.println();
+            allResult=allResult+result;
         }
-        int sum = 0;
-        double med = 0;
-        for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas[i].length; j++) {
-                sum += mas[i][j];
-                med = sum / (n * 4);
-            }
-        }
-        System.out.println("Итого " + sum);
-        System.out.printf("Средняя " + "%-3.4f", med);
+        inResult(n, allResult);
     }
 
+    private static void inResult(int n, int allResult) {
+        System.out.printf("Итого %-10d"+"\n", allResult);
+        double averageSalary=(double) allResult /(4* n);
+        System.out.printf("Средняя %-10.4f", averageSalary );
+    }
+
+    private static void getSalary(Scanner scan, String[] surname, int[][] salary) {
+        for (int i = 0; i < salary.length; i++) {
+            System.out.println("Введите зарплату для " + surname[i]);
+            for (int j = 0; j < salary[i].length; j++) {
+                salary[i][j] = scan.nextInt();
+            }
+        }
+    }
+
+    private static void getSurname(Scanner scan, String[] surname) {
+        for (int i = 0; i < surname.length; i++) {
+            surname[i] = scan.next();
+        }
+    }
 }
