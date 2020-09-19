@@ -20,20 +20,28 @@ public class TaskB2 {
         replaceEndSentence(sb, m3);
         Pattern p4= Pattern.compile("[ ]{2,}");
         Matcher m4 = p4.matcher(sb);
+        //заменим повтояриющиеся пробелы
         replaceSeveralSpaces(sb, m4);
-        System.out.println(sb);
         String varString= sb.toString();
+        //создадим массив строк для преложений
         String []arrayStrings;
         arrayStrings=varString.trim().split("[\\.]");
-        for (int i = 0; i < arrayStrings.length; i++) {
-            arrayStrings[i]=arrayStrings[i].trim();
-        }
-        for (int i = 0; i < arrayStrings.length; i++) {
-            System.out.println(arrayStrings[i]);
-        }
+        //обрежем пробелы в начале и конце каждого предложения
+        trimSpaces(arrayStrings);
+        //сортируем массив по возрастанию
         arraySort(arrayStrings);
+        printArray(arrayStrings);
+    }
+
+    private static void printArray(String[] arrayStrings) {
         for (int i = 0; i < arrayStrings.length; i++) {
             System.out.println(arrayStrings[i]);
+        }
+    }
+
+    private static void trimSpaces(String[] arrayStrings) {
+        for (int i = 0; i < arrayStrings.length; i++) {
+            arrayStrings[i]= arrayStrings[i].trim();
         }
     }
 
