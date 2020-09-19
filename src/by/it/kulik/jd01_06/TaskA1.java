@@ -9,10 +9,10 @@ public class TaskA1 {
         System.out.println(dynText);
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]{4,}");
         Matcher matcher = pattern.matcher(dynText);
-        while (matcher.find()){
-            dynText.setCharAt(matcher.start()+3, '#');
-            if(matcher.end()-matcher.start()>=7){
-                dynText.setCharAt(matcher.start()+6, '#');
+        while (matcher.find()) {
+            dynText.setCharAt(matcher.start() + 3, '#');
+            if (matcher.end() - matcher.start() >= 7) {
+                dynText.setCharAt(matcher.start() + 6, '#');
             }
         }
         System.out.println(dynText);
