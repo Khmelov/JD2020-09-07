@@ -10,21 +10,70 @@ public class TaskB2 {
         Matcher m1 = p1.matcher(sb);
         //заменим троеточие
         replace(sb, m1);
-        Pattern p2= Pattern.compile("[-,:\\na-zA-Z ]{1}");
+        Pattern p2= Pattern.compile("[-,:\\na-zA-Z]");
         Matcher m2 = p2.matcher(sb);
-        replace1(sb, m2);
-////        Pattern p3= Pattern.compile("[ ](?! )");
-//        Pattern p3= Pattern.compile("[ ]{1}");
-//        Matcher m3 = p3.matcher(sb);
-//        while (m3.find()){
-//            sb.replace(m3.start(), m3.end(), "+");
-//        }
-
+        //заменим небуквенные символы
+        replaceNotLetterSymbal(sb, m2);
+        Pattern p3= Pattern.compile("[!?]{1,}");
+        Matcher m3 = p3.matcher(sb);
+        //заменим символы конца предложения на "."
+        replaceEndSentence(sb, m3);
+        Pattern p4= Pattern.compile("[ ]{2,}");
+        Matcher m4 = p4.matcher(sb);
+        replaceSeveralSpaces(sb, m4);
         System.out.println(sb);
-
+        String varString= sb.toString();
+        String []arrayStrings;
+        arrayStrings=varString.trim().split("[\\.]");
+        for (int i = 0; i < arrayStrings.length; i++) {
+            arrayStrings[i]=arrayStrings[i].trim();
+        }
+        for (int i = 0; i < arrayStrings.length; i++) {
+            System.out.println(arrayStrings[i]);
+        }
+        arraySort(arrayStrings);
+        for (int i = 0; i < arrayStrings.length; i++) {
+            System.out.println(arrayStrings[i]);
+        }
     }
 
-    private static void replace1(StringBuilder sb, Matcher matcher) {
+    private static void arraySort(String[] arrayStrings) {
+        int b = arrayStrings.length-1;
+        String buf=new String();
+        boolean det;
+        do {
+            det=false;
+            for (int i = 0; i < b; i++) {
+                if (arrayStrings[i].length() > arrayStrings[i + 1].length()) {
+                    buf = arrayStrings[i + 1];
+                    arrayStrings[i + 1] = arrayStrings[i];
+                    arrayStrings[i] = buf;
+                    det = true;
+                }
+            }
+            b--;
+        }
+        while (det);
+    }
+
+
+    private static void replaceSeveralSpaces(StringBuilder sb, Matcher m4) {
+        int pos=0;
+        while (m4.find(pos)){
+            sb.replace(m4.start(), m4.end(), " ");
+            pos=m4.start()+1;
+        }
+    }
+
+    private static void replaceEndSentence(StringBuilder sb, Matcher m3) {
+        int pos=0;
+        while (m3.find(pos)){
+            sb.replace(m3.start(), m3.end(), ".");
+            pos= m3.start()+1;
+        }
+    }
+
+    private static void replaceNotLetterSymbal(StringBuilder sb, Matcher matcher) {
         while (matcher.find()){
             sb.replace(matcher.start(), matcher.end(), " ");
         }
@@ -35,8 +84,8 @@ public class TaskB2 {
             int start=-1;
             int end=-1;
             start= m1.start();
-            end= m1.end()-2;
-            sb.replace(start, end, "Z");
+            end= m1.end()-1;
+            sb.replace(start, end, "\n");
         }
     }
 }
