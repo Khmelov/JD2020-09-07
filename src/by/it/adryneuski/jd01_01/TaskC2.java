@@ -16,25 +16,28 @@ HEX:22+1a=3c
 OCT:42+32=74
 */
 class TaskC2 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Scanner sc1 = new Scanner(System.in);
-         System.out.println("Введите первое слагаемое:");
-          int i=sc1.nextInt();
+        System.out.println("Введите первое слагаемое:");
+        int i = sc1.nextInt();
 
-          Scanner sc2 = new Scanner(System.in);
-           System.out.println("Введите второе слагаемое:");
-            int j=sc2.nextInt();
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Введите второе слагаемое:");
+        int j = sc2.nextInt();
 
-        int k = i+j;
+        int k = i + j;
 
-        System.out.println("DEC:" + i + "+"+ j + "=" + k);
-        //System.out.println("BIN:" + i + "+"+ j + "=" + k);
-        System.out.printf("HEX:" + "i=%x; j=%x \n", i, j + "=" + k);
-       // System.out.println("DEC:" + i + "+"+ j + "=" + k);
+        System.out.println();
 
-        //System.out.printf("i=%x; j=%x \n", i, j);
+        System.out.println("DEC:" + i + "+" + j + "=" + k);
+       // System.out.println("BIN:" + l,m,n);
+        System.out.printf("HEX:" + "%x+%x=%x  \n", i, j, k);
+        System.out.printf("OCT:" + "%o+%o=%o  \n", i, j, k);
+
+
     }
 
 
-}
+    }
+
