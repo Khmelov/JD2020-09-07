@@ -5,39 +5,86 @@ import java.util.regex.Pattern;
 
 public class TaskC1 {
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder("У     лукоморья     дуб     зелёный,\n");
-        Pattern p=Pattern.compile("\\n");
-        Matcher m=p.matcher(sb);
-        System.out.println( "Длинна строки:"+ sb.length());
 
-        while (m.find()){
-            System.out.println("Позиция конца:" + m.start());
-        }
-
-        System.out.println(sb);
-        Pattern p1=Pattern.compile("[\\s]{2,}");
-        Matcher m1=p1.matcher(sb);
-        int pos=0;
-        while (m1.find(pos)){
-            sb.replace(m1.start(), m1.end(), " ");
-            pos= m1.start();
-        }
-        System.out.println("Длинна строки:" +sb.length());
-        System.out.println(sb);
-        StringBuilder sb1 = new StringBuilder(Poem.text);
-        Pattern p2=Pattern.compile("\\n");
-        Matcher m2=p2.matcher(sb1);
+        StringBuilder sb=new StringBuilder(Poem.text);
+        StringBuilder sbEnd=new StringBuilder();
+        Pattern patternFindMax=Pattern.compile("\\n");
+        Matcher matcherFindMax=patternFindMax.matcher(sb);
         int lenghtRowMax=0;
+        //найдем максимально длинную строку
+        lenghtRowMax = findLenghtRowMax(matcherFindMax, lenghtRowMax);
+        System.out.println("максимальная длинна строки:" + lenghtRowMax);
+        String varString=sb.toString();
+        String []arrayStrings=varString.split("\n");
+//        for (int i = 0; i < arrayStrings.length; i++) {
+//            System.out.println(arrayStrings[i]);
+//        }
+        //заполним промежутки между словами пробелами
+        sbEnd = getStringWithSpaces(sbEnd, lenghtRowMax, arrayStrings);
+        System.out.print(sbEnd);
+    }
+
+    private static StringBuilder getStringWithSpaces(StringBuilder sbEnd, int lenghtRowMax, String[] arrayStrings) {
+        for (int i = 0; i < arrayStrings.length; i++) {
+        if (i<arrayStrings.length-1){
+            if (arrayStrings[i].length() < lenghtRowMax - 1) {
+                StringBuilder sbNew = new StringBuilder(arrayStrings[i]);
+                if (i < arrayStrings.length - 1) sbNew = sbNew.append("\n");
+                int pos = 0;
+                Pattern pNew = Pattern.compile("[ ][-а-яА-Я]");
+                Matcher mNew = pNew.matcher(sbNew);
+                while (sbNew.length() < lenghtRowMax) {
+                    pos = 0;
+                    while (mNew.find(pos)) {
+                        pos = mNew.end();
+                        sbNew.replace(mNew.start(), mNew.end() - 1, "  ");
+                        if (sbNew.length() == lenghtRowMax) break;
+                    }
+                }
+
+                sbEnd = sbEnd.append(sbNew);
+
+            } else {
+                StringBuilder sbNew = new StringBuilder(arrayStrings[i]);
+                sbNew = sbNew.append("\n");
+                sbEnd = sbEnd.append(sbNew);}
+        }
+        if (i==arrayStrings.length-1){
+                if (arrayStrings[i].length() < lenghtRowMax-1) {
+                    StringBuilder sbNew = new StringBuilder(arrayStrings[i]);
+//                    if (i < arrayStrings.length - 1) sbNew = sbNew.append("\n");
+                    int pos = 0;
+                    Pattern pNew = Pattern.compile("[ ][-а-яА-Я]");
+                    Matcher mNew = pNew.matcher(sbNew);
+                    while (sbNew.length() < lenghtRowMax-1) {
+                        pos = 0;
+                        while (mNew.find(pos)) {
+                            pos = mNew.end();
+                            sbNew.replace(mNew.start(), mNew.end() - 1, "  ");
+                            if (sbNew.length() == lenghtRowMax) break;
+                        }
+                    }
+
+                    sbEnd = sbEnd.append(sbNew);
+
+                } else {
+                    StringBuilder sbNew = new StringBuilder(arrayStrings[i]);
+                    sbEnd = sbEnd.append(sbNew);}
+            }
+        }
+        return sbEnd;
+    }
+
+    private static int findLenghtRowMax(Matcher m2, int lenghtRowMax) {
+        int pos;
         pos=0;
         while (m2.find(pos)){
-            int lenghtRow=m2.start()-pos+1;
-            if (lenghtRow>lenghtRowMax) {lenghtRowMax=lenghtRow;}
+            int lenghtRow= m2.start()-pos+1;
+            if (lenghtRow> lenghtRowMax) {
+                lenghtRowMax =lenghtRow;}
             pos= m2.start()+1;
 
         }
-        System.out.println("максимальная длинна строки:" + lenghtRowMax);
-
-
-
+        return lenghtRowMax;
     }
 }
