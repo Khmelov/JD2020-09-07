@@ -33,13 +33,13 @@ public class TaskB {
             if ((-2 < (x/2))&((x/2) <= -1))
             {
                 double a = log(abs(sin(x) * sin(x) + 2.74));
-                System.out.printf("при x/2 =%6.2f  a =%-20.10g\n", x/2, a);
+                System.out.printf("при x/2 =%6.2f  a =%-20.10e\n", x/2, a);
             }
               else if ((-1 < (x/2))&((x/2) < 0.2))
               {
                 double a = log(abs(cos(x) * cos(x) + 2.74));
 
-                System.out.printf("при x/2 =%6.2f  a =%-20.10g\n", x/2, a);
+                System.out.printf("при x/2 =%6.2f  a =%-20.10e\n", x/2, a);
               }
 
 //              else if (x == 0.4)
@@ -49,7 +49,7 @@ public class TaskB {
 //                System.out.printf("при x =%4.2f  a =%-6.2f\n", x, a);
 //              }
             else
-        System.out.printf("при x/2 =%4.2f  значение не определено\n", x/2);
+        System.out.printf("при x/2 =%4.2f  вычисления не определены\n", x/2);
 
     }
 

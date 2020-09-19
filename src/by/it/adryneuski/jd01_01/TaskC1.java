@@ -25,7 +25,7 @@ class TaskC1 {
 
                 int k = i+j;
 
-System.out.println("Sum ="+" "+k);
+System.out.println("Sum = "+k);
 
     }
 }
