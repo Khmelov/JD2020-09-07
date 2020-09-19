@@ -1,4 +1,4 @@
-package src.by.it.adryneuski.jd01_05;
+package by.it.adryneuski.jd01_05;
 
 import static java.lang.Math.*;
 
