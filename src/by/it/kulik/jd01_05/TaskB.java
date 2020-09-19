@@ -10,11 +10,14 @@ public class TaskB {
     double x = scanner.nextDouble();
     double y=0;
         for(double i=x-1; i<=6; i++){
-        for(double a=0; a<=2; a=a+0.2){
-            y=y+Math.pow(7, a) - Math.cos(x);
-            System.out.printf("При а=%6.2f x=%6.2f Сумма y=%g\n", a, x, y);
-        }
+            double a=0;
+            while (a<=2) {
+                a = a + 0.2;
+                y=y+Math.pow(7, a) - Math.cos(x);
+                System.out.printf("При а=%6.2f x=%6.2f Сумма y=%g\n", a, x, y);
 
-    }
+            }
+
+        }
 }
 }
