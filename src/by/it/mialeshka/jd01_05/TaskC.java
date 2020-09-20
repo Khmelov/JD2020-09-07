@@ -6,12 +6,14 @@ import static java.lang.Math.*;
 
 public class TaskC {
     public static void main(String[] args) {
-        step1();
+
+        for (int i = 20; i < 41; i++) {
+            step1(i);
+        }
     }
 
-    private static void step1() {
-      int n = 28;
-      double d = (9-5.33)/n;
+    private static void step1(int n) {
+      double d = (9-5.33)/(n-1);
       double[] arr = new double[n];
 
       int ia = 0;
@@ -58,7 +60,7 @@ public class TaskC {
         System.out.println(head);
         for(int i = 0; i < arr.length; i++) {
             if (i < 10) System.out.printf("%s[% -2d ] = %g    ", arrName, i, arr[i]);
-            else System.out.printf("B[% -2d] = %g    ", i, arr[i]);
+            else System.out.printf("%s[% -2d] = %g    ", arrName, i, arr[i]);
             if ((i+1) % 5 == 0 || i + 1 == arr.length) {
                 System.out.println();
             }
