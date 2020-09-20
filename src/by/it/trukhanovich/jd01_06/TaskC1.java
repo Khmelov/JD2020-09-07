@@ -16,9 +16,6 @@ public class TaskC1 {
         System.out.println("максимальная длинна строки:" + lenghtRowMax);
         String varString=sb.toString();
         String []arrayStrings=varString.split("\n");
-//        for (int i = 0; i < arrayStrings.length; i++) {
-//            System.out.println(arrayStrings[i]);
-//        }
         //заполним промежутки между словами пробелами
         sbEnd = getStringWithSpaces(sbEnd, lenghtRowMax, arrayStrings);
         System.out.print(sbEnd);
