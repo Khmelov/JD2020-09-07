@@ -1,6 +1,8 @@
 package by.it.hryntsaliou.jd01_05;
 
 
+import java.util.Arrays;
+
 import static java.lang.StrictMath.*;
 
 class TaskC {
@@ -11,11 +13,13 @@ class TaskC {
 
     private static void step2() {
         double[] array = new double[30];
+        int bLength = 0;
         for (int i = 0; i < array.length; i++) {
             array[i] = (int) (random() * 348 + 103);
+            if (array[i] / 10 > i) bLength++;
         }
         outBegin(array, 5);
-        outResult(array, 2);
+        outResult(array, 2, bLength);
         //╔  ═ ║  ╗ ╚ ╝ ╣  ╦ ╩  ╬ ║
     }
 
@@ -43,8 +47,38 @@ class TaskC {
         System.out.println("╚═══════════╩═══════════╩═══════════╩═══════════╩═══════════╝");
     }
 
-    private static void outResult(double[] array, int colCount) {
+    private static void outResult(double[] array, int colCount, int length) {
+        double[] result = new double[length + 1];
+        int k = 0;
+        System.out.println("Massiv B <index to cols>");
+        System.out.println("╔═══════════╦═══════════╗");
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] / 10 > i) {
+                k++;
+                result[k] = array[i];
+            }
+        }
+        Arrays.sort(result, 1, k);
+        int rows = 0;
+        for (int i = 0; i < k; i++) {
+            if (i % colCount == 0)
+                rows++;
+        }
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 0; j <= 1; j++) {
+                if (i + rows * j <= k) System.out.printf("║B[%2d]=%4.1f", i + rows * j, result[i + rows * j]);
+                else {
+                    System.out.print("║           ");
+                }
+            }
+            System.out.println("║");
+            if (i == rows) {
+                System.out.println("╚═══════════╩═══════════╝");
 
+            } else {
+                System.out.println("╠═══════════╬═══════════╣");
+            }
+        }
     }
 
     private static void step1() {
@@ -64,7 +98,7 @@ class TaskC {
     private static void output(double[] array, int colCount) {
         System.out.println("Массив A[] ");
         for (int i = 0; i < array.length; i++) {
-            System.out.printf("B[ %d ] = %f  ", i, array[i]);
+            System.out.printf("A[ %d ] = %f  ", i, array[i]);
             if ((i + 1) % colCount == 0 || (i + 1) % array.length == 0) System.out.println();
         }
     }
@@ -81,7 +115,6 @@ class TaskC {
                 sum *= array[i];
                 if (count % colCount == 0 || count % array.length == 0) System.out.println();
             }
-
         }
         double srGeom = pow(sum, (double) 1 / count);
         System.out.println();
