@@ -1,5 +1,6 @@
 package by.it.kulik.jd01_04;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskB {
@@ -18,18 +19,12 @@ public class TaskB {
         for (int i = 0; i < amount; i++) {     //перебираем массив
             System.out.println("Введите зарплату рабочего" + mas[i]);
             for (int j = 0; j < vedomost[i].length; j++) {
-
                 int zarplata = scan.nextInt(); //создан массив из зарплат работяг
-
-                vedomost[i][j]=zarplata;
+                vedomost[i][j] = zarplata;
             }
+            System.out.println(Arrays.deepToString(vedomost));
         }
-
-            {
-
-                System.out.println(" ");
-            }
-
-
+        {
         }
     }
+}
