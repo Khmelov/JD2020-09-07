@@ -11,6 +11,7 @@ class TaskB1 {
         result(words, letters, lettersSogl);
     }
 
+
     private static void result(String[] words, char[] letters, char[] lettersSogl) {
         for (int i = 0; i < words.length; i++) {
             for (char letter : lettersSogl) {
