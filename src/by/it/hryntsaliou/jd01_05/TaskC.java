@@ -5,7 +5,7 @@ import static java.lang.StrictMath.*;
 
 class TaskC {
     public static void main(String[] args) {
-        //step1();
+        step1();
         step2();
     }
 
@@ -85,6 +85,6 @@ class TaskC {
         }
         double srGeom = pow(sum, (double) 1 / count);
         System.out.println();
-        System.out.printf("Среднее геометрическое элементов > 3.5 = %f", srGeom);
+        System.out.printf("Среднее геометрическое элементов > 3.5 = %f\n", srGeom);
     }
 }
