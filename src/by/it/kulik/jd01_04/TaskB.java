@@ -4,26 +4,32 @@ import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in); // Объявляем Scanner
-        System.out.println("Число рабочих: ");
-        int amount = s.nextInt(); // Читаем с клавиатуры размер массива и записываем в amount
-        String array[] = new String[amount]; // Создаём массив int размером в amount
-        System.out.println("Фамилии рабочих:");
-        /*Пройдёмся по всему массиву, заполняя его*/
-        for (int i = 0; i < amount; i++) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите количество рабочих:");
+        int amount = sc.nextInt();           // Читаем с клавиатуры размер массива и записываем в amount
+        String[] mas = new String[amount];    //Создаем массив размером amount
+        for (int i = 0; i < mas.length; i++) {
+            System.out.println("Введите фамилию рабочего");
             Scanner scanner = new Scanner(System.in);
-            array[i] = scanner.nextLine(); // Заполняем массив фамилиями, введёнными с клавиатуры
+            mas[i] = scanner.nextLine();         //Заполняем массив фамилиями, введенными с клавиатуры
         }
-        String array2[][] = new String[amount][4]; // Создаём массив array2 строк=amount, столбцов=4
-        for (int i = 0; i < amount; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.println("Зарплата:");
-                Scanner zarplata = new Scanner(System.in);
-                array2[i][j] = zarplata.nextLine(); // Выводим на экран, полученный массив
+        int[][] vedomost = new int[amount][4]; //Создаем массив размером строк amount и столбцов 4
+        Scanner scan = new Scanner(System.in); //Объявляем сканнер
+        for (int i = 0; i < amount; i++) {     //перебираем массив
+            System.out.println("Введите зарплату рабочего" + mas[i]);
+            for (int j = 0; j < vedomost[i].length; j++) {
+
+                int zarplata = scan.nextInt(); //создан массив из зарплат работяг
+
+                vedomost[i][j]=zarplata;
+            }
+        }
+
+            {
+
+                System.out.println(" ");
             }
 
 
         }
-        System.out.println();
     }
-}
