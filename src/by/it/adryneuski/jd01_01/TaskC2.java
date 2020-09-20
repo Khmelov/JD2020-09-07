@@ -27,17 +27,30 @@ class TaskC2 {
         int j = sc2.nextInt();
 
         int k = i + j;
+//        int l = binar(i);
+//        int m = binar(j);
+//        int n = binar(k);
 
         System.out.println();
 
         System.out.println("DEC:" + i + "+" + j + "=" + k);
-       // System.out.println("BIN:" + l,m,n);
+        System.out.print("BIN:" ); binar(i); System.out.print("+");binar(j);System.out.print("="); binar(k);
+        System.out.println();
         System.out.printf("HEX:" + "%x+%x=%x  \n", i, j, k);
         System.out.printf("OCT:" + "%o+%o=%o  \n", i, j, k);
 
 
     }
 
+        public static void binar(int a) {
+            int b;
+            while (a!= 0)
+            {
+                b = a % 2;
+                System.out.print(b);
+                a = a / 2;
+            }
+        }
 
     }
 
