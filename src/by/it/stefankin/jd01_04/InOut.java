@@ -37,7 +37,7 @@ public class InOut {
     static void printArray(double[ ] arr, String name, int columnCount) {
     int c = 0;
     for (int j=0; j< arr.length;j++) {
-        System.out.printf("%-6s=%-6.2f",name,arr[j]);
+        System.out.printf("%-1s[%2d]=%-6.2f",name,j,arr[j]);
         c++;
         if ((0==c%columnCount) || (j== arr.length-1)) {
             System.out.println("");

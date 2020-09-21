@@ -31,13 +31,13 @@ public class TaskA {
         InOut.printArray(mas,"V",4);
         for (int i = 0; i < mas.length; i++) {
            if (mas[i]==start) {
-               System.out.println("Index of first element = "+i);
+               System.out.println("Index of first element="+i);
                break;
            }
         }
         for (int i = 0; i < mas.length; i++) {
             if (mas[i]==stop) {
-                System.out.println("Index of last element = "+i);
+                System.out.println("Index of last element="+i);
                 break;
             }
         }
