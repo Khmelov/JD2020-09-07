@@ -12,6 +12,14 @@ class Matrix extends Var {
         this.value = matrix.value;
     }
 
+    public Matrix(String strMatrix) {
+        String []arrayString=strMatrix.split("},{");
+
+
+
+        }
+
+
     @Override
     public String toString() {
         StringBuilder sb= new StringBuilder("{");
@@ -19,13 +27,11 @@ class Matrix extends Var {
         for (int i = 0; i < value.length; i++) {
             sb.append("{");
             for (int j = 0; j < value[i].length; j++) {
-
                 sb.append(delimiter);
                 sb.append(value[i][j]);
                 delimiter=",";
                 if ((i==value.length-1)&&j==value[i].length-1) delimiter="";
             }
-
             if (i<value.length-1) sb.append("},");
             else sb.append("}");
             delimiter="";
