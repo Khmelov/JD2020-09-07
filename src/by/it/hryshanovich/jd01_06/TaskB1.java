@@ -10,7 +10,7 @@ public class TaskB1 {
         Matcher matcher= pattern.matcher(Poem.text);
         while (matcher.find()){
             String word = matcher.group();
-            if (cheskWord(word))
+            //if (cheskWord(word))
         }
     }
 }
