@@ -1,6 +1,6 @@
 package by.it.trukhanovich.jd01_07;
 
-import java.util.Arrays;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,9 +16,9 @@ class Matrix extends Var {
 
     public Matrix(String strMatrix) {
         StringBuilder sb= new StringBuilder(strMatrix);
-        int i = findRow(sb);
-        int j = findCollum(sb);
-        double[][] matrix=new double[i][((j)/i)+1];
+        int row = findRow(sb);
+        int collum = findCollum(sb);
+        double[][] matrix=new double[row][((collum)/row)+1];
         this.value= matrix;
         getArrayStrigToDouble(sb,matrix);
     }
