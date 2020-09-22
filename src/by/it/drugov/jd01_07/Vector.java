@@ -10,7 +10,7 @@ class Vector extends Var {
     public String toString() {
         StringBuilder line = new StringBuilder("{");
         for (int i = 0; i < value.length; i++) {
-            if(i== value.length-1) {
+            if (i == value.length - 1) {
                 line.append(value[i]).append("}");
                 continue;
             }
@@ -27,7 +27,6 @@ class Vector extends Var {
         }
         for (int i = 0; i < strVector.trim().split(",").length; i++) {
             this.value[i] = Double.parseDouble(strVector.trim().split(",")[i]);
-            System.out.println(value[i]);
         }
     }
 

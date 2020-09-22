@@ -1,6 +1,8 @@
 package by.it.drugov.jd01_07;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Matrix extends Var {
     @Override
@@ -25,17 +27,47 @@ class Matrix extends Var {
         return line.toString();
     }
 
-    private double[][] value;
-
+    private static double[][] value={{0,0},{0,0}};
     Matrix(double[][] value) {
         this.value = value;
     }
 
     Matrix(Matrix matrix) {
-    this.value = matrix.value;
+        this.value = matrix.value;
     }
 
     Matrix(String strMatrix) {
-
+        Pattern pattern = Pattern.compile("\\{");
+        Matcher matcher = pattern.matcher(strMatrix);
+        while (matcher.find()) {
+            strMatrix = matcher.replaceFirst("");
+            break;
+        }
+        StringBuilder sbLine = new StringBuilder(strMatrix);
+        sbLine.reverse();
+        pattern = Pattern.compile("[}]");
+        matcher = pattern.matcher(sbLine);
+        matcher.reset();
+        while (matcher.find()) {
+            strMatrix = matcher.replaceFirst("");
+            break;
+        }
+        sbLine = new StringBuilder(strMatrix);
+        sbLine.reverse();
+        strMatrix = sbLine.toString();
+        strMatrix = strMatrix.trim();
+        String[] array = strMatrix.split("},");
+        for (int i = 0; i < array.length; i++) {
+            pattern = Pattern.compile("[{}]");
+            matcher = pattern.matcher(array[i]);
+            while (matcher.find()) {
+                array[i] = matcher.replaceAll(" ");
+            }
+            String[] line = array[i].trim().split(",");
+            for (int j = 0; j < line.length; j++) {
+                this.value[i][j] = Double.parseDouble(line[j]);
+            }
+        }
     }
 }
+
