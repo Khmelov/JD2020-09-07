@@ -1,17 +1,27 @@
 package by.it.kulik.jd01_06;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskB1 {
 
-private static final String G= "АаиИУуЕеэЭОоЮюЯя";
+    private static final String G = "АаиИУуЕеэЭОоЮюЯя";
 
     public static void main(String[] args) {
+        Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
+        Matcher matcher = pattern.matcher(Poem.text);
+        while (matcher.find()) {
+            String word = matcher.group();
+            if (checkWord(word)) {
+                System.out.println(word);
+            }
 
-
+        }
     }
-    static boolean checkWord(String word){
-        return  G.indexOf(word.charAt(0))<0 && G.indexOf(word.charAt(word.length()-1))>=0;
+
+    private static boolean checkWord(String word) {
+        return G.indexOf(word.charAt(0)) < 0 && G.indexOf(word.charAt(word.length() - 1)) >= 0;
     }
 
 
