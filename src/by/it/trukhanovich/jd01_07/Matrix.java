@@ -51,7 +51,7 @@ class Matrix extends Var {
                 delimiter=", ";
                 if ((i==value.length-1)&&j==value[i].length-1) delimiter="";
             }
-            if (i<value.length-1) sb.append("}, ");
+            if (i<value.length-1) sb.append("},");
             else sb.append("}");
             delimiter="";
         }
