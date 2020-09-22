@@ -4,7 +4,7 @@ package by.it.kulik.jd01_06;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TaskB1 {
+ class TaskB1 {
 
     private static final String G = "АаиИУуЕеэЭОоЮюЯя";
 
