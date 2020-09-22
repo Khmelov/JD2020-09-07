@@ -1,37 +1,41 @@
 package by.it.adryneuski.jd01_06;
 
 
+
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskA2 {
 
-    private static String[] words = new String[0];
-    private static int[] counts = new int[0];
+    private static String [] w =new String[0];
+    private static int [] count=new int[0];
 
     public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
-        Matcher matcher = pattern.matcher(Poem.text);
-        while (matcher.find()) {
-            process(matcher.group());
+        StringBuilder sb = new StringBuilder(Poem.text);
+        Pattern p1= Pattern.compile("[а-яА-ЯёЁ]+");
+        Matcher m1= p1.matcher(Poem.text);
+        while (m1.find()){
+            String word=m1.group();
+            int p= position(word);
+            if (p>=0) {count[p]=count[p]+1;}
+            if (p==-1) {
+                int last= w.length;
+                w= Arrays.copyOf(w,last+1);
+                count=Arrays.copyOf(count, last+1);
+                w[w.length-1]=word;
+                count [count.length-1]=1;
+            }
         }
-        for (int i = 0; i < words.length; i++) {
-            System.out.printf("%s=%d\n", words[i], counts[i]);
+        for (int i = 0; i < w.length; i++) {
+            System.out.printf("%s=%d", w[i], count[i]);
         }
     }
-
-    private static void process(String word) {
-        for (int i = 0; i < words.length; i++) {
-            if (word.equals(words[i])) {
-                counts[i]++;
-                return;
-            }
-            words = Arrays.copyOf(words, words.length + 1);
-            counts = Arrays.copyOf(counts, counts.length + 1);
-            words[words.length - 1] = word;
-            counts[counts.length - 1] = 1;
-
+    private static int position (String word){
+        for (int i = 0; i < w.length; i++) {
+            if (w[i].equals(word)) return i;
         }
+        return -1;
     }
 }
