@@ -11,7 +11,8 @@ class Vector extends Var {
   public Vector(double[] value) {
    this.value = value;
   }
- public Vector(Vector vector) {
+
+ public Vector (Vector vector) {
   this.value = vector.value;
  }
  public Vector (String strVector) {

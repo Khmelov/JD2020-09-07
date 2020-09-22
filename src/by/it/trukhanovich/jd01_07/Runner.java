@@ -14,5 +14,8 @@ public class Runner {
         System.out.println(v4);
         Var v5=new Matrix (new double[][] {{1.5, 2.5}, {3.5,4.5}});
         System.out.println(v5);
+        Var v6=new Matrix ("{{1,2}, {3,4}}");
+        System.out.println(v6);
+
     }
 }
