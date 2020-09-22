@@ -6,5 +6,7 @@ public class Runner {
         Var v2=new Vector(new double[]{1,2,3});
         System.out.println(v1);
         System.out.println(v2);
+        Var v3=new Scalar("31351");
+        System.out.println(v3);
     }
 }

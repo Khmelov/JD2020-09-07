@@ -1,4 +1,8 @@
 package by.it.kulik.jd01_07;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class Vector extends Var {
     private double[] value;
     Vector(double[] value) {
