@@ -19,9 +19,8 @@ class TaskC1 {
          System.out.println("Введите первое слагаемое:");
           int i=sc1.nextInt();
 
-         Scanner sc2 = new Scanner(System.in);
-          System.out.println("Введите второе слагаемое:");
-           int j=sc2.nextInt();
+           System.out.println("Введите второе слагаемое:");
+           int j=sc1.nextInt();
 
                 int k = i+j;
 

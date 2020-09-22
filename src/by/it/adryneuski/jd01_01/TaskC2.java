@@ -22,9 +22,8 @@ class TaskC2 {
         System.out.println("Введите первое слагаемое:");
         int i = sc1.nextInt();
 
-        Scanner sc2 = new Scanner(System.in);
         System.out.println("Введите второе слагаемое:");
-        int j = sc2.nextInt();
+        int j = sc1.nextInt();
 
         int k = i + j;
 //        int l = binar(i);
@@ -33,8 +32,8 @@ class TaskC2 {
 
         System.out.println();
 
-        System.out.println("DEC:" + i + "+" + j + "=" + k);
-        System.out.print("BIN:" ); binar(i); System.out.print("+");binar(j);System.out.print("="); binar(k);
+        System.out.println ("DEC:"+ i + "+"+ j +"="+ k);
+        System.out.print("BIN:" + Integer.toBinaryString(i) + "+" + Integer.toBinaryString(j) + "=" + Integer.toBinaryString(k));
         System.out.println();
         System.out.printf("HEX:" + "%x+%x=%x  \n", i, j, k);
         System.out.printf("OCT:" + "%o+%o=%o  \n", i, j, k);
