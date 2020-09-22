@@ -25,7 +25,8 @@ class Matrix extends Var {
         int j=1;
         while (m2.find()){j++;}
         double[][] matrix=new double[i][((j)/i)+1];
-        Pattern p3= Pattern.compile("(\\d+)");
+        this.value= matrix;
+        Pattern p3= Pattern.compile("(\\d+\\.\\d+)|(\\d+)");
         Matcher m3= p3.matcher(sb);
         i=0;
         j=0;
@@ -34,7 +35,6 @@ class Matrix extends Var {
             if (j<matrix[i].length-1) j++;
             else j=0;
             if (j==0) i++;}
-        this.value= matrix;
     }
 
 
