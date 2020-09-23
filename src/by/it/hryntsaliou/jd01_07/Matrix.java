@@ -16,17 +16,25 @@ class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        Pattern pattern = Pattern.compile("[{}]+");
+        Pattern pattern1 = Pattern.compile("[{]");
+        Matcher matcher1 = pattern1.matcher(strMatrix);
+        int count = 0;
+        while (matcher1.find()) {
+            count++;
+        }
+        Pattern pattern = Pattern.compile("[{},]+");
         Matcher matcher = pattern.matcher(strMatrix);
         while (matcher.find()) {
             strMatrix = matcher.replaceAll("");
         }
-        System.out.println(strMatrix);
-
-
-
-
-
+        String[] numbers = strMatrix.split(" ");
+        int k = 0;
+        for (int i = 0; i < count - 1; i++) {
+            for (int j = 0; j < (numbers.length) / (count - 1); j++) {
+                this.value[i][j] = Double.parseDouble(numbers[k]);
+                k++;
+            }
+        }
     }
 
 

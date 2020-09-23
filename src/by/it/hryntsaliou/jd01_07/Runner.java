@@ -12,7 +12,7 @@ public class Runner {
         System.out.println(strVector);
         Var matrix = new Matrix(new double[][]{{1.0, 2.0}, {3.0, 4.0}});
         System.out.println(matrix);
-        //Var strMatrix = new Matrix("{{1.0, 2.0, 3.0}, {3.0, 4.0, 9.0}}");
-        //System.out.println(strMatrix);
+        Var strMatrix = new Matrix("{{1.0, 2.0}, {3.0, 4.0}}");
+        System.out.println(strMatrix);
     }
 }
