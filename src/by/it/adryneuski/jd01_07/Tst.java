@@ -1,39 +1,14 @@
 package by.it.adryneuski.jd01_07;
 
+import java.util.Arrays;
+
 public class Tst {
     public static void main(String[] args) {
 
-        Person tom = new Person();
-        tom.displayInfo();
 
-        Person GOGA = new Person("GOGA");
-        GOGA.displayInfo();
+  String strVector = "1 2 4";
 
-
-    }
-}
-class Person{
-
-    String name;    // имя
-    int age;        // возраст
-
-    public Person() {
-        this("FOKA",33);
-    }
-
-    public Person(String name) {
-
-       this(name,79);
-    }
-
-    public Person(String name, int age) {
-
-
-        this.name = name;
-        this.age = age;
-    }
-
-    void displayInfo(){
-        System.out.printf("Name: %s \tAge: %d\n", name, age);
+  double[] value1 = Arrays.stream(strVector.split(" ")).mapToDouble(Double::parseDouble).toArray();
+        System.out.println(value1);
     }
 }
