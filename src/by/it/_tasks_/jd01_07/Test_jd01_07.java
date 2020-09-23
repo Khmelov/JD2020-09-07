@@ -32,7 +32,7 @@ public class Test_jd01_07 {
         Object scalar=c.newInstance(0.12345);
         System.out.println("было выполнено успешно. \nТестирование вывода значения 0.12345 через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение 0.12345", scalar.toString(), "0.12345");
+        assertEquals("Не было получено ожидаемое значение 0.12345", "0.12345", scalar.toString());
         System.out.println("выполнено успешно. Scalar="+scalar);
     }
 
@@ -48,7 +48,7 @@ public class Test_jd01_07 {
         scalar=c.newInstance(scalar);
         System.out.println("было выполнено успешно. \nТестирование вывода значения 0.12345 через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение 0.12345", scalar.toString(), "0.12345");
+        assertEquals("Не было получено ожидаемое значение 0.12345", "0.12345", scalar.toString());
         System.out.println("выполнено успешно. Scalar="+scalar);
     }
 
@@ -62,7 +62,7 @@ public class Test_jd01_07 {
         Object scalar=c.newInstance("0.12345");
         System.out.println("было выполнено успешно. \nТестирование вывода значения 0.12345 через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение 0.12345", scalar.toString(), "0.12345");
+        assertEquals("Не было получено ожидаемое значение 0.12345", "0.12345", scalar.toString());
         System.out.println("выполнено успешно. Scalar="+scalar);
     }
 
@@ -78,7 +78,7 @@ public class Test_jd01_07 {
         Object vector=c.newInstance(new double[]{1,2,4});
         System.out.println("было выполнено успешно. \nТестирование вывода значения {1,2,4} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", vector.toString(), "{1.0, 2.0, 4.0}");
+        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", "{1.0, 2.0, 4.0}", vector.toString());
         System.out.println("выполнено успешно. Vector="+vector);
     }
 
@@ -94,7 +94,7 @@ public class Test_jd01_07 {
         vector=c.newInstance(vector);
         System.out.println("было выполнено успешно. \nТестирование вывода значения {1,2,4} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", vector.toString(), "{1.0, 2.0, 4.0}");
+        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", "{1.0, 2.0, 4.0}", vector.toString());
         System.out.println("выполнено успешно. Vector="+vector);
     }
 
@@ -108,7 +108,7 @@ public class Test_jd01_07 {
         Object vector=c.newInstance("{1,2,4}");
         System.out.println("было выполнено успешно. \nТестирование вывода значения {1,2,4} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", vector.toString(), "{1.0, 2.0, 4.0}");
+        assertEquals("Не было получено ожидаемое значение {1.0, 2.0, 4.0}", "{1.0, 2.0, 4.0}", vector.toString());
         System.out.println("выполнено успешно. Vector="+vector);
     }
 
@@ -123,7 +123,7 @@ public class Test_jd01_07 {
         Object matrix=c.newInstance(new Object[]{new double[][]{{1,2},{3,4}}});
         System.out.println("было выполнено успешно. \nТестирование вывода значения {{1,2},{3,4}} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", matrix.toString().replaceAll(" ",""), "{{1.0,2.0},{3.0,4.0}}");
+        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", "{{1.0,2.0},{3.0,4.0}}", matrix.toString().replaceAll(" ",""));
         System.out.println("выполнено успешно. Matrix="+matrix);
     }
 
@@ -139,7 +139,7 @@ public class Test_jd01_07 {
         matrix=c.newInstance(matrix);
         System.out.println("было выполнено успешно. \nТестирование вывода значения {{1,2},{3,4}} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", matrix.toString().replaceAll(" ",""), "{{1.0,2.0},{3.0,4.0}}");
+        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", "{{1.0,2.0},{3.0,4.0}}", matrix.toString().replaceAll(" ",""));
         System.out.println("выполнено успешно. Matrix="+matrix);
     }
 
@@ -153,7 +153,7 @@ public class Test_jd01_07 {
         Object matrix=c.newInstance("{{1,2},{3,4}}");
         System.out.println("было выполнено успешно. \nТестирование вывода значения {{1,2},{3,4}} через метод toString()");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", matrix.toString().replaceAll(" ",""), "{{1.0,2.0},{3.0,4.0}}");
+        assertEquals("Не было получено ожидаемое значение {{1.0, 2.0}, {3.0, 4.0}}", "{{1.0,2.0},{3.0,4.0}}", matrix.toString().replaceAll(" ",""));
         System.out.println("выполнено успешно. Matrix="+matrix);
     }
 
