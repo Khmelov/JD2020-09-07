@@ -27,11 +27,11 @@ public class TaskA2 {
                 counts[i]++;
                 return;
             }
-        }
-        words = Arrays.copyOf(words, words.length + 1);
-        counts = Arrays.copyOf(counts, counts.length + 1);
-        words[words.length - 1] = word;
-        counts[counts.length - 1] = 1;
+            words = Arrays.copyOf(words, words.length + 1);
+            counts = Arrays.copyOf(counts, counts.length + 1);
+            words[words.length - 1] = word;
+            counts[counts.length - 1] = 1;
 
+        }
     }
 }
