@@ -18,7 +18,7 @@ class Matrix extends Var {
         StringBuilder sb= new StringBuilder(strMatrix);
         int row = findRow(sb);
         int collum = findCollum(sb);
-        double[][] matrix=new double[row][((collum)/row)+1];
+        double[][] matrix=new double[row][(((collum)/row)+1)];
         this.value= matrix;
         getArrayStrigToDouble(sb,matrix);
     }
@@ -26,24 +26,24 @@ class Matrix extends Var {
     {
         Pattern p3= Pattern.compile("(\\d+\\.\\d+)|(\\d+)");
         Matcher m3= p3.matcher(sb);
-        int i=0;
-        int j=0;
+        int row=0;
+        int collum=0;
         while (m3.find()) {
-            matrix[i][j]=Double.parseDouble(m3.group());
-            if (j<matrix[i].length-1) j++;
-            else j=0;
-            if (j==0) i++;}
+            matrix[row][collum]=Double.parseDouble(m3.group());
+            if (collum<matrix[row].length-1) collum++;
+            else collum=0;
+            if (collum==0) row++;}
     }
     private int findCollum(StringBuilder sb) {
-        Pattern p2= Pattern.compile("\\d,\\d");
+        Pattern p2= Pattern.compile("\\d,");
         Matcher m2= p2.matcher(sb);
-        int j=1;
+        int j=0;
         while (m2.find()){j++;}
         return j;
     }
 
     private int findRow(StringBuilder sb) {
-        Pattern p1= Pattern.compile("\\}\\, \\{");
+        Pattern p1= Pattern.compile("(\\}\\, \\{)|(\\}\\,\\{)");
         Matcher m1= p1.matcher(sb);
         int i=1;
         while (m1.find()){i++;}
