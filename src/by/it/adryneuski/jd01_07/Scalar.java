@@ -3,7 +3,7 @@ package by.it.adryneuski.jd01_07;
 class Scalar extends Var
 
   {
-      private double value;
+       double value;
 
        Scalar(double value)
          {
