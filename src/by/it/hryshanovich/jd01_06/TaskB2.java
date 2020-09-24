@@ -10,27 +10,20 @@ public class TaskB2 {
         StringBuilder sb= new StringBuilder(by.it.hryshanovich.jd01_06.Poem.text);
         Pattern p1= Pattern.compile("[. ]{4}[а-я]");
         Matcher m1 = p1.matcher(sb);
-        //заменим троеточие
         replace(sb, m1);
         Pattern p2= Pattern.compile("[-,:\\na-zA-Z]");
         Matcher m2 = p2.matcher(sb);
-        //заменим небуквенные символы
         replaceNotLetterSymbal(sb, m2);
         Pattern p3= Pattern.compile("[!?]{1,}");
         Matcher m3 = p3.matcher(sb);
-        //заменим символы конца предложения на "."
         replaceEndSentence(sb, m3);
         Pattern p4= Pattern.compile("[ ]{2,}");
         Matcher m4 = p4.matcher(sb);
-        //заменим повтояриющиеся пробелы
         replaceSeveralSpaces(sb, m4);
         String varString= sb.toString();
-        //создадим массив строк для преложений
         String []arrayStrings;
         arrayStrings=varString.trim().split("[\\.]");
-        //обрежем пробелы в начале и конце каждого предложения
         trimSpaces(arrayStrings);
-        //сортируем массив по возрастанию
         arraySort(arrayStrings);
         printArray(arrayStrings);
     }
