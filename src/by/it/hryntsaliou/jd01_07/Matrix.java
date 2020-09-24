@@ -18,23 +18,25 @@ class Matrix extends Var {
     Matrix(String strMatrix) {
         Pattern pattern1 = Pattern.compile("[{]");
         Matcher matcher1 = pattern1.matcher(strMatrix);
-        int count = 0;
+        int countRows = 0;
         while (matcher1.find()) {
-            count++;
+            countRows++;
         }
-        Pattern pattern = Pattern.compile("[{},]+");
+        Pattern pattern = Pattern.compile("[{}]");
         Matcher matcher = pattern.matcher(strMatrix);
         while (matcher.find()) {
             strMatrix = matcher.replaceAll("");
         }
-        String[] numbers = strMatrix.split(" ");
+        String[] numbers = strMatrix.split(",");
+        double[][] nums = new double[countRows - 1][numbers.length / (countRows - 1)];
         int k = 0;
-        for (int i = 0; i < count - 1; i++) {
-            for (int j = 0; j < (numbers.length) / (count - 1); j++) {
-                this.value[i][j] = Double.parseDouble(numbers[k]);
+        for (int i = 0; i < countRows - 1; i++) {
+            for (int j = 0; j < numbers.length / (countRows - 1); j++) {
+                nums[i][j] = Double.parseDouble(numbers[k]);
                 k++;
             }
         }
+        this.value = nums;
     }
 
 
