@@ -14,11 +14,12 @@ class TaskB3 {
 //        System.out.println("Новым Годом");
 //        System.out.println("C Новым");
 //        System.out.println("Годом");
-//        System.out.print("C Новым");
+            System.out.print("C Новым");
 //        System.out.println("Годом");
 //        System.out.println(s);
 //        System.out.print("C Новым!");
-//        System.out.print(" ");
-//        System.out.println("Годом");
-    }
-}
+            System.out.print(" ");
+            System.out.println("Годом");
+        }
+        }
+
