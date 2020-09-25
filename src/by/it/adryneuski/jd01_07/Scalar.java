@@ -5,7 +5,7 @@ class Scalar extends Var
   {
        double value;
 
-       Scalar(double value)
+      Scalar(double value)
          {
           this.value = value;
          }
