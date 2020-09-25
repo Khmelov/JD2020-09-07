@@ -1,4 +1,4 @@
-package by.it._tasks_.jd01_01;
+package by.it.hryshanovich.jd01_01;
 /*
 напишите программу которая выводит на экран
 Hello world!
