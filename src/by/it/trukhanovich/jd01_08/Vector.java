@@ -90,7 +90,13 @@ class Vector extends Var {
 
     @Override
     public Var div(Var other) {
-        if (other instanceof Scalar){  return super.div(other);}
+        if (other instanceof Scalar){
+        double[]res=new double[value.length];
+            for (int i = 0; i < res.length; i++) {
+                res[i]=value[i]/((Scalar) other).getValue();
+            }
+            return new Vector(res);
+        }
         else if (other instanceof Vector){  return super.div(other);}
         else if (other instanceof Matrix){  return super.div(other);}
         else  return super.div(other);
