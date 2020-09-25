@@ -90,7 +90,10 @@ class Vector extends Var {
 
     @Override
     public Var div(Var other) {
-    return super.div(other);
+        if (other instanceof Scalar){  return super.div(other);}
+        else if (other instanceof Vector){  return super.div(other);}
+        else if (other instanceof Matrix){  return super.div(other);}
+        else  return super.div(other);
     }
 
     @Override

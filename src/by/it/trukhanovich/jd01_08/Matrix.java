@@ -67,7 +67,7 @@ class Matrix extends Var {
         if (other instanceof Matrix){
             this.value=value;
             double [][] s1=((Matrix) other).getValue();
-            double[][] result=new double[value.length][value[0].length];
+            double [][] result=new double[value.length][value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result [i][j]=value[i][j]+s1[i][j];
@@ -75,8 +75,28 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return super.add(other);
+        else if (other instanceof Vector){  return super.add(other);}
+        else if (other instanceof Scalar){  return super.add(other);}
+        else return super.add(other);
     }
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Matrix){
+            this.value=value;
+            double [][] s1=((Matrix) other).getValue();
+            double[][] result=new double[value.length][value[0].length];
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result [i][j]=value[i][j]-s1[i][j];
+                }
+            }
+            return new Matrix(result);
+        }
+        else if (other instanceof Vector){  return super.sub(other);}
+        else if (other instanceof Scalar){  return super.sub(other);}
+        else return super.sub(other);
+    }
+
 
     @Override
     public Var mul(Var other) {
@@ -98,7 +118,7 @@ class Matrix extends Var {
             }
             return new Vector(result);
         }
-        else  {
+        else  if (other instanceof Matrix){
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).getValue();
             double[][] result = new double[matrixLeft.length][matrixRight[0].length];
@@ -111,6 +131,7 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
+        return super.mul(other);
     }
 
     @Override
