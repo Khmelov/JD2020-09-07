@@ -11,7 +11,16 @@ class Vector extends Var {
         this.value=vector.value;
     }
     Vector (String str){
-        //this.value= ;
+        String [] strings = str
+                .replace('{',' ')
+                .replace('}',' ')
+                .trim()
+                .split(",\\s*");
+        double[] array=new double[strings.length];
+        for (int i =0; i<array.length; i++){
+            array [i]= Double.parseDouble(strings [i]);
+        }
+        this.value=array;
     }
 
     @Override
