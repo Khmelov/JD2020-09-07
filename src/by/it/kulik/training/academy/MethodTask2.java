@@ -7,14 +7,11 @@ public class MethodTask2 {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
         int b = scanner.nextInt();
-        method(a,b);
+        System.out.println(method(a,b));
     }
 
     static int method(int a, int b) {
-        int c = a + b;
-        int sum = c + a * b;
-        System.out.println(sum);
-        return sum;
+        return (a+b) + a * b;
     }
 
 }
