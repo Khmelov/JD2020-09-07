@@ -1,6 +1,7 @@
 package by.it.hryntsaliou.jd01_07;
 
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,11 +10,11 @@ class Vector extends Var{
     private double[] value;
 
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(Vector vector) {
-        this.value = vector.value;
+        this.value = Arrays.copyOf(vector.value, vector.value.length);
     }
 
     Vector(String strVector) {
