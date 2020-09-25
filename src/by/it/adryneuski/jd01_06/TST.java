@@ -5,16 +5,12 @@ import java.util.regex.Pattern;
 
 public class TST {
     public static void main(String[] args) {
-
-
-        String input = "Hello";
-        Pattern pattern = Pattern.compile("Hello");
+        String input = "Hello Java! Hello JavaScript! JavaSE 8";
+        Pattern pattern = Pattern.compile("Java(\\w*)");
         Matcher matcher = pattern.matcher(input);
         boolean found = matcher.matches();
-        if(found)
-            System.out.println("Найдено");
-        else
-            System.out.println("Не найдено");
+        while(matcher.find())
+            System.out.println(matcher.group());
 
     }
 }
