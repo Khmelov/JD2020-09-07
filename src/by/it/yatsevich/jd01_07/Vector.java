@@ -5,34 +5,41 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Vector extends Var {
-    private double [] value;
+    private double[] value;
 
-    Vector(double[ ] value){
-        this.value = value;
+    Vector(double[] value) {
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(Vector vector) {
-        this.value= vector.value;
+
+        this.value = Arrays.copyOf(vector.value, vector.value.length);
     }
 
-    Vector(String strVector){
-        StringBuilder line = new StringBuilder(strVector);
-        Pattern pattern = Pattern.compile("[{}]");
-        Matcher matcher = pattern.matcher(line);
-        while (matcher.find()){
-            line.setCharAt(matcher.start(),' '); }
-        String line1 = String.valueOf(line);
-        line1 = line1.trim();
+    Vector(String strVector) {
+     String [] string = strVector
+
+             .replace('{',' ')
+             .replace('}',' ')
+             .trim()
+             .split(",\\s*");
+     double[] array = new double[string.length];
+        for (int i = 0; i <array.length ; i++) {
+            array[i]=Double.parseDouble(string[i]);
+        }
+        this.value=array;
+
     }
 
     @Override
     public String toString() {
-       StringBuilder sb = new StringBuilder("{");
-       String delimiter = " ";
-        for (double element:value) {
+        StringBuilder sb = new StringBuilder("{");
+        String delimiter = " ";
+        for (double element : value) {
             sb.append(delimiter).append(element);
             delimiter = ", ";
-        }sb.append("}");
+        }
+        sb.append("}");
         return sb.toString();
     }
 }
