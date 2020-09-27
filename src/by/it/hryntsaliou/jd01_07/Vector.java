@@ -27,7 +27,7 @@ class Vector extends Var{
         for (int i = 0; i < strVector.trim().split(",").length; i++) {
             vec[i] = Double.parseDouble(strVector.trim().split(",")[i]);
         }
-            this.value = vec;
+        this.value = vec;
     }
 
 
