@@ -1,10 +1,8 @@
 package by.it.yatsevich.jd01_07;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-class Vector extends Var{
+class Vector extends Var {
     private double[] value;
 
     Vector(double[] value) {
@@ -17,24 +15,24 @@ class Vector extends Var{
     }
 
     Vector(String strVector) {
-     String [] string = strVector
+        String[] string = strVector
 
-             .replace('{',' ')
-             .replace('}',' ')
-             .trim()
-             .split(",\\s*");
-     double[] array = new double[string.length];
-        for (int i = 0; i <array.length ; i++) {
-            array[i]=Double.parseDouble(string[i]);
+                .replace('{', ' ')
+                .replace('}', ' ')
+                .trim()
+                .split(",\\s*");
+        double[] array = new double[string.length];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Double.parseDouble(string[i]);
         }
-        this.value=array;
+        this.value = array;
 
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
-        String delimiter = " ";
+        String delimiter = "";
         for (double element : value) {
             sb.append(delimiter).append(element);
             delimiter = ", ";
