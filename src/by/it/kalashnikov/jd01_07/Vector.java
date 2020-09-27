@@ -19,8 +19,11 @@ class Vector extends Var{
 
 
     Vector (String strVector){
-//        StringBuilder strings = new StringBuilder(strVector);
-//        strings.replace('{',' ').replace('}',' ').trim().split(",\\s*");
+//        String [] strings = strVector
+//        .replace('{',' ').
+//        replace('}',' ').
+//        trim().
+//        split(",\\s*");
 //        double [] array = new double[strings.length()];
 //        for (int i = 0; i < array.length; i++) {
 //            array[i] = Double.parseDouble(strings[i]);
