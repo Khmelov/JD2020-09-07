@@ -2,21 +2,30 @@ package by.it.kalashnikov.jd01_07;
 
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Vector extends Var{
 
     private double[] value;
+
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value,value.length);
     }
 
     Vector (Vector vector){
-        this.value = vector.value;
+        this(vector.value);
     }
 
 
     Vector (String strVector){
-        
+//        StringBuilder strings = new StringBuilder(strVector);
+//        strings.replace('{',' ').replace('}',' ').trim().split(",\\s*");
+//        double [] array = new double[strings.length()];
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = Double.parseDouble(strings[i]);
+//        }
+//        this.value=array;
     }
 
     @Override
