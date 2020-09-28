@@ -1,19 +1,20 @@
 package by.it.hryntsaliou.jd01_07;
 
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Vector extends Var{
 
-    private static double[] value;
+    private double[] value;
 
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(Vector vector) {
-        this.value = vector.value;
+        this.value = Arrays.copyOf(vector.value, vector.value.length);
     }
 
     Vector(String strVector) {
@@ -22,9 +23,11 @@ class Vector extends Var{
         while (matcher.find()) {
             strVector = matcher.replaceAll(" ");
         }
+        double[] vec = new double[strVector.trim().split(",").length];
         for (int i = 0; i < strVector.trim().split(",").length; i++) {
-            this.value[i] = Double.parseDouble(strVector.trim().split(",")[i]);
+            vec[i] = Double.parseDouble(strVector.trim().split(",")[i]);
         }
+        this.value = vec;
     }
 
 
