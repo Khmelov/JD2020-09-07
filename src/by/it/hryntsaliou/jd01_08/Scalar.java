@@ -1,7 +1,5 @@
 package by.it.hryntsaliou.jd01_08;
 
-import com.sun.jdi.Value;
-
 class Scalar extends Var {
 
     private double value;
