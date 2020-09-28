@@ -7,11 +7,10 @@ public class TaskB {
         Scanner sc = new Scanner(System.in);
         int n=sc.nextInt();
         String[] name=new String[n];
-        for (int i = 0; i <= name.length; i++) {
+        for (int i = 0; i <= name.length; i++){
             name[i]= sc.nextLine();
         }
-
-        int[][] salary=new int[n][4];
+        int[][] salary=new int[n][3];
 
 
     }
