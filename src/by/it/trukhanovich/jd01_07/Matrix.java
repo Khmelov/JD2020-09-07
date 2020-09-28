@@ -1,6 +1,7 @@
 package by.it.trukhanovich.jd01_07;
 
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,12 @@ class Matrix extends Var {
      private double [][] value;
 
     public Matrix(double[][] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
+        for (int i = 0; i < this.value.length; i++) {
+            for (int j = 0; j < this.value[i].length; j++) {
+                this.value[i][j]=value[i][j];
+            }
+        }
     }
     public Matrix(Matrix matrix) {
         this.value = matrix.value;
