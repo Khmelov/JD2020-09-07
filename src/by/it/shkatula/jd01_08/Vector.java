@@ -100,12 +100,11 @@ class Vector extends Var {
             for (int i = 0; i < resultVecVec.length; i++) {
                 resultVecVec[i] = resultVecVec[i] * ((Vector) other).value[i];
             }
-            for (int sumElement = 0; sumElement < resultVecVec.length; sumElement++) {
-                sum = sum + resultVecVec[sumElement];
+            for (double v : resultVecVec) {
+                sum = sum + v;
 
             }
-            String str = Double.toString(sum);
-            return new Vector(str);
+            return new Scalar(sum);
         } else
             return super.mul(other);
     }
@@ -118,7 +117,7 @@ class Vector extends Var {
                 resultVecSca[i] = resultVecSca[i] / ((Scalar) other).getValue();
             }
             return new Vector(resultVecSca);
-        }  else
+        } else
             return super.mul(other);
     }
 
