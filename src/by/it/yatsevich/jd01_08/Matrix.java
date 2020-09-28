@@ -25,7 +25,7 @@ class Matrix extends Var {
     }
 
     private static double[][] getArray(StringBuilder sb, double[][] matrix, int row) {
-        Pattern patternArray = Pattern.compile("\\d+\\.+\\d+");
+        Pattern patternArray = Pattern.compile("(\\d+\\.+\\d+)|(\\d+)");
         Matcher matcherArray = patternArray.matcher(sb);
         double[] temp = new double[matrix[0].length * row];
         int k = 0;
@@ -45,7 +45,7 @@ class Matrix extends Var {
 
     private static int getColls(StringBuilder sb) {
         int colsFirst = 0;
-        Pattern collPattern = Pattern.compile("\\d+\\.+\\d+");
+        Pattern collPattern = Pattern.compile("(\\d+\\.+\\d+)|(\\d+)");
         Matcher collMatcher = collPattern.matcher(sb);
         while (collMatcher.find()) colsFirst++;
         return colsFirst;
