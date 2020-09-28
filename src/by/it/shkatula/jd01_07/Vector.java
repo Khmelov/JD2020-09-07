@@ -18,7 +18,7 @@ class Vector extends Var {
 
     private double[] setVector(double[] vec) {
         double[] resultVector = new double[vec.length];
-        for (int i = 0; i < resultVector.length; i++) {
+        for (int i = 0; i < vec.length; i++) {
             resultVector[i] = vec[i];
         }
 
