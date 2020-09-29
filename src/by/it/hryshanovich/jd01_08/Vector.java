@@ -88,11 +88,11 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             double [] res = Arrays.copyOf(value,value.length);
-            double resS = 0;
+            double resJ = 0;
             for (int i = 0; i < res.length; i++) {
-                resS=resS+ res[i]*((Vector)other).value[i];
+                resJ=resJ+ res[i]*((Vector)other).value[i];
             }
-            return new Scalar(resS);
+            return new Scalar(resJ);
         }
         else
             return super.mul(other);
