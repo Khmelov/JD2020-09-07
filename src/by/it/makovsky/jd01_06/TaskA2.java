@@ -11,10 +11,10 @@ public class TaskA2 {
 
 
     public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
-        Matcher matcher = pattern.matcher(Poem.text);
-        while (matcher.find()) {
-            process(matcher.group());
+        Pattern p = Pattern.compile("[а-яА-ЯёЁ]+");
+        Matcher m = p.matcher(Poem.text);
+        while (m.find()) {
+            process(m.group());
         }
         for (int i = 0; i < words.length; i++) {
             System.out.printf("%s=%d\n", words[i], counts[i]);
