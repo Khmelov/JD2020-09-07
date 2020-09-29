@@ -1,7 +1,5 @@
 package by.it.hryntsaliou.jd01_09;
 
-import org.hamcrest.core.IsNull;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,15 +40,15 @@ class Matrix extends Var {
             strMatrix = matcher.replaceAll("");
         }
         String[] numbers = strMatrix.split(",");
-        double[][] nums = new double[countRows - 1][numbers.length / (countRows - 1)];
+        double[][] newNumbers = new double[countRows - 1][numbers.length / (countRows - 1)];
         int k = 0;
         for (int i = 0; i < countRows - 1; i++) {
             for (int j = 0; j < numbers.length / (countRows - 1); j++) {
-                nums[i][j] = Double.parseDouble(numbers[k]);
+                newNumbers[i][j] = Double.parseDouble(numbers[k]);
                 k++;
             }
         }
-        this.value = nums;
+        this.value = newNumbers;
     }
 
     @Override

@@ -30,5 +30,19 @@ abstract class Var implements Operation {
         return "Var{}";
     }
 
-
+    static Var createVar(String strVar) {
+        if (strVar.matches(Patterns.SCALAR)) {
+            return new Scalar(strVar);
+        }
+        if (strVar.matches(Patterns.VECTOR)) {
+            return new Vector(strVar);
+        }
+        if (strVar.matches(Patterns.MATRIX)) {
+            return new Matrix(strVar);
+        }
+        else {
+            System.err.println("Незвестная переменная "+strVar);
+            return null;
+        }
+    }
 }
