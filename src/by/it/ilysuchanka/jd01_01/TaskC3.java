@@ -30,5 +30,4 @@ package by.it.ilysuchanka.jd01_01;
 
 */
 class TaskC3 {
-
 }
