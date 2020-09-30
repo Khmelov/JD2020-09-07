@@ -68,7 +68,6 @@ class Vector extends Var {
     @Override
     public Var div(Var other) {
         if (other instanceof Vector) {
-            System.out.println("Операция невозможна");
             return super.div(other);
         } else if (other instanceof Scalar && ((Scalar) other).getValue() != 0) {
             double[] div = Arrays.copyOf(value, value.length);

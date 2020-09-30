@@ -2,6 +2,10 @@ package by.it.yatsevich.jd01_09;
 
 class Scalar extends Var {
 
+    public double getValue() {
+        return value;
+    }
+
     private double value;
 
     Scalar(double value) {
