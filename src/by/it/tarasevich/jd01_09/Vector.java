@@ -1,6 +1,4 @@
-package by.it.tarasevich.jd01_08;
-
-
+package by.it.tarasevich.jd01_09;
 
 import java.util.Arrays;
 
@@ -17,11 +15,11 @@ class Vector extends Var {
     }
 
     public Vector(String str) {
-        String[] string = str.replace('{',' ')
-                .replace('}',' ')
-                .trim()
-                .split(",\\s*");
-        double[] array = new double[string.length];
+      String[] string = str.replace('{',' ')
+                            .replace('}',' ')
+                            .trim()
+                            .split(",\\s*");
+      double[] array = new double[string.length];
         for (int i = 0; i <array.length ; i++) {
             array[i] = Double.parseDouble(string[i]);
         }
@@ -97,4 +95,4 @@ class Vector extends Var {
 
         return stringBuilder.toString();
     }
- }
+}
