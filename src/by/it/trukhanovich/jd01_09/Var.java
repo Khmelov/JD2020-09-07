@@ -41,6 +41,8 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         }
         else {
-        return null;}
+            System.err.println("Незвестная переменная "+strVar);
+        return null;
+        }
     }
 }
