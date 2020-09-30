@@ -2,7 +2,7 @@ package by.it.tarasevich.jd01_08;
 
  class Vector extends Var {
 
-   private double[] value;
+  final private double[] value;
 
   public Vector(double[] value) {
    this.value = value;
