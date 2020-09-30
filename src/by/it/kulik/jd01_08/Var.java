@@ -3,7 +3,7 @@ package by.it.kulik.jd01_08;
 abstract class Var implements Operation {
     @Override
     public Var add(Var other) {
-        System.out.println("Операция сложения "+ this+"+"+other+" невозможна");
+        System.out.println("Операция сложения "+ this+"+"+ other +" невозможна");
         return null;
     }
 
