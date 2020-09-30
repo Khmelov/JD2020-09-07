@@ -8,11 +8,23 @@ class Matrix extends Var {
     private double[][] value;
 
     Matrix(double[][] value) {
-        this.value = value;
+        double[][] numbers = new double[value.length][value[0].length];
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                numbers[i][j] = value[i][j];
+            }
+        }
+        this.value = numbers;
     }
 
     Matrix(Matrix matrix) {
-        this.value = matrix.value;
+        double[][] numbers = new double[matrix.value.length][matrix.value[0].length];
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                numbers[i][j] = matrix.value[i][j];
+            }
+        }
+        this.value = numbers;
     }
 
     Matrix(String strMatrix) {
