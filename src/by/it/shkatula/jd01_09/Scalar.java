@@ -1,4 +1,4 @@
-package by.it.shkatula.jd01_08;
+package by.it.shkatula.jd01_09;
 
 class Scalar extends Var {
 
@@ -39,7 +39,7 @@ class Scalar extends Var {
             double sub = this.value - ((Scalar) other).value;
             return new Scalar(sub);
         } else {
-            return other.sub(this).mul(new Scalar(-1));
+            return new Scalar(-1).mul(other).add(this);
 
 
         }
