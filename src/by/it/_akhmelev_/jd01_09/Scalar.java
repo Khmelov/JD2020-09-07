@@ -1,25 +1,24 @@
-package by.it.shkatula.jd01_08;
+package by.it._akhmelev_.jd01_09;
 
 class Scalar extends Var {
-
-    private double value;
 
     public double getValue() {
         return value;
     }
 
-    Scalar(double value) {
+    private double value;
+
+    public Scalar(double value) {
         this.value = value;
     }
 
-
-
-    Scalar(Scalar scalar) {
+    public Scalar(Scalar scalar) {
         this.value = scalar.value;
     }
 
-    Scalar(String str) {
-        this.value = Double.parseDouble(str);
+
+    public Scalar(String strScalar) {
+        this.value = Double.parseDouble(strScalar);
     }
 
     @Override
@@ -27,10 +26,8 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
-        } else {
+        } else
             return other.add(this);
-
-        }
     }
 
     @Override
@@ -38,11 +35,8 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double sub = this.value - ((Scalar) other).value;
             return new Scalar(sub);
-        } else {
+        } else
             return other.sub(this).mul(new Scalar(-1));
-
-
-        }
     }
 
     @Override
@@ -50,10 +44,8 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double mul = this.value * ((Scalar) other).value;
             return new Scalar(mul);
-        } else {
+        } else
             return other.mul(this);
-
-        }
     }
 
     @Override
@@ -61,10 +53,8 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
-        } else {
-            return super.div(this);
-
-        }
+        } else
+            return super.div(other);
     }
 
     @Override
