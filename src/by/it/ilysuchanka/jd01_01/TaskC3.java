@@ -33,7 +33,18 @@ import java.util.Scanner;
 */
 class TaskC3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
+        Scanner sc = new Scanner(System.in);
+        int massaearth = sc.nextInt();
+        double massamarsa = getWeight(massaearth);
+        System.out.println(massamarsa);
     }
+
+    private static double getWeight(int massaearth) {
+        double massamarsa100=massaearth/9.81*3.86*100;
+        double delta=massamarsa100-(int)massamarsa100;
+        if (delta<0.5){
+            return ((int) massamarsa100) / 100.0;
+        }
+        return ((int)massamarsa100+1)/100.0;
+}
 }
