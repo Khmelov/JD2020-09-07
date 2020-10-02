@@ -67,10 +67,10 @@ class Matrix extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Matrix){
-            double [][] result=Arrays.copyOf(value,value.length);
+            double[][] result=new double[value.length][value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result [i][j]+= ((Matrix) other).getValue()[i][j];
+                    result [i][j]= value[i][j] + ((Matrix) other).getValue()[i][j];
                 }
             }
             return new Matrix(result);
@@ -79,10 +79,10 @@ class Matrix extends Var {
             return super.add(other);
         }
         else if (other instanceof Scalar) {
-            double[][] result = Arrays.copyOf(value, value.length);
+            double[][] result=new double[value.length][value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j]  += ((Scalar) other).getValue();
+                    result[i][j] =value[i][j]+ ((Scalar) other).getValue();
                 }
             }
             return new Matrix(result);
