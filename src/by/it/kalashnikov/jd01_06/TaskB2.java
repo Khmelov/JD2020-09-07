@@ -24,6 +24,12 @@ class TaskB2 {
             sb.replace(start, start+3, "");
         }
 
+        Pattern pattern1 = Pattern.compile("[!.?]");
+        String[] arrString = pattern1.split(sb);
+        for (int i = 0; i < arrString.length; i++) {
+            arrString[i]=arrString[i].replaceAll("[^а-яА-яёЁ]"," ");
+            System.out.println(arrString[i]);
+        }
 
 
     }
