@@ -1,4 +1,4 @@
-package by.it.shkatula.jd01_08;
+package by.it.shkatula.jd01_09;
 
 import java.util.Arrays;
 
@@ -10,11 +10,11 @@ class Matrix extends Var {
     }
 
     Matrix(double[][] value) {
-        this.value=Arrays.copyOf(value,value.length);
+        this.value = value;
     }
 
     Matrix(Matrix matrix) {
-        this(matrix.value);
+        this.value = matrix.value.clone();
     }
 
     Matrix(String strMatrix) {
@@ -115,8 +115,8 @@ class Matrix extends Var {
             return new Vector(result);
         }
         else  if (other instanceof Matrix){
-            double[][] matrixLeft = Arrays.copyOf(value,value.length);
-            double[][] matrixRight = Arrays.copyOf(((Matrix) other).getValue(),((Matrix) other).getValue().length);
+            double[][] matrixLeft = this.value;
+            double[][] matrixRight = ((Matrix) other).getValue();
             double[][] result = new double[matrixLeft.length][matrixRight[0].length];
             for (int i = 0; i < matrixLeft.length; i++) {
                 for (int j = 0; j < matrixRight[0].length; j++) {
