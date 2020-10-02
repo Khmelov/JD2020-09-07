@@ -20,7 +20,7 @@ public class Runner {
 
         //my realization
         System.out.println("моя реализация");
-        ListA<Object> myListOk = new ListA<>();
+        ListB<Object> myListOk = new ListB<>();
         myListOk.add("myOne");
         myListOk.add("my1");
         myListOk.add("my2");
