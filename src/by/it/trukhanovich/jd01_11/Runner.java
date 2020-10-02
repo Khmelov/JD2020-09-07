@@ -18,6 +18,19 @@ public class Runner {
         System.out.println(listOk);
         System.out.println(listOk.size());
 
+        //my realization
+        System.out.println("моя реализация");
+        ListA<Object> myListOk = new ListA<>();
+        myListOk.add("myOne");
+        myListOk.add("my1");
+        myListOk.add("my2");
+        myListOk.add("my3");
+        myListOk.add("my4");
+        myListOk.add("my5");
+        System.out.println(myListOk);
+        System.out.println(myListOk.size());
+        System.out.println(myListOk.get(4));
+
 
 
     }

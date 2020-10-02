@@ -1,37 +1,57 @@
 package by.it.trukhanovich.jd01_11;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-public class ListA <E> implements List<E> {
+public class ListA <T> implements List<T> {
+
+    private T[] elements= (T[]) new Object[]{};
+    private int size=0;
+
+
     @Override
-    public boolean add(E e) {
+    public boolean add(T element) {
+        if (size==elements.length)
+        {
+            elements=Arrays.copyOf(elements,elements.length+1);
+        }
+        elements[size++]=element;
         return false;
     }
 
     @Override
-    public E remove(int index) {
-        return null;
+    public T remove(int index) {
+       T element=elements[index];
+       System.arraycopy(elements,index+1,elements,index,size-index-1);
+       size--;
+       return element;
     }
 
     @Override
-    public E get(int index) {
-        return null;
+    public T get(int index) {
+
+        return elements[index];
+    }
+
+    @Override
+    public int size() {
+        return size;
     }
 
     @Override
     public String toString() {
-        return "ListA{}";
+        StringBuilder out=new StringBuilder();
+        out.append("[");
+        for (int i = 0; i < size; i++) {
+            if (i>0) {
+                out.append(", ");
+            }
+            out.append(elements[i]);
+        }
+        out.append("]");
+        return out.toString();
     }
 
     //no impl
-
-    @Override
-    public int size() {
-        return 0;
-    }
 
     @Override
     public boolean isEmpty() {
@@ -44,7 +64,7 @@ public class ListA <E> implements List<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator<T> iterator() {
         return null;
     }
 
@@ -69,12 +89,12 @@ public class ListA <E> implements List<E> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
+    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
+    public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
 
@@ -94,12 +114,12 @@ public class ListA <E> implements List<E> {
     }
 
     @Override
-    public E set(int index, E element) {
+    public T set(int index, T element) {
         return null;
     }
 
     @Override
-    public void add(int index, E element) {
+    public void add(int index, T element) {
 
     }
 
@@ -114,17 +134,17 @@ public class ListA <E> implements List<E> {
     }
 
     @Override
-    public ListIterator<E> listIterator() {
+    public ListIterator<T> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator<E> listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<E> subList(int fromIndex, int toIndex) {
+    public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
 }
