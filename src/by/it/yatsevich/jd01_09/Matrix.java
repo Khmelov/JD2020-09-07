@@ -10,31 +10,26 @@ class Matrix extends Var {
         return value;
     }
 
-    private final double[][] value;
+    private double[][] value;
 
     Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
-        for (int i = 0; i < this.value.length; i++) {
-            for (int j = 0; j < this.value[i].length; j++) {
-                this.value[i][j] = value[i][j];
-            }
-        }
     }
 
     Matrix(Matrix matrix) {
-        this.value = matrix.value;
+        this.value = Arrays.copyOf(matrix.value, matrix.value.length);
     }
 
     Matrix(String strMatrix) {
         StringBuilder sb = new StringBuilder(strMatrix);
         int row = getRow(sb);
-        int cols = (getColls(sb) + 1) / row;
+        int cols = (getColls(sb)+1)/ row;
         double[][] matrix = new double[row][cols];
-        this.value = matrix;
-        getArray(sb, matrix, row);
+        this.value=matrix;
+                getArray(sb, matrix,row);
     }
 
-    private void getArray(StringBuilder sb, double[][] matrix, int row) {
+    private static double[][] getArray(StringBuilder sb, double[][] matrix, int row) {
         Pattern patternArray = Pattern.compile("(\\d+\\.+\\d+)|(\\d+)");
         Matcher matcherArray = patternArray.matcher(sb);
         double[] temp = new double[matrix[0].length * row];
@@ -50,6 +45,7 @@ class Matrix extends Var {
                 k++;
             }
         }
+        return matrix;
     }
 
     private static int getColls(StringBuilder sb) {
@@ -70,47 +66,53 @@ class Matrix extends Var {
 
     @Override
     public Var add(Var other) {
-        if (other instanceof Matrix) {
-            double[][] res =  new double[value.length][value[0].length];
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] =value[i][j] + ((Matrix) other).getValue()[i][j];
+        if (other instanceof Matrix){
+            double [][] result=Arrays.copyOf(value,value.length);
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result [i][j]+= ((Matrix) other).getValue()[i][j];
                 }
             }
-            return new Matrix(res);
-        } else if (other instanceof Vector) { return super.add(other);
-        } else if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value,value.length);
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] += ((Scalar) other).getValue();
+            return new Matrix(result);
+        }else
+        if (other instanceof Vector){
+            return super.add(other);
+        }
+        else if (other instanceof Scalar) {
+            double[][] result = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j]  += ((Scalar) other).getValue();
                 }
             }
-            return new Matrix(res);
-        } else return super.add(other);
+            return new Matrix(result);
+        }
+        else return super.add(other);
     }
-
     @Override
     public Var sub(Var other) {
-        if (other instanceof Matrix) {
-            double[][] res = new double[value.length][value[0].length];
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] = value[i][j] - ((Matrix) other).getValue()[i][j];
+        if (other instanceof Matrix){
+            double[][] result=new double[value.length][value[0].length];
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result [i][j]=value[i][j]-((Matrix) other).getValue()[i][j];
                 }
             }
-            return new Matrix(res);
-        } else if (other instanceof Vector) {
+            return new Matrix(result);
+        }
+        else if (other instanceof Vector){
             return super.sub(other);
-        } else if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] = value[i][j] - ((Scalar) other).getValue();
+        }
+        else if (other instanceof Scalar) {
+            double[][] result = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] = value[i][j] - ((Scalar) other).getValue();
                 }
             }
-            return new Matrix(res);
-        } else return super.sub(other);
+            return new Matrix(result);
+        }
+        else return super.sub(other);
     }
 
     @Override
@@ -124,15 +126,16 @@ class Matrix extends Var {
             }
             return new Matrix(res);
         } else if (other instanceof Vector) {
-            double[] result = new double[value.length];
-            double[] vector = Arrays.copyOf(((Vector) other).getValue(), ((Vector) other).getValue().length);
+            double result[] = new double[value.length];
+            double[] vetc = Arrays.copyOf(((Vector) other).getValue(), ((Vector) other).getValue().length);
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[i].length; j++) {
-                    result[i] = result[i] + value[i][j] * vector[j];
+                    result[i] = result[i] + value[i][j] * vetc[j];
                 }
             }
             return new Vector(result);
-        } else if (other instanceof Matrix) {
+        }
+        else  if (other instanceof Matrix){
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).getValue();
             double[][] result = new double[matrixLeft.length][matrixRight[0].length];
@@ -150,6 +153,7 @@ class Matrix extends Var {
 
     @Override
     public Var div(Var other) {
+
         return super.div(other);
     }
 
@@ -165,7 +169,7 @@ class Matrix extends Var {
                 delimiter = ", ";
                 if (j == value[i].length - 1) delimiter = "";
             }
-            if (i < value.length - 1) strBuild.append("}, ");
+            if (i < value.length-1) strBuild.append("}, ");
             else strBuild.append("}");
             delimiter = "";
         }
