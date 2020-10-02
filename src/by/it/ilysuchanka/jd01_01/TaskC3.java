@@ -1,5 +1,7 @@
 package by.it.ilysuchanka.jd01_01;
 
+import java.util.Scanner;
+
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -30,4 +32,8 @@ package by.it.ilysuchanka.jd01_01;
 
 */
 class TaskC3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+    }
 }
