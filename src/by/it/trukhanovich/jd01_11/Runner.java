@@ -1,6 +1,7 @@
 package by.it.trukhanovich.jd01_11;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Runner {
@@ -17,6 +18,15 @@ public class Runner {
         listOk.remove(2);
         System.out.println(listOk);
         System.out.println(listOk.size());
+        listOk.set(2,"new string");
+        System.out.println(listOk);
+        listOk.add(3,"123");
+        System.out.println(listOk);
+        listOk.addAll(listOk);
+        System.out.println(listOk);
+//        ArrayList ggg=new ArrayList();
+//        ggg.toArray()
+
 
         //my realization
         System.out.println("моя реализация");
@@ -27,9 +37,20 @@ public class Runner {
         myListOk.add("my3");
         myListOk.add("my4");
         myListOk.add("my5");
+        myListOk.add("my6");
         System.out.println(myListOk);
         System.out.println(myListOk.size());
         System.out.println(myListOk.get(4));
+        myListOk.set(2,"myNewString");
+        System.out.println(myListOk);
+        myListOk.add(3,"new");
+        System.out.println(myListOk);
+        System.out.println("addAll");
+        System.out.println("Размер массива:"+myListOk.size());
+        myListOk.addAll(myListOk);
+        System.out.println(myListOk);
+        System.out.println("Размер массива:"+myListOk.size());
+
 
 
 

@@ -15,7 +15,7 @@ public class ListB <T> implements List<T> {
             elements=Arrays.copyOf(elements,elements.length+1);
         }
         elements[size++]=element;
-        return false;
+        return true;
     }
 
     @Override
@@ -51,6 +51,33 @@ public class ListB <T> implements List<T> {
         return out.toString();
     }
 
+    @Override
+    public T set(int index, T e) {
+        T old=elements[index];
+        elements[index]=e;
+        return old;
+    }
+
+    @Override
+    public void add(int index, T element) {
+        elements=Arrays.copyOf(elements,elements.length+1);
+        size++;
+        for (int i = size-1; i >index; i--) {
+            elements[i]=elements[i-1];
+        }
+        elements[index]=element;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        Object[] a = c.toArray();
+        elements=Arrays.copyOf(elements,elements.length+a.length);
+        System.arraycopy(a, 0, elements, size, a.length);
+        size += a.length;
+        return a.length != 0;
+    }
+
+
     //no impl
 
     @Override
@@ -70,12 +97,18 @@ public class ListB <T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(elements, size);
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        if (a.length < size)
+            // Make a new array of a's runtime type, but my contents:
+            return (T[]) Arrays.copyOf(elements, size, a.getClass());
+        System.arraycopy(elements, 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;
+        return a;
     }
 
     @Override
@@ -85,11 +118,6 @@ public class ListB <T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
@@ -113,15 +141,6 @@ public class ListB <T> implements List<T> {
 
     }
 
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
-    }
 
     @Override
     public int indexOf(Object o) {
