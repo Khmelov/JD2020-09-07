@@ -87,6 +87,9 @@ public class ListB <T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
+        for (T element : elements) {
+            if(element==o) return true;
+        }
         return false;
     }
 
@@ -144,7 +147,10 @@ public class ListB <T> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        for (int index = 0; index < size; index++) {
+            if(elements[index]==o) return index;
+        }
+        return -1;
     }
 
     @Override

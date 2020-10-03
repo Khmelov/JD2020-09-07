@@ -1,9 +1,6 @@
 package by.it.trukhanovich.jd01_11;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class SetC<T> implements Set<T> {
     private T[] elements= (T[]) new Object[]{};
@@ -14,7 +11,7 @@ public class SetC<T> implements Set<T> {
     public boolean contains(Object o) {
         for (T element : elements) {
 //            if (element.equals(o)) return true;
-            if(element.hashCode()==o.hashCode()) return true;
+            if(element==o) return true;
         }
         return false;
     }
@@ -23,7 +20,7 @@ public class SetC<T> implements Set<T> {
     public boolean add(T t) {
         if (size>0) {
             for (int i = 0; i <size; i++) {
-            if (elements[i].hashCode()==t.hashCode()) return false;
+            if (elements[i]==t) return false;
             }
         }
         if (size==0||size==elements.length)
@@ -57,16 +54,15 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean remove(Object o) {
+
         if (size==0) return false;
-        else {
-            for (int index = 0; index < size; index++) {
-                if (elements[index].hashCode() == o.hashCode()) {
-                    System.arraycopy(elements, index + 1,
+        for (int index = 0; index < size; index++) {
+            if (elements[index].equals(o)) {
+                System.arraycopy(elements, index + 1,
                             elements, index, size - index - 1);
-                    size--;
-                    return true;
+                size--;
+                return true;
                 }
-            }
         }
         return false;
     }
@@ -76,6 +72,31 @@ public class SetC<T> implements Set<T> {
         if (size==0) return true;
         return false;
     }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        Object[] a = c.toArray();
+//        elements=Arrays.copyOf(elements,elements.length+a.length);
+        boolean det = true;
+        boolean det1 = true;
+        int oldSize = size;
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < size; j++) {
+                    if (elements[j]==a[i]) {
+                        det = false;
+                    }
+                }
+                if (det) {
+                    elements = Arrays.copyOf(elements, elements.length + 1);
+                    System.arraycopy(a, i, elements, size, 1);
+                    size++;
+                }
+                det = true;
+            }
+//        }
+        return size != oldSize;
+    }
+
     //no impl
 
     @Override
@@ -96,11 +117,6 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
