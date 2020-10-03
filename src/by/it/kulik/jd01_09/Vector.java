@@ -1,6 +1,4 @@
-package by.it.kulik.jd01_08;
-
-import java.util.Arrays;
+package by.it.kulik.jd01_09;
 
 class Vector extends Var {
     private double[] value;
@@ -19,19 +17,7 @@ class Vector extends Var {
         return sb.toString();
     }
     Vector(Vector vector) {
-        this(vector.value);
-    }
-
-    @Override
-    public Var add(Var other) {
-        if  (other instanceof Scalar){
-            double[] res= Arrays.copyOf(value,value.length);
-            for (int i = 0; i < res.length; i++) {
-                res[i]=res[i]+((Scalar)other).getValue();
-            }
-            return  new Vector(res);
-        }else
-            return super.add(this);
+        this.value = vector.value;
     }
 
     Vector(String str) {

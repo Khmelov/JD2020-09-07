@@ -1,11 +1,7 @@
-package by.it.kulik.jd01_08;
+package by.it.kulik.jd01_09;
 
 class Scalar extends Var {
     private double value;
-
-    public double getValue() {
-        return value;
-    }
 
     Scalar(double value) {
         this.value = value;
@@ -43,7 +39,7 @@ class Scalar extends Var {
         if  (other instanceof Scalar){
             double div=this.value/((Scalar) other).value;
             return  new Scalar(div);
-        }
+        }else
             return super.div(other);
     }
 
