@@ -11,14 +11,33 @@ public class SetC<T> implements Set<T> {
     private int size=0;
 
     @Override
-    public boolean add(T t) {
-        if (size==elements.length)
-        {
-            elements=Arrays.copyOf(elements,elements.length+1);
+    public boolean contains(Object o) {
+        for (T element : elements) {
+//            if (element.equals(o)) return true;
+            if(element.hashCode()==o.hashCode()) return true;
         }
-        elements[size++]=t;
+        return false;
+    }
+
+    @Override
+    public boolean add(T t) {
+        if (size>0) {
+            for (int i = 0; i <size; i++) {
+            if (elements[i].hashCode()==t.hashCode()) return false;
+            }
+        }
+        if (size==0||size==elements.length)
+        {
+            elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
+        }
+        elements[size]=t;
+        size++;
         return true;
 
+    }
+    @Override
+    public int size() {
+        return size;
     }
 
     @Override
@@ -34,22 +53,30 @@ public class SetC<T> implements Set<T> {
         out.append("]");
         return out.toString();
     }
-    //no impl
+
 
     @Override
-    public int size() {
-        return 0;
+    public boolean remove(Object o) {
+        if (size==0) return false;
+        else {
+            for (int index = 0; index < size; index++) {
+                if (elements[index].hashCode() == o.hashCode()) {
+                    System.arraycopy(elements, index + 1,
+                            elements, index, size - index - 1);
+                    size--;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean isEmpty() {
+        if (size==0) return true;
         return false;
     }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
+    //no impl
 
     @Override
     public Iterator<T> iterator() {
@@ -66,11 +93,6 @@ public class SetC<T> implements Set<T> {
         return null;
     }
 
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
 
     @Override
     public boolean containsAll(Collection<?> c) {

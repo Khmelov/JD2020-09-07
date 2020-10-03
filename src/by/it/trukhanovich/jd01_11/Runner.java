@@ -13,7 +13,27 @@ public class Runner {
         strings.add("4");
         strings.add("124");
         System.out.println(strings.toString());
+        System.out.println("contains \"one\": "+strings.contains("one"));
+        System.out.println("remove: "+strings.remove("5"));
+        System.out.println("after remove:"+strings.toString());
+        System.out.println("size: " +strings.size());
+        System.out.println("isEmpty: "+strings.isEmpty());
 
+
+        //my realization
+        System.out.println("my realization ");
+        SetC<String> objects = new SetC<>();
+        objects.add("one");
+        objects.add("one");
+        objects.add("one");
+        objects.add("1");
+        objects.add("2");
+        objects.add("3");
+        System.out.println("after add: "+objects.toString());
+        System.out.println("remove:"+objects.remove("123"));
+        System.out.println("after remove: "+objects.toString());
+        System.out.println("size: " +objects.size());
+        System.out.println("isEmpty: "+objects.isEmpty());
 
 
 

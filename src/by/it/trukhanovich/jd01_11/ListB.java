@@ -12,7 +12,7 @@ public class ListB <T> implements List<T> {
     public boolean add(T element) {
         if (size==elements.length)
         {
-            elements=Arrays.copyOf(elements,elements.length+1);
+            elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
         }
         elements[size++]=element;
         return true;
@@ -60,7 +60,7 @@ public class ListB <T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        elements=Arrays.copyOf(elements,elements.length+1);
+        elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
         size++;
         for (int i = size-1; i >index; i--) {
             elements[i]=elements[i-1];
