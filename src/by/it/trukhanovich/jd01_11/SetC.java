@@ -18,11 +18,11 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
-        if (size>0) {
+//        if (size>0) {
             for (int i = 0; i <size; i++) {
             if (elements[i]==t) return false;
             }
-        }
+//        }
         if (size==0||size==elements.length)
         {
             elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
@@ -57,7 +57,7 @@ public class SetC<T> implements Set<T> {
 
         if (size==0) return false;
         for (int index = 0; index < size; index++) {
-            if (elements[index].equals(o)) {
+            if (elements[index]==o) {
                 System.arraycopy(elements, index + 1,
                             elements, index, size - index - 1);
                 size--;
@@ -75,26 +75,26 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        Object[] a = c.toArray();
-//        elements=Arrays.copyOf(elements,elements.length+a.length);
-        boolean det = true;
-        boolean det1 = true;
-        int oldSize = size;
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < size; j++) {
-                    if (elements[j]==a[i]) {
-                        det = false;
-                    }
-                }
-                if (det) {
-                    elements = Arrays.copyOf(elements, elements.length + 1);
-                    System.arraycopy(a, i, elements, size, 1);
-                    size++;
-                }
-                det = true;
-            }
-//        }
-        return size != oldSize;
+        boolean modified = false;
+        for (T e : c) if (add(e)) modified = true;
+        return modified;
+//        Object[] a = c.toArray();
+//        boolean det = true;
+//        int oldSize = size;
+//        for (int i = 0; i < a.length; i++) {
+//            for (int j = 0; j < size; j++) {
+//                    if (elements[j]==a[i]) {
+//                        det = false;
+//                    }
+//                }
+//                if (det) {
+//                    elements = Arrays.copyOf(elements, elements.length + 1);
+//                    System.arraycopy(a, i, elements, size, 1);
+//                    size++;
+//                }
+//                det = true;
+//            }
+//        return size != oldSize;
     }
 
     @Override
@@ -110,6 +110,28 @@ public class SetC<T> implements Set<T> {
             if (b==false) return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        Object[] a = c.toArray();
+        boolean[] check = new boolean[a.length];
+        if (size==0) return false;
+        for (int index = 0; index < size; index++) {
+            for (int j = 0; j < a.length; j++) {
+                if (elements[index] == a[j]) {
+                    System.arraycopy(elements, index + 1,
+                            elements, index, size - index - 1);
+                    size--;
+                    check[j] = true;
+                }
+            }
+        }
+        for (boolean b : check) {
+                if (b==false) return false;
+        }
+        return true;
+
     }
 
     //no impl
@@ -132,11 +154,6 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
         return false;
     }
 

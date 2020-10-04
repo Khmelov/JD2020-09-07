@@ -15,7 +15,7 @@ public class ListA <T> implements List<T> {
             elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
         }
         elements[size++]=element;
-        return false;
+        return true;
     }
 
     @Override
