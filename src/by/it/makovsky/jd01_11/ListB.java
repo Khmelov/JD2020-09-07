@@ -75,7 +75,6 @@ public class ListB<T> implements List<T> {
     }
 
 
-
 //-------------------------------------------------------------
 
     @Override
