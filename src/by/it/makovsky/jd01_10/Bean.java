@@ -7,12 +7,12 @@ public class Bean {
         return a+b;
     }
 
-    @Param(a=2,b=5)
+    @Param(a=22,b=55)
     public static double min (int a,int b){
         return Math.min(a, b);
     }
 
-    @Param(a=2,b=5)
+    @Param(a=20,b=50)
     public double max (int a,int b){
         return Math.max(a, b);
     }
