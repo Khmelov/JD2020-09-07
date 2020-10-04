@@ -3,6 +3,7 @@ package by.it.tarasevich.jd01_08;
 class Scalar extends Var {
 
     private double value;
+    public  double getValue() {return value;}
 
     public Scalar(double value) {
         this.value = value;

@@ -7,7 +7,7 @@ public class TaskA {
     public static void main(String[] args) {
         printMulTable();
         Scanner scanner = new Scanner(System.in);
-        String s  = scanner.nextLine();
+        String s = scanner.nextLine();
         buildOneDimArray(s);
     }
 
@@ -22,8 +22,6 @@ public class TaskA {
     }
 
 
-
-
     static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
         double start = array[0];
@@ -31,20 +29,15 @@ public class TaskA {
         InOut.printArray(array, "V", 5);
         Helper.sort(array);
         InOut.printArray(array, "V", 4);
+        int firstIndex = 0;
+        int lastIndex = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == start) {
-                System.out.println("Index of first element = " + i);
-                break;
-            }
+            if (array[i] == start) firstIndex = i;
+            if (array[i] == finish) lastIndex = i;
         }
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == finish) {
-                System.out.println("Index of last element =  " + i);
-                break;
-            }
-
-
-        }
+        System.out.printf("Index of first element = %d " + "\n" +
+                "Index of last element = %d ", firstIndex, lastIndex);
     }
+    
 
 }

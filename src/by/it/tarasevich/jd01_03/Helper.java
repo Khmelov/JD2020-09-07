@@ -2,61 +2,52 @@ package by.it.tarasevich.jd01_03;
 
 public class Helper {
 
-    public static double findMax(double[] arr) {
-        if (0 == arr.length) {
-            return Integer.MAX_VALUE;
+    static double findMax(double[] arr) {
+        double max = arr[0];
+        for (double element : arr) {
 
-        } else {
-
-            double max = arr[0];
-            for (double m : arr) {
-                if (max < m) max = m;
-            }
-            return max;
+            if (max < element) max = element;
         }
-
-
+        return max;
     }
 
     public static double findMin(double[] arr) {
-        if (0 == arr.length) {
-            return Integer.MIN_VALUE;
+        double min = arr[0];
+        for (double element : arr) {
 
-        } else {
-
-            double min = arr[0];
-            for (double m : arr) {
-                if (min > m) min = m;
-            }
-            return min;
+            if (min > element) min = element;
         }
-
-
+        return min;
     }
 
-     static void sort(double[] arr) {
-        for (int start = 0; start < arr.length; start++) {
-            int least = start;
-            for (int j = start; j < arr.length; j++) {
-                if ((arr[j] < arr[least]) ||
-                        (arr[least] > arr[start])) {
-                    least = j;
+    static void sort(double[] arr) {
+        int b = arr.length - 1;
+        double buf = 0;
+        boolean det;
+        do {
+
+
+            det = false;
+            for (int i = 0; i < b; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    buf = arr[i + 1];
+                    arr[i + 1] = arr[i];
+                    arr[i] = buf;
+                    det = true;
                 }
-
             }
-                double tmp = arr[start];
-                arr[start] = arr[least];
-                arr[least] = tmp;
-
+            b--;
         }
+        while (det);
     }
 
     static double[] mul(double[][] matrix, double[] vector) {
         double[] z = new double[matrix.length];
-
-        for (int i = 0; i < vector.length; i++)
-            for (int j = 0; j < vector.length; j++)
+        for (int i = 0; i < vector.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
                 z[i] = z[i] + matrix[i][j] * vector[j];
+            }
+        }
         return z;
 
     }
@@ -64,10 +55,13 @@ public class Helper {
     static double[][] mul(double[][] matrixLeft, double[][] matrixRigth) {
         double[][] z = new double[matrixLeft.length][matrixRigth[0].length];
 
-        for (int i = 0; i < matrixLeft.length; i++)
-            for (int j = 0; j < matrixRigth[0].length; j++)
-                for (int k = 0; k < matrixRigth.length; k++)
+        for (int i = 0; i < matrixLeft.length; i++) {
+            for (int j = 0; j < matrixRigth[0].length; j++) {
+                for (int k = 0; k < matrixRigth.length; k++) {
                     z[i][j] = z[i][j] + matrixLeft[i][k] * matrixRigth[k][j];
+                }
+            }
+        }
         return z;
 
     }
