@@ -23,18 +23,21 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean contains(Object o) {
-        for (int i = 0; i < size; i++) {
-            if (elements[i].equals(o))
+        for (T element : elements) {
+            if (element == o)
                 return true;
         }
         return false;
@@ -60,24 +63,41 @@ public class SetC<T> implements Set<T> {
         if (contains(t))
             return false;
         if (size == elements.length)
-            elements = Arrays.copyOf(elements, size * 3 / 2 + 1);
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
         elements[size++] = t;
         return true;
     }
 
     @Override
     public boolean remove(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (elements[i].equals(o)) {
+                System.arraycopy(elements, i + 1, elements, i, size - i - 1);
+                size--;
+                return true;
+            }
+        }
         return false;
+
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean flag = false;
+        Object[] element = c.toArray();
+        for (int i = 0; i < c.size(); i++) {
+            if(contains(element[i]))
+                flag = true;
+        }
+        return flag?true:false;
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        for (T element : c) {
+            add(element);
+        }
+        return true;
     }
 
     @Override
@@ -87,11 +107,16 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        Object[] element = c.toArray();
+        for (int i = 0; i < c.size(); i++) {
+            if(contains(element[i]))
+                remove(element[i]);
+        }
+        return true;
     }
 
     @Override
     public void clear() {
-
+        removeAll(Arrays.asList(elements));
     }
 }

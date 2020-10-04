@@ -73,7 +73,7 @@ public class ListB<T> implements List<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
