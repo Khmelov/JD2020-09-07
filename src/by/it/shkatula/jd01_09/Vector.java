@@ -1,4 +1,4 @@
-package by.it.shkatula.jd01_08;
+package by.it.shkatula.jd01_09;
 
 import java.util.Arrays;
 
@@ -33,7 +33,7 @@ class Vector extends Var {
 
         line = line.replaceAll("\\{", "");
         line = line.replaceAll("}", "");
-        String[] qwe = line.split(",");
+        String[] qwe = line.split(", ?");
         double[] result = new double[qwe.length];
         for (int i = 0; i < qwe.length; i++) {
             result[i] = Double.parseDouble(qwe[i].trim());
