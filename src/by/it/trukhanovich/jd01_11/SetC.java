@@ -97,6 +97,21 @@ public class SetC<T> implements Set<T> {
         return size != oldSize;
     }
 
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        Object[] a = c.toArray();
+        boolean[] check = new boolean[a.length];
+        for (T element : elements) {
+            for (int i = 0; i < a.length; i++) {
+                if(element==a[i]) check[i]=true;
+            }
+        }
+        for (boolean b : check) {
+            if (b==false) return false;
+        }
+        return true;
+    }
+
     //no impl
 
     @Override
@@ -114,11 +129,6 @@ public class SetC<T> implements Set<T> {
         return null;
     }
 
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
 
     @Override
     public boolean retainAll(Collection<?> c) {

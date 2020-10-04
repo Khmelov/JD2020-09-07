@@ -29,17 +29,17 @@ public class Runner {
         strings1.add(null);        
         Set<String> strings2 = new HashSet<String>();
         strings2.add("one");
-        strings2.add("four");
-        strings2.add("five");
-        strings2.add("six");
+//        strings2.add("four");
+//        strings2.add("five");
+//        strings2.add("six");
         strings2.add("1");
         strings2.add("2");
         strings2.add(null);
         System.out.println("addAll: "+strings.addAll(strings1));
         System.out.println(strings.toString());
-        strings.removeAll(strings2);
-        System.out.println("strings after removeAll strings2: "+strings.toString());
-//        System.out.println("containsAll: " + strings.containsAll(strings2));
+//        strings.removeAll(strings2);
+//        System.out.println("strings after removeAll strings2: "+strings.toString());
+        System.out.println("containsAll: " + strings.containsAll(strings2));
 
 
 
@@ -54,15 +54,16 @@ public class Runner {
         objects.add("2");
         objects.add("3");
         objects.add(null);
-        System.out.println("after add: "+objects.toString());
+//        System.out.println("after add: "+objects.toString());
 //        System.out.println("remove:"+objects.remove("1"));
 //        System.out.println("after remove: "+objects.toString());
-        System.out.println("size: " +objects.size());
+//        System.out.println("size: " +objects.size());
 //        System.out.println("isEmpty: "+objects.isEmpty());
         System.out.println("strings1: "+strings1.toString());
         System.out.println("addAll: "+objects.addAll(strings1));
         System.out.println(objects.toString());
-        System.out.println("size: " +objects.size());
+//        System.out.println("size: " +objects.size());
+        System.out.println(objects.containsAll(strings2));
 
 
 
