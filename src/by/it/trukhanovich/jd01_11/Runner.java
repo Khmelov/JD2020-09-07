@@ -41,8 +41,11 @@ public class Runner {
 //        strings.removeAll(strings2);
 //        System.out.println("strings after removeAll strings2: "+strings.toString());
         System.out.println("containsAll: " + strings.containsAll(strings2));
-        System.out.println("removeAll: "+strings.removeAll(strings));
+        System.out.println("removeAll: "+strings.removeAll(strings2));
         System.out.println(strings.toString());
+        strings.clear();
+        System.out.println(strings.toString());
+
 
 
 
@@ -84,18 +87,23 @@ public class Runner {
         strings3.add("2");
         strings3.add("3");
         strings3.add(null);
-        strings3.add("six");
-        strings3.add("four");
-        strings3.add("five");
+//        strings3.add("six");
+//        strings3.add("four");
+//        strings3.add("five");
         System.out.println("==============================");
         //печать коллекции для проверки containsAll и removeAll
         System.out.println("strings3: "+strings3.toString());
         //печать тестирумой коллекции
         System.out.println("objects: "+objects.toString());
-        System.out.println("containsAll string3: "+objects.containsAll(strings3));
+        //тест метода containsAll
+        System.out.println("containsAll string3: "+objects.containsAll(objects));
+        //тест метода removeAll
         System.out.println("removeAll string3: "+objects.removeAll(strings3));
         System.out.println("objects: "+objects.toString());
         System.out.println("size: " +objects.size());
+        //проверка clear
+        objects.clear();
+        System.out.println("clear: "+objects.toString());
 
 
 

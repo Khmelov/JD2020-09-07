@@ -120,10 +120,17 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+//        if (elements==(T)c) {clear(); return true;}
+        boolean [] flags=new boolean[c.size()];
+        int i=0;
         for (Object object : c) {
-             remove(object);
+             if (remove(object)) flags[i++]=true;
         }
-        return false;
+        for (boolean b : flags) {
+                if (b==false) return false;
+        }
+        return true;
+
         //ПЕРВОНАЧАЛЬНЫЙ ВАРИАНТ
 //        Object[] a = c.toArray();
 //        boolean[] check = new boolean[a.length];
@@ -171,6 +178,11 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
+        for (int index = 0; index != size; )  {
+            System.arraycopy(elements, index + 1,
+                    elements, index, size - index - 1);
+            size--;
+        }
 
     }
 }
