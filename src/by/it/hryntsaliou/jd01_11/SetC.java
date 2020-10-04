@@ -87,6 +87,19 @@ public class SetC<T> implements Set<T> {
     }
 
     @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            if(i>0) {
+                stringBuilder.append(", ");
+            }
+            stringBuilder.append(elements[i]);
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return null;
     }
