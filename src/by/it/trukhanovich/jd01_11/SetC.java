@@ -18,12 +18,12 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
-//        if (size>0) {
-            for (int i = 0; i <size; i++) {
-            if (elements[i]==t) return false;
-            }
-//        }
-        if (size==0||size==elements.length)
+        if (contains(t)) return false;
+//            for (int i = 0; i <size; i++) {
+//            if (elements[i]==t) return false;
+//            }
+
+        if (size==elements.length)
         {
             elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
         }
@@ -75,31 +75,11 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-//        Object[] collecttion = c.toArray();
         boolean flag=false;
         for (Object o : c) {
             if (add((T) o)) flag=true;
         }
         return flag;
-
-//          ПЕРВОНАЧАЛЬНЫЙ ВАРИАНТ
-//        Object[] a = c.toArray();
-//        boolean det = true;
-//        int oldSize = size;
-//        for (int i = 0; i < a.length; i++) {
-//            for (int j = 0; j < size; j++) {
-//                if (elements[j] == a[i]) {
-//                        det = false;
-//                    }
-//                }
-//                if (det) {
-//                    elements = Arrays.copyOf(elements, elements.length + 1);
-//                    System.arraycopy(a, i, elements, size, 1);
-//                    size++;
-//                }
-//                det = true;
-//                }
-//        return size != oldSize;
     }
 
 
@@ -121,13 +101,14 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean removeAll(Collection<?> c) {
         if (containsAll(c)&&c.containsAll(Arrays.asList(elements))) {clear(); return true;}
+        if (c.isEmpty()) return false;
         boolean [] flags=new boolean[c.size()];
         int i=0;
         for (Object object : c) {
              if (remove(object)) flags[i++]=true;
         }
         for (boolean b : flags) {
-                if (b==false) return false;
+                if (b==false) return true;
         }
         return true;
 
