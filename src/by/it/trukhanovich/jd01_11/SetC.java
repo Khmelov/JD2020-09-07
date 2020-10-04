@@ -75,15 +75,20 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        boolean modified = false;
-        for (T e : c) if (add(e)) modified = true;
-        return modified;
+//        Object[] collecttion = c.toArray();
+        boolean flag=false;
+        for (Object o : c) {
+            if (add((T) o)) flag=true;
+        }
+        return flag;
+
+//          ПЕРВОНАЧАЛЬНЫЙ ВАРИАНТ
 //        Object[] a = c.toArray();
 //        boolean det = true;
 //        int oldSize = size;
 //        for (int i = 0; i < a.length; i++) {
 //            for (int j = 0; j < size; j++) {
-//                    if (elements[j]==a[i]) {
+//                if (elements[j] == a[i]) {
 //                        det = false;
 //                    }
 //                }
@@ -93,9 +98,10 @@ public class SetC<T> implements Set<T> {
 //                    size++;
 //                }
 //                det = true;
-//            }
+//                }
 //        return size != oldSize;
     }
+
 
     @Override
     public boolean containsAll(Collection<?> c) {
@@ -114,24 +120,30 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        Object[] a = c.toArray();
-        boolean[] check = new boolean[a.length];
-        if (size==0) return false;
-        for (int index = 0; index < size; index++) {
-            for (int j = 0; j < a.length; j++) {
-                if (elements[index] == a[j]) {
-                    System.arraycopy(elements, index + 1,
-                            elements, index, size - index - 1);
-                    size--;
-                    check[j] = true;
-                }
-            }
+        for (Object object : c) {
+             remove(object);
         }
-        for (boolean b : check) {
-                if (b==false) return false;
-        }
-        return true;
-
+        return false;
+        //ПЕРВОНАЧАЛЬНЫЙ ВАРИАНТ
+//        Object[] a = c.toArray();
+//        boolean[] check = new boolean[a.length];
+//        if (size==0) return false;
+//        for (int index = 0; index < size; index++) {
+//            for (int j = 0; j < a.length; j++) {
+//                if (elements[index] == a[j]) {
+//                    remove(a[j]);
+//                    System.arraycopy(elements, index + 1,
+//                            elements, index, size - index - 1);
+//                    size--;
+//                    check[j] = true;
+//                    continue;
+//                }
+//            }
+//        }
+//        for (boolean b : check) {
+//                if (b==false) return false;
+//        }
+//        return true;
     }
 
     //no impl

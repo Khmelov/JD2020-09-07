@@ -24,14 +24,14 @@ public class Runner {
         strings1.add("four");
         strings1.add("five");
         strings1.add("six");
-        strings1.add("1");
+//        strings1.add("1");
+//        strings1.add(null);
         strings1.add("2");
-        strings1.add(null);        
         Set<String> strings2 = new HashSet<String>();
         strings2.add("one");
-//        strings2.add("four");
+        strings2.add("four");
         strings2.add("five");
-//        strings2.add("six");
+        strings2.add("six");
         strings2.add("1");
         strings2.add("2");
         strings2.add("3");
@@ -41,35 +41,62 @@ public class Runner {
 //        strings.removeAll(strings2);
 //        System.out.println("strings after removeAll strings2: "+strings.toString());
         System.out.println("containsAll: " + strings.containsAll(strings2));
-        System.out.println("removeAll: "+strings.removeAll(strings2));
+        System.out.println("removeAll: "+strings.removeAll(strings));
         System.out.println(strings.toString());
 
 
 
-        System.out.println("==============================");
         //my realization
+        System.out.println("==============================");
         System.out.println("my realization ");
-        SetC<String> objects = new SetC<>();
+        SetC<String> objects = new SetC<>(); //создание коллекции
+        //заполнение коллекции
         objects.add("one");
+        //получение возращаемого значения false при попытке добавить повторящийся элемент
         System.out.println(objects.add("one"));
         objects.add("one");
         objects.add("one");
+        //получение возращаемого значения true при попытке добавить уникальный элемент
         System.out.println(objects.add("1"));
         objects.add("2");
         objects.add("3");
         objects.add(null);
+        //печать полученной коллекции
         System.out.println("after add: "+objects.toString());
-//        System.out.println("remove:"+objects.remove("1"));
-//        System.out.println("after remove: "+objects.toString());
-//        System.out.println("size: " +objects.size());
-//        System.out.println("isEmpty: "+objects.isEmpty());
+        //тест метода remove
+//        System.out.println("remove:"+objects.remove(null));
+        System.out.println("after remove: "+objects.toString());
+        //тест метода size
+        System.out.println("size: " +objects.size());
+        //тест метода isEmpty
+        System.out.println("isEmpty: "+objects.isEmpty());
+        //печать коллекции которую необходимо добавит
         System.out.println("strings1: "+strings1.toString());
+        //печать true/false если что-то добавилось/ничего не добавилось
         System.out.println("addAll: "+objects.addAll(strings1));
+        //печать полученного объекта
         System.out.println("objects: "+objects.toString());
-//        System.out.println("size: " +objects.size());
-//        System.out.println("containsAll string2: "+objects.containsAll(strings2));
-//        System.out.println("removeAll string2: "+objects.removeAll(strings2));
-//        System.out.println(objects.toString());
+        System.out.println("size: " +objects.size());
+        //создадим новую коллекцию для проверки методов containsAll и removeAll
+        Set<String> strings3 = new HashSet<String>();
+        strings3.add("one");
+        strings3.add("1");
+        strings3.add("2");
+        strings3.add("3");
+        strings3.add(null);
+        strings3.add("six");
+        strings3.add("four");
+        strings3.add("five");
+        System.out.println("==============================");
+        //печать коллекции для проверки containsAll и removeAll
+        System.out.println("strings3: "+strings3.toString());
+        //печать тестирумой коллекции
+        System.out.println("objects: "+objects.toString());
+        System.out.println("containsAll string3: "+objects.containsAll(strings3));
+        System.out.println("removeAll string3: "+objects.removeAll(strings3));
+        System.out.println("objects: "+objects.toString());
+        System.out.println("size: " +objects.size());
+
 
 
 //        System.out.println("==============================");
