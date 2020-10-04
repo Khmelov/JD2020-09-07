@@ -2,7 +2,7 @@ package by.it.kulik.training.academy;
 
 import java.util.Scanner;
 
-public class MethodTask2 {
+ class MethodTask2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
@@ -10,7 +10,7 @@ public class MethodTask2 {
         System.out.println(method(a,b));
     }
 
-    static int method(int a, int b) {
+   private static int method(int a, int b) {
         return (a+b) + a * b;
     }
 
