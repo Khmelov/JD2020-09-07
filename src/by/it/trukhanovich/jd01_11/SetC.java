@@ -120,7 +120,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-//        if (elements==(T)c) {clear(); return true;}
+        if (containsAll(c)&&c.containsAll(Arrays.asList(elements))) {clear(); return true;}
         boolean [] flags=new boolean[c.size()];
         int i=0;
         for (Object object : c) {
@@ -162,7 +162,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(elements, size);
     }
 
     @Override
@@ -178,11 +178,9 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-        for (int index = 0; index != size; )  {
-            System.arraycopy(elements, index + 1,
-                    elements, index, size - index - 1);
-            size--;
+        for (int i = 0; i < elements.length; i++) {
+            elements[i]=null;
         }
-
+        size=0;
     }
 }

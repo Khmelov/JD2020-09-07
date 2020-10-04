@@ -98,7 +98,7 @@ public class Runner {
         //тест метода containsAll
         System.out.println("containsAll string3: "+objects.containsAll(objects));
         //тест метода removeAll
-        System.out.println("removeAll string3: "+objects.removeAll(strings3));
+        System.out.println("removeAll string3: "+objects.removeAll(objects));
         System.out.println("objects: "+objects.toString());
         System.out.println("size: " +objects.size());
         //проверка clear
