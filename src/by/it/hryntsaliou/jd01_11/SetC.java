@@ -23,7 +23,7 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean remove(Object o) {
         for (int index = 0; index < size; index++) {
-            if (elements[index] == o) {
+            if (elements[index].equals(o)) {
                 System.arraycopy(elements, index + 1, elements, index, size - index - 1);
                 size--;
                 return true;
