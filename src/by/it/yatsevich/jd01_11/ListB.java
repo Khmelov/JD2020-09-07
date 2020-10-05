@@ -63,7 +63,7 @@ class ListB <T> implements List<T> {
 
     @Override
     public int size() {
-        return elements.length;
+        return siz;
     }
 
     @Override
@@ -97,17 +97,25 @@ class ListB <T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
+        for (T element : elements) {
+            if (element==o)return true;
+        }
         return false;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+
+        return (Iterator<T>) elements[siz++];
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] objects = new Object[elements.length];
+        for (int i = 0; i < elements.length; i++) {
+            objects[i] = elements[i];
+        }
+        return objects;
     }
 
     @Override
@@ -117,6 +125,8 @@ class ListB <T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
+        Object[] temp=c.toArray();
+        if (Arrays.equals(elements,temp))return true;
         return false;
     }
 
