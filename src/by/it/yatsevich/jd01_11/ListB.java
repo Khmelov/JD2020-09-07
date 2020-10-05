@@ -125,8 +125,11 @@ class ListB <T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        Object[] temp=c.toArray();
-        if (Arrays.equals(elements,temp))return true;
+        int value=0;
+        for (Object o : c) {
+            if(contains(o)) value++;
+        }
+        if (value<=size())return true;
         return false;
     }
 

@@ -4,7 +4,6 @@ import java.util.*;
 
 class SetC<T> implements Set<T> {
     private T[] elements = (T[]) new Object[]{};
-    private HashSet<T> hashSet=new HashSet<T>();
     private ListB<T> list = new ListB<>();
 
     @Override
@@ -59,23 +58,17 @@ class SetC<T> implements Set<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
+
         return list.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        Object[] temp=c.toArray();
-        Object[] temp2 =list.toArray();
-        for (Object o : temp2) {
-            for (Object o1 : temp) {
-                if (!equals(o)){
-                    int i=temp2.length;
-                    Object[] objects = Arrays.copyOf(temp2,(i+1));
-                    objects[i++]=o1;
-                }
-            }
+        boolean value = false;
+        for (Object o : c) {
+            if(add((T)o)) value=true;
         }
-        return false;
+        return value;
     }
 
     @Override
@@ -85,8 +78,15 @@ class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        if (list.contains(c)==true){
+            for (Object o : c) {
+                list.remove(o);
+            }
+        }
         return false;
     }
+
+
 
     @Override
     public void clear() {
