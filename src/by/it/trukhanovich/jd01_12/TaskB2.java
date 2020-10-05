@@ -34,7 +34,7 @@ public class TaskB2 {
     }
 
     static String process(LinkedList<String> peoples) {
-        LinkedList<String> strings = new LinkedList<>(peoples);
+        List<String> strings = new LinkedList<>(peoples);
         int check=1;
         for(;strings.size()>1;){
             for (int i = 0; i < strings.size(); ) {
