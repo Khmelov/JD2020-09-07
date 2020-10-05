@@ -1,6 +1,6 @@
-package by.it.trukhanovich.jd01_08;
+package by.it.trukhanovich.jd01_09;
 
-abstract class Var implements Operation{
+abstract class Var implements Operation {
     @Override
     public Var add(Var other) {
         System.out.printf("Операция %s + %s невозможна\n", this, other);
@@ -26,13 +26,23 @@ abstract class Var implements Operation{
     }
 
     @Override
-    public String getYourClass(Var other) {
-        return "Var";
-    }
-
-    @Override
     public String toString() {
         return "Это класс Var{}";
     }
 
+    static Var createVar (String strVar){
+        if (strVar.matches(Patterns.SKALAR)){
+            return new Scalar(strVar);
+        }
+       else if (strVar.matches(Patterns.VECTOR)){
+            return new Vector(strVar);
+        }
+        else if (strVar.matches(Patterns.MATRIX)){
+            return new Matrix(strVar);
+        }
+        else {
+            System.err.println("Незвестная переменная "+strVar);
+        return null;
+        }
+    }
 }

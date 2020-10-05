@@ -1,15 +1,10 @@
-package by.it.trukhanovich.jd01_08;
+package by.it.trukhanovich.jd01_09;
 
 import java.util.Arrays;
 
 class Vector extends Var {
 
   private double [] value;
-
-    @Override
-    public String getYourClass(Var other) {
-        return "Vector";
-    }
 
     public double[] getValue() {
         return value;
@@ -37,14 +32,14 @@ class Vector extends Var {
 
     @Override
     public Var add(Var other) {
-        if (other.getYourClass(other)=="Scalar"){
+        if (other instanceof Scalar){
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+ ((Scalar) other).getValue();
             }
             return new Vector(res);
         }
-        else if (other.getYourClass(other)=="Vector"){
+        else if (other instanceof Vector){
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+((Vector) other).value[i];

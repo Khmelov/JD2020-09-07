@@ -1,4 +1,4 @@
-package by.it.trukhanovich.jd01_08;
+package by.it.trukhanovich.jd01_09;
 
 
 import java.util.Arrays;
@@ -61,14 +61,10 @@ class Matrix extends Var {
         while (m1.find()){i++;}
         return i;
     }
-    @Override
-    public String getYourClass(Var other) {
-        return "Matrix";
-    }
 
     @Override
     public Var add(Var other) {
-        if (other.getYourClass(other)=="Matrix"){
+        if (other instanceof Matrix){
             this.value=value;
             double [][] s1=((Matrix) other).getValue();
             double [][] result=new double[value.length][value[0].length];
