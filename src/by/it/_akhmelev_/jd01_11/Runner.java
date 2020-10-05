@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runner {
-
     public static void main(String[] args) {
         List<String> listOk=new ArrayList<>();
         listOk.add("One");
@@ -27,5 +26,5 @@ public class Runner {
         myList.remove(2);
         System.out.println(myList);
         System.out.println(myList.size());
-    };
+    }
 }
