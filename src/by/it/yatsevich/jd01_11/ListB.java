@@ -105,8 +105,7 @@ class ListB <T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-
-        return (Iterator<T>) elements[siz++];
+        return null;
     }
 
     @Override
@@ -150,7 +149,9 @@ class ListB <T> implements List<T> {
 
     @Override
     public void clear() {
-
+        for (Object element : elements) {
+            element=null;
+        }
     }
 
     @Override

@@ -78,11 +78,12 @@ class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        if (list.contains(c)==true){
+       // if (contains(c)){
+            int value =0;
             for (Object o : c) {
-                list.remove(o);
-            }
-        }
+                remove(o);value++;
+            }if (value<=c.size()) return true;
+        //}
         return false;
     }
 
@@ -90,6 +91,8 @@ class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-
+        for (Object t : list) {
+            t=null;
+        }
     }
 }
