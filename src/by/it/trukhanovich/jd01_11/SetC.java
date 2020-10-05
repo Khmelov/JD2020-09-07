@@ -10,7 +10,6 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean contains(Object o) {
         for (T element : elements) {
-//            if (element.equals(o)) return true;
             if(element==o) return true;
         }
         return false;
@@ -19,16 +18,11 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean add(T t) {
         if (contains(t)) return false;
-//            for (int i = 0; i <size; i++) {
-//            if (elements[i]==t) return false;
-//            }
-
         if (size==elements.length)
         {
             elements=Arrays.copyOf(elements,elements.length * 3 / 2 + 1);
         }
-        elements[size]=t;
-        size++;
+        elements[size++]=t;
         return true;
 
     }
@@ -85,53 +79,26 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        Object[] a = c.toArray();
-        boolean[] check = new boolean[a.length];
-        for (T element : elements) {
-            for (int i = 0; i < a.length; i++) {
-                if(element==a[i]) check[i]=true;
-            }
+        int check=0;
+        for (Object object : c) {
+            if (contains(object)) check++;
         }
-        for (boolean b : check) {
-            if (b==false) return false;
-        }
-        return true;
+        if (check<=c.size()) return true;
+        return false;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
         if (containsAll(c)&&c.containsAll(Arrays.asList(elements))) {clear(); return true;}
         if (c.isEmpty()) return false;
-        boolean [] flags=new boolean[c.size()];
-        int i=0;
+        int check=0;
         for (Object object : c) {
-             if (remove(object)) flags[i++]=true;
+             if (remove(object)) check++;
         }
-        for (boolean b : flags) {
-                if (b==false) return true;
-        }
-        return true;
+        if (check<=c.size()) return true;
+        return false;
 
-        //ПЕРВОНАЧАЛЬНЫЙ ВАРИАНТ
-//        Object[] a = c.toArray();
-//        boolean[] check = new boolean[a.length];
-//        if (size==0) return false;
-//        for (int index = 0; index < size; index++) {
-//            for (int j = 0; j < a.length; j++) {
-//                if (elements[index] == a[j]) {
-//                    remove(a[j]);
-//                    System.arraycopy(elements, index + 1,
-//                            elements, index, size - index - 1);
-//                    size--;
-//                    check[j] = true;
-//                    continue;
-//                }
-//            }
-//        }
-//        for (boolean b : check) {
-//                if (b==false) return false;
-//        }
-//        return true;
+
     }
 
     //no impl
@@ -159,9 +126,10 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-        for (int i = 0; i < elements.length; i++) {
-            elements[i]=null;
-        }
+        Arrays.fill(elements,null);
+//        for (int i = 0; i < elements.length; i++) {
+//            elements[i]=null;
+//        }
         size=0;
     }
 }
