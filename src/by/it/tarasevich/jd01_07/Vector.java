@@ -1,4 +1,4 @@
-package by.it.tarasevich.id01_07;
+package by.it.tarasevich.jd01_07;
 
  class Vector extends Var {
 
