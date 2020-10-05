@@ -8,8 +8,11 @@ class PrintMath {
         Method[] declaredMethods = mathClass.getDeclaredMethods();
         for (Method method : declaredMethods) {
             StringBuilder sb=new StringBuilder();
-            if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
-                sb.append("public ");
+            if ((method.getModifiers() & Modifier.PRIVATE) != Modifier.PRIVATE){
+
+                if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
+                sb.append("public ");}
+
                 if ((method.getModifiers() & Modifier.STATIC) == Modifier.STATIC){
                     sb.append("static ");
                     Class<?> returnType = method.getReturnType();
@@ -35,5 +38,23 @@ class PrintMath {
                 }
             }
         }
+        Field[] declaredFields = mathClass.getFields();
+        StringBuilder sb1 = new StringBuilder();
+        for (Field field : declaredFields) {
+            Class<?> returnType = field.getType();
+            sb1.append(returnType.getSimpleName());
+            sb1.append(' ');
+            sb1.append(field.getName());
+            sb1.append("\n");
+        }
+
+        Field[] fields = mathClass.getDeclaredFields();
+        for (Field field : fields) {
+            if ((field.getModifiers() & Modifier.PUBLIC) != Modifier.PUBLIC) {
+                    sb1.append(field.getName());
+                    sb1.append("\n");
+            }
+        }
+        System.out.println(sb1);
     }
 }
