@@ -8,10 +8,10 @@ class PrintMath {
         Method[] declaredMethods = mathClass.getDeclaredMethods();
         for (Method method : declaredMethods) {
             StringBuilder sb=new StringBuilder();
-            if ((method.getModifiers() & Modifier.PRIVATE) != Modifier.PRIVATE){
+            if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
 
-                if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
-                sb.append("public ");}
+
+                sb.append("public ");
 
                 if ((method.getModifiers() & Modifier.STATIC) == Modifier.STATIC){
                     sb.append("static ");
