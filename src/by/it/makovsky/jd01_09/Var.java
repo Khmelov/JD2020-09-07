@@ -1,6 +1,21 @@
-package by.it.makovsky.jd01_08;
+package by.it.makovsky.jd01_09;
 
-abstract class Var implements Operation {
+abstract class Var implements Operation, Patterns {
+
+    static Var createVar(String operand) {
+        operand=operand.trim().replace("\\s+","");
+        if (operand.matches(SCALAR)){
+            return new Scalar(operand);
+        }
+        if (operand.matches(VECTOR)){
+            return new Vector(operand);
+        }
+        if (operand.matches(MATRIX)){
+            return new Matrix(operand);
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Это абстрактный класс Var";
