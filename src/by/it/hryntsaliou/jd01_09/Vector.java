@@ -1,4 +1,4 @@
-package by.it.hryntsaliou.jd01_08;
+package by.it.hryntsaliou.jd01_09;
 
 
 import java.util.Arrays;
@@ -87,7 +87,7 @@ class Vector extends Var {
                 sum += res[i] * ((Vector) other).value[i];
             }
             return new Scalar(sum);
-        } else return super.mul(other);//TODO
+        } else return super.mul(other);//ДОДЕЛАТЬ!!!
     }
 
     @Override
