@@ -17,7 +17,6 @@ OCT:42+32=74
 */
     class TaskC2 {
     public static void main(String[] args) {
-        // write your code here
         Scanner sc = new Scanner(System.in);
         int a, b, c;
         System.out.println("Enter a:");
@@ -32,6 +31,5 @@ OCT:42+32=74
                 "=" + Integer.toHexString(c));
         System.out.println("OCT:" + Integer.toOctalString(a) + "+" + Integer.toOctalString(b) +
                 "=" + Integer.toOctalString(c));
-
     }
 }
