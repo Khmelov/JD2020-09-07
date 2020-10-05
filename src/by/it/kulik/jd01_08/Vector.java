@@ -1,7 +1,6 @@
-package by.it.kulik.jd01_07;
+package by.it.kulik.jd01_08;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 class Vector extends Var {
     private double[] value;
@@ -20,7 +19,19 @@ class Vector extends Var {
         return sb.toString();
     }
     Vector(Vector vector) {
-        this.value = vector.value;
+        this(vector.value);
+    }
+
+    @Override
+    public Var add(Var other) {
+        if  (other instanceof Scalar){
+            double[] res= Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i]=res[i]+((Scalar)other).getValue();
+            }
+            return  new Vector(res);
+        }else
+            return super.add(this);
     }
 
     Vector(String str) {
