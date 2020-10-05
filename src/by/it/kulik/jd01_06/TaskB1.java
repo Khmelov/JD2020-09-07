@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
  class TaskB1 {
 
-    private static final String G = "АаиИУуЕеэЭОоЮюЯя";
+    private static final String G = "АаиИУуЁёЕеэЭОоЮюЯяыЫ";
 
     public static void main(String[] args) {
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
@@ -16,13 +16,9 @@ import java.util.regex.Pattern;
             if (checkWord(word)) {
                 System.out.println(word);
             }
-
         }
     }
-
     private static boolean checkWord(String word) {
         return G.indexOf(word.charAt(0)) < 0 && G.indexOf(word.charAt(word.length() - 1)) >= 0;
     }
-
-
 }

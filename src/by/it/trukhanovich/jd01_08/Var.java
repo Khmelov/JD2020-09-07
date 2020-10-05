@@ -26,6 +26,11 @@ abstract class Var implements Operation{
     }
 
     @Override
+    public String getYourClass(Var other) {
+        return "Var";
+    }
+
+    @Override
     public String toString() {
         return "Это класс Var{}";
     }
