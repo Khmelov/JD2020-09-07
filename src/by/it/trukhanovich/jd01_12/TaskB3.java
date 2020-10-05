@@ -1,11 +1,12 @@
 package by.it.trukhanovich.jd01_12;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-
-public class TaskB2 {
+public class TaskB3 {
     public static void main(String[] args) {
-        int n=10;
+        int n=4096;
         List<String> strings1 = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             strings1.add(String.valueOf(i+1));
@@ -19,6 +20,7 @@ public class TaskB2 {
 
         System.out.println(s1);
         System.out.println(s2);
+
     }
     static String process(ArrayList<String> peoples) {
         ArrayList<String> strings = new ArrayList<>(peoples);
