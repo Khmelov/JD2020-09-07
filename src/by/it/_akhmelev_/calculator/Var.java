@@ -61,7 +61,7 @@ abstract class Var implements Operation{
 
         }
 
-        System.err.println("Незвестная переменная "+strVar);
+        System.err.println("Неизвестная переменная "+strVar);
         return null;
     }
 }
