@@ -91,8 +91,6 @@ class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-        for (Object t : list) {
-            t=null;
-        }
+        list.clear();
     }
 }

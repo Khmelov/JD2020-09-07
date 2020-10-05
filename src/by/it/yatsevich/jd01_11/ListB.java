@@ -151,6 +151,7 @@ class ListB <T> implements List<T> {
     public void clear() {
         for (Object element : elements) {
             element=null;
+            siz=0;
         }
     }
 
