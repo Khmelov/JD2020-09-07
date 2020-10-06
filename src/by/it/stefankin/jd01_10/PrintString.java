@@ -6,19 +6,14 @@ import java.lang.reflect.Modifier;
 
 public class PrintString {
     public static void main(String[] args) {
-        Class<String> c = String.class;
-        Method[] metody = c.getDeclaredMethods();
-
-        StringBuilder out = new StringBuilder();
+        Class<?> strgCls = String.class;
+        Method[] metody = strgCls.getDeclaredMethods();
 
         for (Method met : metody) {
             int modifiers = met.getModifiers();
-
             if (!Modifier.isStatic(modifiers)) {
 
-
-                   out.append(met.getName());
-                System.out.println(out);
+               System.out.println(met.getName());
 
             }
         }

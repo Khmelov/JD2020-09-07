@@ -18,8 +18,9 @@ public class Bean {
         else return (double) b;
 
     }
+
     public double avg (int a, int b) {
-        return (double) (a+b)/2.0;
+       return (double) (a+b)/2.0;
 
     }
 }

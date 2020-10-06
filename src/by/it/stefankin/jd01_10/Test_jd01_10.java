@@ -182,7 +182,7 @@ public class Test_jd01_10 {
 
                 .exclude("checkIndex")
                 .exclude("rangeCheck")
-                .exclude("format")
+               // .exclude("format")
                 .exclude("copyValueOf")
                 .exclude("checkOffset")
                 .exclude("checkBoundsOffCount")
