@@ -4,12 +4,12 @@ import java.util.*;
 
 public class TaskB3 {
     public static void main(String[] args) {
-        int n=4096;
-        List<String> strings1 = new ArrayList<>();
+        int n=262144;
+        ArrayList<String> strings1 = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             strings1.add(String.valueOf(i+1));
         }
-        Deque<String> strings2 = new LinkedList<>();
+        LinkedList<String> strings2 = new LinkedList<>();
         for (int i = 0; i < n; i++) {
             strings2.add(String.valueOf(i+1));
         }
