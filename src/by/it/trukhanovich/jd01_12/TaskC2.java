@@ -6,8 +6,10 @@ import java.util.Set;
 
 public class TaskC2 {
     public static void main(String[] args) {
-        Set<Number> a = new HashSet<>(Arrays.asList(1,2,3,4,5,5,6,6));
-        Set<Number> b = new HashSet<>(Arrays.asList(4,4,4,5,5,6,6,7,8,9));
+        Set<Number> a = new HashSet<Number>(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        Set<Number> b = new HashSet<Number>(Arrays.asList(4, 3, 5, 6, 7, 8));
+        Set<Number> c = new HashSet<Number>(Arrays.asList(0., 1., 2., 3., 4., 5.));
+        Set<Number> d = new HashSet<Number>(Arrays.asList(2., 3., 4., 9.));
         System.out.printf("a=%s\n",a);
         System.out.printf("b=%s\n",b);
         Set<Number> union = getUnion(a, b);
