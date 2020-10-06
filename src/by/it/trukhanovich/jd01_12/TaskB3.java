@@ -3,6 +3,7 @@ package by.it.trukhanovich.jd01_12;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TaskB3 {
     public static void main(String[] args) {
@@ -34,18 +35,39 @@ public class TaskB3 {
         String s= strings.get(0);
         return s;
     }
-
     static String process(LinkedList<String> peoples) {
-        LinkedList<String> strings = new LinkedList<>(peoples);
+        List<String> strings = new LinkedList<>(peoples);
         int check=1;
         for(;strings.size()>1;){
-            for (int i = 0; i < strings.size(); ) {
-                if (check==1) {check=2;i++; continue;}
-                if (check==2) {strings.remove(i); check=1; }
+            ListIterator<String> stringListIterator = strings.listIterator();
+            while (stringListIterator.hasNext()){
+                stringListIterator.next();
+                if (check==1) {check=2;stringListIterator.hasNext();continue;}
+                if (check==2) {stringListIterator.remove(); check=1; }
+
             }
         }
         String s= strings.get(0);
         return s;
     }
-
+//    static String process(LinkedList<String> peoples) {
+//        List<String> strings = new LinkedList<>(peoples);
+//        int check=1;
+//        for(;strings.size()>1;){
+//            int i=0;
+////            ListIterator<String> stringListIterator = strings.listIterator();
+////            while (stringListIterator.hasNext()){
+////                stringListIterator.next();
+//                if (check==1) {check=2;i=strings.listIterator().nextIndex(); i=i-1;continue;}
+//                if (check==2) {
+//                    ListIterator<String> stringListIterator = strings.listIterator(i);
+//                    stringListIterator.next();
+//                    strings.listIterator().remove(i);
+//                    check=1; }
+//
+//            }
+//
+//        String s= strings.get(0);
+//        return s;
+//    }
 }

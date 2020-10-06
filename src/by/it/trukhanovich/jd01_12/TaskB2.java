@@ -33,17 +33,31 @@ public class TaskB2 {
         return s;
     }
 
+//    static String process(LinkedList<String> peoples) {
+//        List<String> strings = new LinkedList<>(peoples);
+//        int check=1;
+//        for(;strings.size()>1;){
+//            for (int i = 0; i < strings.size(); ) {
+//                if (check==1) {check=2;i++; continue;}
+//                if (check==2) {strings.remove(i); check=1; }
+//            }
+//        }
+//        String s= strings.get(0);
+//        return s;
+//    }
     static String process(LinkedList<String> peoples) {
         List<String> strings = new LinkedList<>(peoples);
         int check=1;
         for(;strings.size()>1;){
-            for (int i = 0; i < strings.size(); ) {
-                if (check==1) {check=2;i++; continue;}
-                if (check==2) {strings.remove(i); check=1; }
-            }
+            ListIterator<String> stringListIterator = strings.listIterator();
+            while (stringListIterator.hasNext()){
+                stringListIterator.next();
+                if (check==1) {check=2;stringListIterator.hasNext();continue;}
+                if (check==2) {stringListIterator.remove(); check=1; }
+
+        }
         }
         String s= strings.get(0);
         return s;
     }
-
 }
