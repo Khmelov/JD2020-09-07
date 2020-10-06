@@ -2,6 +2,7 @@ package by.it.trukhanovich.jd01_12;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class TaskC2 {
@@ -35,10 +36,25 @@ public class TaskC2 {
 
     }
 
+//    private static Set<Number> getCross(Set<?extends Number>...args) {
+//        HashSet result = new HashSet(args[0]);
+//        for (int i = 1; i < args.length; i++) {
+//            result.retainAll( args[i]);
+//        }
+//        return result;
+//    }
     private static Set<Number> getCross(Set<?extends Number>...args) {
-        HashSet result = new HashSet(args[0]);
-        for (int i = 1; i < args.length; i++) {
-            result.retainAll( args[i]);
+        HashSet result = new HashSet();
+        for (int i = 0; i < args.length; i++) {
+            HashSet buffer = new HashSet <Double>();
+            Iterator<? extends Number> it = args[i].iterator();
+            while (it.hasNext()){
+                double k= it.next().doubleValue();
+                buffer.add(k);
+                if (i==0) {result.add(k);}
+            }
+            result.retainAll( buffer);
+            buffer.clear();
         }
         return result;
     }
@@ -48,11 +64,12 @@ public class TaskC2 {
 //        HashSet result = new HashSet();
         HashSet result = new HashSet <Double>();
         for (int i = 0; i < args.length; i++) {
-            for (int j = 0; j < args[i].size(); j++) {
-
-
+            Iterator<? extends Number> it = args[i].iterator();
+            while (it.hasNext()){
+                double k= it.next().doubleValue();
+                result.add(k);
             }
-            result.addAll(args[i]);
+//            result.addAll(args[i]);
         }
 
         return result;
