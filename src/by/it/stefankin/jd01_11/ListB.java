@@ -55,34 +55,30 @@ public class ListB<T>  implements List<T> {
 
     @Override
     public T set(int index, T element) {
+       T rez=elems[index];
         elems[index]=element;
-        return elems[index];
+        return rez;
     }
 
 
     @Override
-    public boolean addAll(List<?> c) {
-        T[] nlm= (T[]) new Object[]{c.size()};
-        for (int i = 0; i < c.size(); i++) {
-            nlm[i]=c[i];
-        }
-        for (int i = 0; i < nlm.length; i++) {
-             add(nlm[i]);
-        }
-
-        return false;
+    public boolean addAll(Collection<? extends T> c) {
+        Object[] objarr = c.toArray();
+        elems=Arrays.copyOf(elems,elems.length+objarr.length);
+        System.arraycopy(objarr, 0, elems, size, objarr.length);
+        size += objarr.length;
+        return objarr.length !=0;
     }
 
 
 
 
 
+//
 
 
 
 
-
-    //
 
 
 

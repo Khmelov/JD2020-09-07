@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-       /* List<String> myList=new ListA<>();
+        List<String> myList=new ListA<>();
         List<String> arrList=new ArrayList<>();
 
         myList.add("First");arrList.add("First");
@@ -20,7 +20,7 @@ public class Runner {
         System.out.println(myList);
         myList.remove("Three");
         System.out.println(myList);
-*/
+
         List<Integer> lb = new ListB<>();
         lb.add(1);
         lb.add(2);
