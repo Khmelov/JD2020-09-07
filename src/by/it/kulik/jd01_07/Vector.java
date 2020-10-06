@@ -22,8 +22,22 @@ class Vector extends Var {
     Vector(Vector vector) {
         this.value = vector.value;
     }
-    Vector(String strVector) {
 
+    Vector(String str) {
+        String[] strings = str
+                .replace('{', ' ')
+                .replace('}', ' ')
+                .trim()
+                .split(",\\s*");
+        double[] array = new double[strings.length];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Double.parseDouble(strings[i]);
+        }
+        this.value = array;
     }
-}
+
+        }
+
+
+
 
