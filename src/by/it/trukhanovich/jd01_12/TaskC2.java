@@ -17,11 +17,6 @@ public class TaskC2 {
         Set<Number> cross = getCross(a, b,c,d);
         System.out.println(union);
         System.out.println(cross);
-        Number x=10;
-        Number y=10.0;
-        if (x.doubleValue()== y.doubleValue()) System.out.println("ДА doubleValue");
-        if (x.equals(y)) System.out.println("да equals");
-        if ((Number) x==(Number) y) System.out.println("да==");
     }
 
     private static Set<Number> getCross(Set<?extends Number>...args) {

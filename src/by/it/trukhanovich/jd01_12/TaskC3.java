@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 public class TaskC3 {
     public static void main(String[] args) {
         ArrayList arrayList = new ArrayList();
-        //[{(3+2)/2}*10]/5+[{(3+2)/2}*10]/5
-        //{[{()}][()]{()}}
         Scanner sc = new Scanner(System.in);
         String s= sc.nextLine();
         Pattern p1=Pattern.compile("[\\{\\}\\(\\)\\[\\]]");

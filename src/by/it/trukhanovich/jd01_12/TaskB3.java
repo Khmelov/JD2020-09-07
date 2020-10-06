@@ -44,7 +44,6 @@ public class TaskB3 {
                 stringListIterator.next();
                 if (check==1) {check=2;stringListIterator.hasNext();continue;}
                 if (check==2) {stringListIterator.remove(); check=1; }
-
             }
         }
         String s= strings.get(0);
@@ -54,19 +53,11 @@ public class TaskB3 {
 //        List<String> strings = new LinkedList<>(peoples);
 //        int check=1;
 //        for(;strings.size()>1;){
-//            int i=0;
-////            ListIterator<String> stringListIterator = strings.listIterator();
-////            while (stringListIterator.hasNext()){
-////                stringListIterator.next();
-//                if (check==1) {check=2;i=strings.listIterator().nextIndex(); i=i-1;continue;}
-//                if (check==2) {
-//                    ListIterator<String> stringListIterator = strings.listIterator(i);
-//                    stringListIterator.next();
-//                    strings.listIterator().remove(i);
-//                    check=1; }
-//
+//            for (int i = 0; i < strings.size(); ) {
+//                if (check==1) {check=2;i++; continue;}
+//                if (check==2) {strings.remove(i); check=1; }
 //            }
-//
+//        }
 //        String s= strings.get(0);
 //        return s;
 //    }
