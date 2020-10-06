@@ -20,18 +20,6 @@ public class TaskC2 {
         Set<Number> cross = getCross(d, a, b, c);
         System.out.println(union);
         System.out.println(cross);
-//        Set<Double> union1=new HashSet<>();
-//        for (Number number : union) {
-//            double k=number.doubleValue();
-//            union1.add(k);
-//        }
-//        Set<Double> cross1=new HashSet<>();
-//        for (Number number : cross) {
-//            double k=number.doubleValue();
-//            cross1.add(k);
-//        }
-//        System.out.println(union1);
-//        System.out.println(cross1);
 
 
     }
@@ -43,6 +31,13 @@ public class TaskC2 {
 //        }
 //        return result;
 //    }
+//    private static Set<Number> getUnion(Set<?extends Number>...args) {
+//        HashSet result = new HashSet(args[0]);
+//        for (int i = 1; i < args.length; i++) {
+//            result.addAll(args[i]);
+//    }
+//        return result;
+//}
     private static Set<Number> getCross(Set<?extends Number>...args) {
         HashSet result = new HashSet();
         for (int i = 0; i < args.length; i++) {
@@ -60,8 +55,6 @@ public class TaskC2 {
     }
 
     private static Set getUnion(Set<?extends Number>...args) {
-
-//        HashSet result = new HashSet();
         HashSet result = new HashSet <Double>();
         for (int i = 0; i < args.length; i++) {
             Iterator<? extends Number> it = args[i].iterator();
@@ -69,9 +62,7 @@ public class TaskC2 {
                 double k= it.next().doubleValue();
                 result.add(k);
             }
-//            result.addAll(args[i]);
         }
-
         return result;
     }
 }
