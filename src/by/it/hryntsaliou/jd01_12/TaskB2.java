@@ -13,13 +13,15 @@ class TaskB2 {
     }
     static String process(ArrayList<String> peoples) {
         Iterator<String> iterator = peoples.iterator();
+        int size = peoples.size();
         while (iterator.hasNext()) {
-            for (int i = 0; i < peoples.size(); i++) {
+            for (int i = 0; i < size; i++) {
                 while (peoples.size()!=0) {
                     String names = iterator.next();
                     if ((i + 1) % 2 == 0) {
                         peoples.remove(i);
-                        //System.arraycopy(peoples, i+1, peoples, i);
+                        size--;
+                        i++;
                     }
                 }
             }
