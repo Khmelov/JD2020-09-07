@@ -6,6 +6,11 @@ class Vector extends Var {
 
   private double [] value;
 
+    @Override
+    public String getYourClass(Var other) {
+        return "Vector";
+    }
+
     public double[] getValue() {
         return value;
     }
@@ -32,14 +37,14 @@ class Vector extends Var {
 
     @Override
     public Var add(Var other) {
-        if (other instanceof Scalar){
+        if (other.getYourClass(other)=="Scalar"){
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+ ((Scalar) other).getValue();
             }
             return new Vector(res);
         }
-        else if (other instanceof Vector){
+        else if (other.getYourClass(other)=="Vector"){
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+((Vector) other).value[i];

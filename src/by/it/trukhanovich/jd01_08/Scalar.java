@@ -3,7 +3,6 @@ package by.it.trukhanovich.jd01_08;
 class Scalar extends Var {
 
      private double value;
-
     public double getValue() {
         return value;
     }
@@ -19,6 +18,11 @@ class Scalar extends Var {
      public Scalar(String strScalar) {
          this.value = Double.parseDouble(strScalar);
      }
+
+    @Override
+    public String getYourClass(Var other) {
+        return "Scalar";
+    }
 
     @Override
     public Var add(Var other) {

@@ -22,19 +22,7 @@ public class TaskC {
         binarySearch(mas,stop);
         InOut.printArray(mas,"V",4);
 
-        /*
-        for (int i = 0; i < mas.length; i++) {
-            if (mas[i]==start) {
-                System.out.println("Index of first element="+i);
-                break;
-            }
-        }
-        for (int i = 0; i < mas.length; i++) {
-            if (mas[i]==stop) {
-                System.out.println("Index of last element="+i);
-                break;
-            }
-        } */
+
 
     }
      static void mergeSort(double[ ] array){
@@ -78,7 +66,7 @@ public class TaskC {
         }
         mergeSort(left, mid);
         mergeSort(right, n - mid);
-        System.out.println("+++");
+       // System.out.println("+++");
         merge(array,left, right);
     }
 
@@ -103,7 +91,7 @@ public class TaskC {
         while (j < r) {
             arr[k++] = part2[j++];
         }
-        System.out.println("+-+-+");
+        //System.out.println("+-+-+");
     }
     static int binarySearch(double[ ] array, double value) {
 

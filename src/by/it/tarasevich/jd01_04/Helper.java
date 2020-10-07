@@ -34,20 +34,24 @@ public class Helper {
 
     }
 
-    public static void sort(double[] arr) {
-        for (int start = 0; start < arr.length; start++) {
-            int least = start;
-            for (int j = start; j < arr.length; j++) {
-                if ((arr[j] < arr[least]) ||
-                        (arr[least] > arr[start])) {
-                    least = j;
-                }
+     static void sort(double[] arr) {
+        int b= arr.length-1;
+        double mass = 0;
+        boolean det;
+        do {
+            det = false;
+            for (int i = 0; i < b; i++) {
+                if (arr[i] > arr[i + 1]) {
 
+                    mass = arr[i + 1];
+                    arr[i + 1] = arr[i];
+                    arr[i] = mass;
+                    det = true;
+                }
             }
-            double tmp = arr[start];
-            arr[start] = arr[least];
-            arr[least] = tmp;
+            b--;
         }
+        while (det);
     }
 
     static double[] mul(double[][] matrix, double[] vector) {

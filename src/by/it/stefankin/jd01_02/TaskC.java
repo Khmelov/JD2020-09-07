@@ -6,37 +6,34 @@ public class TaskC {
     public static void main(String[] args) {
     Scanner sc=new Scanner(System.in);
     int v = sc.nextInt();
-    step1(v);
-
+    int [][] arr=step1(v);
+    step2(arr);
     }
 
     public static int[ ][ ] step1(int n) {
     int[][] matr =new int[n][n];
-       /* boolean est=false;
-        boolean est2=false;
-        boolean snado=false;
 
+
+    boolean soderzh = true;
     do {
-       */
-
-     for (int i=0;i<n;i++) {
-        for (int j=0;j<n;j++) {
-            matr[i][j]=(int) (Math.random()*((2*n)+1)-(n+1));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matr[i][j] = (int) Math.round(Math.random() * ((2 * n) + 1) - (n + 1));
+            }
         }
-      }
-     /*for (int c=0;c<n;c++) {
-        for (int k=0;k<n;k++){
-            if (matr[c][k]==n)
-                est=true;
-            if (matr[c][k]==-n)
-                est2=true;
-            if (est&&est2)
-                snado=true;
-
+        int d1 =-n;
+        int d2 =n;
+        boolean find1=false;
+        boolean find2=false;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+               if (matr[i][j] ==d1) find1=true;
+               if (matr[i][j] ==d2) find2=true;
+            }
         }
-     }
-    }
-     while (!snado); */
+        if (find1&&find2) soderzh=false;
+
+    } while (soderzh);
      for (int strok=0;strok<n;strok++) {
          for (int stolb = 0; stolb < n; stolb++) {
              System.out.print(matr[strok][stolb] + " ");
@@ -47,13 +44,49 @@ public class TaskC {
 
     }
 
- /*
+
     public static int step2 (int[ ][ ] arr) {
+       int sum = 0;
 
+       for (int j=0; j<arr.length;j++) {
+
+           int pol1 = -1;
+           int pol2 = -1;
+           for (int i = 0; i < arr[j].length; i++) {
+               if (arr[j][i] > 0) {
+                   pol1 = i;
+                   for (int k = pol1 + 1; k < arr[j].length; k++) {
+                       if (arr[j][k] > 0)
+                           System.out.println("22");
+                       pol2 = k;
+                       if (pol1 >= 0 && pol2 > 0)
+                           System.out.println("индексы"+"="+(pol2-pol1));
+                                                            {
+                           for (int q = pol1 + 1; q < pol2; q++) {
+                              // if (q != pol2)
+                                   sum = sum+arr[j][q];
+                               System.out.println(sum+"в цикле");
+                           }
+
+                       }
+
+                       break;
+                   }
+                   break;
+               }
+
+           }
+
+
+
+       }
+       System.out.println(sum+ "  итого");
+       return sum;
     }
+
     public static int[ ][ ] step3(int[ ][ ] arr) {
-
+    return null;
     }
 
-*/
+
 }

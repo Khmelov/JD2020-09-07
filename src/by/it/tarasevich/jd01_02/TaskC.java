@@ -16,22 +16,22 @@ public class TaskC {
     }
 
 
-    static int[][] step1(int n) {
+    static int[ ][ ] step1(int n) {
         boolean minOK;
         boolean maxOK;
-        int[][] array = new int[n][n];
+        int[][] arr = new int[n][n];
         do {
             minOK = false;
             maxOK = false;
-            for (int i = 0; i < array.length; i++) {
-                for (int j = 0; j < array[i].length; j++) {
-                    array[i][j] = -n + (int) (Math.random() * (2 * n + 1));
-                    if (array[i][j] == n) maxOK = true;
-                    if (array[i][j] == -n) minOK = true;
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < arr[i].length; j++) {
+                    arr[i][j] = -n + (int) (Math.random() * (2 * n + 1));
+                    if (arr[i][j] == n) maxOK = true;
+                    if (arr[i][j] == -n) minOK = true;
                 }
             }
         } while (!maxOK || !minOK);
-        return array;
+        return arr;
     }
 
     static int step2(int[][] arr) {
@@ -44,7 +44,7 @@ public class TaskC {
                     firstOK = true;
 
                 }
-                if (firstOK && element >= 0) {
+                if (firstOK && element > 0) {
                     sumRow += element;
                 } else
                     break;
@@ -57,22 +57,22 @@ public class TaskC {
     }
 
 
-    static int[][] step3(int[][] array) {
+    static int[ ][ ] step3(int[][] arr) {
         boolean minOK;
         boolean maxOK;
 
         do {
             maxOK = false;
             minOK = false;
-            for (int i = 0; i < array.length; i++) {
-                for (int j = 0; j < array.length; j++) {
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < arr.length; j++) {
 
 
 
                 }
 
             }
-            return array;
+            return arr;
 
 
         } while (!minOK || !maxOK);
