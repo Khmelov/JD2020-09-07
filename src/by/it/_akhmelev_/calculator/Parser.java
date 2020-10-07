@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException {
         String[] parts = expression.split(Patterns.OPERATION, 2);
         //если нет операции, а есть только одно число или одна переменная
         if (parts.length == 1)
@@ -19,11 +19,7 @@ class Parser {
         //это вычислительная операция, получаем левую часть
         Var left = Var.createVar(parts[0]);
 
-        //если что-то не распознали выходим с ошибкой
-        if (left == null | right == null)
-            return null;
-
-        //иначе ищем операцию и выполняем ее
+       //иначе ищем операцию и выполняем ее
         Matcher matcherOperation = Pattern
                 .compile(Patterns.OPERATION)
                 .matcher(expression);
@@ -37,10 +33,8 @@ class Parser {
                     return left.mul(right);
                 case "/":
                     return left.div(right);
-                default:
-                    return null;
             }
         }
-        return null;
+        throw new CalcException("Неизвестная операция "+expression);
     }
 }
