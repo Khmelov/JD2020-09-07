@@ -7,16 +7,23 @@ class Parser {
 
     Var calc(String expression) {
         String[] parts = expression.split(Patterns.OPERATION, 2);
+        //если нет операции, а есть только одно число или одна переменная
+        if (parts.length == 1)
+            return Var.createVar(expression);
 
-        if (parts.length == 1) return Var.createVar(expression);
-        if (parts.length > 2) return null;
-
+        //какая-то операция есть, получим правую часть и проверим присваивание
         Var right = Var.createVar(parts[1]);
-        if (expression.contains("=")) return Var.save(parts[0], right);
+        if (expression.contains("="))
+            return Var.save(parts[0], right);
 
+        //это вычислительная операция, получаем левую часть
         Var left = Var.createVar(parts[0]);
-        if (left == null | right == null) return null;
 
+        //если что-то не распознали выходим с ошибкой
+        if (left == null | right == null)
+            return null;
+
+        //иначе ищем операцию и выполняем ее
         Matcher matcherOperation = Pattern
                 .compile(Patterns.OPERATION)
                 .matcher(expression);
