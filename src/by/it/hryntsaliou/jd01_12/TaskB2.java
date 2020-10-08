@@ -41,12 +41,16 @@ class TaskB2 {
         Iterator<String> iterator = peoples.iterator();
         while (peoples.size()>1) {
             while (iterator.hasNext()) {
-
-
-
+                if (peoples.size() > 2) {
+                    iterator.next();
+                    iterator.next();
+                }
+                else {
+                    iterator.next();
+                    iterator.remove();
+                }
             }
-
         }
-        return peoples.get(0);
+        return peoples.getFirst();
     }
 }
