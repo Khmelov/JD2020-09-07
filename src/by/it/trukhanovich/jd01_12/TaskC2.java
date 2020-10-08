@@ -1,9 +1,6 @@
 package by.it.trukhanovich.jd01_12;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class TaskC2 {
     public static void main(String[] args) {
@@ -16,11 +13,25 @@ public class TaskC2 {
         System.out.printf("b=%s\n",b);
         System.out.printf("b=%s\n",c);
         System.out.printf("b=%s\n",d);
+//        Comparator<Number> numberComparator = new Comparator<Number>() {
+//            @Override
+//            public int compare(Number o1, Number o2) {
+//                if (o1.doubleValue()>o2.doubleValue()) return 1;
+//                if (o1.doubleValue()<o2.doubleValue()) return -1;
+//                if (o1.doubleValue()==o2.doubleValue()) return 0;
+//                return -2;
+//            }
+//
+//            @Override
+//            public boolean equals(Object obj) {
+//
+//                return false;
+//            }
+//        };
         Set<Number> union = getUnion(d, a, b, c);
         Set<Number> cross = getCross(d, a, b, c);
         System.out.println(union);
         System.out.println(cross);
-
 
     }
 
@@ -31,8 +42,8 @@ public class TaskC2 {
 //        }
 //        return result;
 //    }
-//    private static Set<Number> getUnion(Set<?extends Number>...args) {
-//        HashSet result = new HashSet(args[0]);
+//    private static Set<Number> getUnion(Comparator comparator, Set<?extends Number>...args) {
+//        Set <Number>result = new TreeSet(comparator);
 //        for (int i = 1; i < args.length; i++) {
 //            result.addAll(args[i]);
 //    }
