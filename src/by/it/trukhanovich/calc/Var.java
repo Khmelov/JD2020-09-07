@@ -18,27 +18,25 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         System.out.printf("Операция %s + %s невозможна\n", this, other);
         return null;
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Операция %s - %s невозможна\n", this, other);
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s - %s невозможна\n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Операция %s * %s невозможна\n", this, other);
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s * %s невозможна\n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Операция %s / %s невозможна\n", this, other);
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна\n", this, other));
+
     }
 
     @Override
@@ -46,7 +44,7 @@ abstract class Var implements Operation {
         return "Это класс Var{}";
     }
 
-    static Var createVar (String strVar){
+    static Var createVar (String strVar) throws CalcException {
         if (strVar.matches(Patterns.SKALAR)){
             return new Scalar(strVar);
         }
@@ -60,8 +58,8 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            System.err.println("Незвестная переменная "+strVar);
-        return null;
+            throw new CalcException(String.format("Незвестная переменная "+strVar));
+
         }
     }
 }

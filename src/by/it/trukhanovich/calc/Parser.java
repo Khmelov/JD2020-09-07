@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    Var calc (String expression){
+    Var calc (String expression) throws CalcException {
         String [] parts=expression.split(Patterns.OPERANIONS,2);
         if (parts.length!=2) {
             //TODO expression
@@ -27,9 +27,8 @@ class Parser {
                 case "-": return left.sub(right);
                 case "*": return left.mul(right);
                 case "/": return left.div(right);
-                default: return null;
             }
         }
-        return null;
+        throw new CalcException("неизвестная операция: "+expression);
     }
 }
