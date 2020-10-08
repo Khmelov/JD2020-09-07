@@ -70,6 +70,9 @@ class Matrix extends Var {
             this.value=value;
             double [][] s1=((Matrix) other).getValue();
             double [][] result=new double[value.length][value[0].length];
+            if (value[0].length!=s1[0].length){
+                throw new CalcException("недопустимый размер матриц.");
+            }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result [i][j]=value[i][j]+s1[i][j];
@@ -96,7 +99,7 @@ class Matrix extends Var {
             double [][] s1=((Matrix) other).getValue();
             double[][] result=new double[value.length][value[0].length];
             if (value[0].length!=s1[0].length){
-                throw new CalcException("недопустимый размер матриц");
+                throw new CalcException("недопустимый размер матриц.");
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -132,6 +135,9 @@ class Matrix extends Var {
         } else if (other instanceof Vector) {
             double result[] = new double[value.length];
             double[] vetc = Arrays.copyOf(((Vector) other).getValue(), ((Vector) other).getValue().length);
+            if (value[0].length!=vetc.length){
+                throw new CalcException("недопустимый размер матрицы и вектора.");
+            }
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[i].length; j++) {
                     result[i] = result[i] + value[i][j] * vetc[j];
@@ -142,6 +148,9 @@ class Matrix extends Var {
         else  if (other instanceof Matrix){
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).getValue();
+            if (matrixLeft[0].length!=matrixRight[0].length){
+                throw new CalcException("недопустимый размер матриц.");
+            }
             double[][] result = new double[matrixLeft.length][matrixRight[0].length];
             for (int i = 0; i < matrixLeft.length; i++) {
                 for (int j = 0; j < matrixRight[0].length; j++) {

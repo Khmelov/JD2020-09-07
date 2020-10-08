@@ -44,7 +44,7 @@ class Vector extends Var {
         else if (other instanceof Vector){
              double [] res=Arrays.copyOf(value,value.length);
             if (value.length!=((Vector) other).getSize()){
-                throw new CalcException("недопустимый размер векторою");
+                throw new CalcException("недопустимый размер векторов.");
             }
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+((Vector) other).value[i];
@@ -65,7 +65,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             if (value.length!=((Vector) other).getSize()){
-                throw new CalcException("недопустимый размер векторою");
+                throw new CalcException("недопустимый размер векторов.");
             }
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
@@ -87,6 +87,9 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             double [] res=Arrays.copyOf(value,value.length);
+            if (value.length!=other.getSize()){
+                throw new CalcException("недопустимый размер векторов.");
+            }
             double sum=0;
             for (int i = 0; i < res.length; i++) {
                 sum=sum+res[i]*((Vector) other).value[i];
