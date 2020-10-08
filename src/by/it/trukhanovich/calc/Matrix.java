@@ -92,9 +92,12 @@ class Matrix extends Var {
     @Override
     public Var sub(Var other)throws CalcException {
         if (other instanceof Matrix){
-            this.value=value;
+//            this.value=value;
             double [][] s1=((Matrix) other).getValue();
             double[][] result=new double[value.length][value[0].length];
+            if (value[0].length!=s1[0].length){
+                throw new CalcException("недопустимый размер матриц");
+            }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result [i][j]=value[i][j]-s1[i][j];
