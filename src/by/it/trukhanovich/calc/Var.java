@@ -17,6 +17,8 @@ abstract class Var implements Operation {
         return var;
     }
 
+
+
     @Override
     public Var add(Var other) throws CalcException {
         System.out.printf("Операция %s + %s невозможна\n", this, other);
@@ -62,4 +64,8 @@ abstract class Var implements Operation {
 
         }
     }
+
+    protected abstract int getSize();
+
+    ;
 }

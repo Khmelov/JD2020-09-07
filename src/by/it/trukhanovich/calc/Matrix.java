@@ -62,6 +62,8 @@ class Matrix extends Var {
         return i;
     }
 
+
+
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Matrix){
@@ -169,5 +171,10 @@ class Matrix extends Var {
         sb.append("}");
         return sb.toString();
 
+    }
+
+    @Override
+    protected int getSize() {
+        return 0;
     }
 }

@@ -30,6 +30,8 @@ class Vector extends Var {
   }
  }
 
+
+
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar){
@@ -40,7 +42,10 @@ class Vector extends Var {
             return new Vector(res);
         }
         else if (other instanceof Vector){
-            double [] res=Arrays.copyOf(value,value.length);
+             double [] res=Arrays.copyOf(value,value.length);
+            if (value.length!=((Vector) other).getSize()){
+                throw new CalcException("недопустимый размер векторою");
+            }
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+((Vector) other).value[i];
             }
@@ -59,6 +64,9 @@ class Vector extends Var {
             return new Vector(res);
         }
         else if (other instanceof Vector){
+            if (value.length!=((Vector) other).getSize()){
+                throw new CalcException("недопустимый размер векторою");
+            }
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]-((Vector) other).value[i];
@@ -113,4 +121,9 @@ class Vector extends Var {
   sb.append("}");
   return sb.toString();
  }
+
+    @Override
+    protected int getSize() {
+        return value.length;
+        }
 }

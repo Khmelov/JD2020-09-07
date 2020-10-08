@@ -20,6 +20,8 @@ class Scalar extends Var {
          this.value = Double.parseDouble(strScalar);
      }
 
+
+
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar){
@@ -66,4 +68,9 @@ class Scalar extends Var {
      public String toString() {
          return Double.toString(value);
      }
- }
+
+    @Override
+    protected int getSize() {
+        return 0;
+    }
+}
