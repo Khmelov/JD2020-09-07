@@ -11,26 +11,42 @@ class TaskB2 {
         process(names);
         process(names1);
     }
+
     static String process(ArrayList<String> peoples) {
-        Iterator<String> iterator = peoples.iterator();
-        int size = peoples.size();
-        while (iterator.hasNext()) {
-            for (int i = 0; i < size; i++) {
-                while (peoples.size()!=0) {
-                    String names = iterator.next();
-                    if ((i + 1) % 2 == 0) {
-                        peoples.remove(i);
-                        size--;
-                        i++;
+        int size;
+            while (peoples.size() > 1) {
+                if (peoples.size() % 2 != 0) {
+                    int count = 0;
+                    size = (peoples.size() - 1) / 2;
+                    for (int i = 0; i < size; i++) {
+                        peoples.remove(count + 1);
+                        count++;
+                    }
+                    peoples.remove(0);
+                }
+                if (peoples.size() % 2 == 0) {
+                    int count = 0;
+                    size = peoples.size() / 2;
+                    for (int i = 0; i < size; i++) {
+                        peoples.remove(count + 1);
+                        count++;
                     }
                 }
             }
-        }
-        return null;
+            return peoples.get(0);
     }
+
+
     static String process(LinkedList<String> peoples) {
         Iterator<String> iterator = peoples.iterator();
+        while (peoples.size()>1) {
+            while (iterator.hasNext()) {
 
-        return null;
+
+
+            }
+
+        }
+        return peoples.get(0);
     }
 }
