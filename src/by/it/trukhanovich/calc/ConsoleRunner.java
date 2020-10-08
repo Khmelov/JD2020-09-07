@@ -9,6 +9,12 @@ public class ConsoleRunner {
         Printer printer=new Printer();
         for (;;){
          String expression= sc.nextLine();
+         if (expression.equals("printvar")){
+             System.out.println(Var.vars);
+         }
+         if (expression.equals("sortvar")){
+             System.out.println(Var.sortMap());
+         }
          if (expression.equals("end")){
              break;
          }

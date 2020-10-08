@@ -1,11 +1,16 @@
 package by.it.trukhanovich.calc;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 abstract class Var implements Operation {
 
-    private static Map<String,Var> vars =new HashMap<>();
+    static Map<String,Var> vars =new HashMap<>();
+
+    static TreeMap sortMap(){
+        TreeMap treeMap = new TreeMap(vars);
+                return treeMap;
+
+    }
 
     static Var saveVar (String name, Var var){
         vars.put(name, var);
