@@ -57,7 +57,7 @@ class Scalar extends Var {
             return new Scalar(sub);
         }
         else
-            return super.div(this);
+            return super.div(other);
     }
 
     @Override
