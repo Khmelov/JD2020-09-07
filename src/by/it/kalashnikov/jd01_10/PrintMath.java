@@ -9,8 +9,8 @@ class PrintMath {
         for (Method method : declaredMethods) {
             StringBuilder sb=new StringBuilder();
 
+            if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
 
-                if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC){
                 sb.append("public ");
 
                 if ((method.getModifiers() & Modifier.STATIC) == Modifier.STATIC){
