@@ -1,13 +1,12 @@
 package by.it.adryneuski.jd01_07;
 
- abstract class Var
+abstract class Var
+{
+
+    @Override
+    public String toString()
     {
-
-        @Override
-        public String toString()
-        {
-            return "Это класс Var";
-        }
+        return "Это класс Var";
     }
-
+}
 
