@@ -13,7 +13,12 @@ public class ConsoleRunner {
             if (expression.equals("end")){
                 break;
             }
-            Var result = parser.calc(expression);
+            Var result = null;
+            try {
+                result = parser.calc(expression);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
             printer.print(result);
         }
     }
