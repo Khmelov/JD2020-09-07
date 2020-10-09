@@ -1,7 +1,6 @@
 package by.it.hryntsaliou.jd01_12;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 class TaskB2 {
@@ -38,19 +37,26 @@ class TaskB2 {
 
 
     static String process(LinkedList<String> peoples) {
-        Iterator<String> iterator = peoples.iterator();
-        while (peoples.size()>1) {
-            while (iterator.hasNext()) {
-                if (peoples.size() > 2) {
-                    iterator.next();
-                    iterator.next();
+        int size;
+        while (peoples.size() > 1) {
+            if (peoples.size() % 2 != 0) {
+                int count = 0;
+                size = (peoples.size() - 1) / 2;
+                for (int i = 0; i < size; i++) {
+                    peoples.remove(count + 1);
+                    count++;
                 }
-                else {
-                    iterator.next();
-                    iterator.remove();
+                peoples.remove(0);
+            }
+            if (peoples.size() % 2 == 0) {
+                int count = 0;
+                size = peoples.size() / 2;
+                for (int i = 0; i < size; i++) {
+                    peoples.remove(count + 1);
+                    count++;
                 }
             }
         }
-        return peoples.getFirst();
+        return peoples.get(0);
     }
 }
