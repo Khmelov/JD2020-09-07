@@ -87,7 +87,7 @@ class Vector extends Var {
                 sum += res[i] * ((Vector) other).value[i];
             }
             return new Scalar(sum);
-        } else return super.mul(other);//ДОДЕЛАТЬ!!!
+        } else return super.mul(other);//TODO
     }
 
     @Override
