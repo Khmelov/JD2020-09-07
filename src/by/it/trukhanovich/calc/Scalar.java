@@ -71,6 +71,6 @@ class Scalar extends Var {
 
     @Override
     protected int getSize() {
-        return 0;
+        return -1;
     }
 }

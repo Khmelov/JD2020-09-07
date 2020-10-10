@@ -67,5 +67,5 @@ abstract class Var implements Operation {
 
     protected abstract int getSize();
 
-    ;
+
 }
