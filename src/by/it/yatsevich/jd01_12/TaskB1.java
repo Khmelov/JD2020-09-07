@@ -1,24 +1,18 @@
 package by.it.yatsevich.jd01_12;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.regex.Pattern;
+import java.util.*;
 
 public class TaskB1 {
     public static void main(String[] args) {
-        Map<String, Integer> text = new HashMap<>();
+        HashMap<String, Integer> text = new HashMap<>();
         Scanner scan= new Scanner(System.in);
-        String strings;
-        Pattern pattern= Pattern.compile("[a-zA-Z']+");
+        scan.useDelimiter("[/\\s\\.—,:;?(){}]");
         String s=scan.next();
-        Integer value=1;
-        while (!s.equals("end")){
-            if (text.containsKey(s)==true){
-                text.replace(s,value,value+1);
-            }else if (!text.containsKey(s))text.put(s,value);
-        }
+        do {
+            if (!text.containsKey(s)){
+                text.put(s,1);
+            }else text.put(s, text.get(s) + 1);;
+        }while (!(s=scan.next()).equals("end"));
         System.out.println(text);
     }
 }
