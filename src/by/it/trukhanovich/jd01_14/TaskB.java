@@ -13,7 +13,7 @@ public class TaskB {
     public static void main(String[] args) {
         String path=getPath(TaskB.class);
         String fileName=path+ FILE_NAME;
-        System.out.println(fileName);
+//        System.out.println(fileName);
         //        StringBuilder sb=new StringBuilder();
 
         int word=checkWords(fileName);
