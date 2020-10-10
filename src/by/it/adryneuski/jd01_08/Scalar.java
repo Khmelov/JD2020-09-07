@@ -1,12 +1,12 @@
-package by.it._akhmelev_.calculator;
+package by.it.adryneuski.jd01_08;
 
 class Scalar extends Var {
 
-    public double getValue() {
+    private double value;
+    public double getValue()
+    {
         return value;
     }
-
-    private double value;
 
     public Scalar(double value) {
         this.value = value;
@@ -22,7 +22,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcException {
+    public Var add(Var other) {
         if (other instanceof Scalar) {
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
@@ -31,7 +31,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcException {
+    public Var sub(Var other) {
         if (other instanceof Scalar) {
             double sub = this.value - ((Scalar) other).value;
             return new Scalar(sub);
@@ -40,7 +40,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
+    public Var mul(Var other) {
         if (other instanceof Scalar) {
             double mul = this.value * ((Scalar) other).value;
             return new Scalar(mul);
@@ -49,13 +49,9 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
+    public Var div(Var other) {
         if (other instanceof Scalar) {
-            double zz = ((Scalar) other).value;
-            if (zz == 0) {
-                throw new CalcException("деление на ноль.");
-            }
-            double div = this.value / zz;
+            double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
         } else
             return super.div(other);
