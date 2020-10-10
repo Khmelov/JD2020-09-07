@@ -1,7 +1,6 @@
 package by.it.trukhanovich.jd01_14;
 
 import java.io.*;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
