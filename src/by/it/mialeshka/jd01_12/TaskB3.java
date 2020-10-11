@@ -13,10 +13,15 @@ public class TaskB3 {
         for (int i = 0; i <= 4096; i++) {
             stringLIST.add("Вася"+i);
             linkedList.add("Вася"+i);
-            
         }
+        long startTime = System.nanoTime();
         System.out.println(process(stringLIST));
+        long endTime = System.nanoTime();
+        System.out.println((endTime-startTime)/1000000.0);
+        startTime = System.nanoTime();
         System.out.println(process(linkedList));
+        endTime = System.nanoTime();
+        System.out.println((endTime-startTime)/1000000.0);
 
     }
 
@@ -38,16 +43,11 @@ public class TaskB3 {
 
     }
     static String process(LinkedList<String> peoples){
-        int count = 1;
         while (peoples.size() > 1)
         {
-            int index = 0;
-            if (count == 2)
-            {
-                peoples.remove();
-                count = 1;
-            }
-            else count++;
+            peoples.addLast(peoples.getFirst());
+            peoples.removeFirst();
+            peoples.removeFirst();
 
         }
         return  peoples.get(0);
