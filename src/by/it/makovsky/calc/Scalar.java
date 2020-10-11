@@ -51,6 +51,9 @@ class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if(other instanceof Scalar){
             double div= this.value / ((Scalar)other).value;
+            if (((Scalar)other).value == 0) {
+                throw new CalcException("деление на ноль.");
+            }
             return new Scalar(div);
         } else
             return other.add(this);
