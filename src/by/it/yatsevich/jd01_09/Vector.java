@@ -1,4 +1,4 @@
-package by.it.yatsevich.jd01_08;
+package by.it.yatsevich.jd01_09;
 
 import java.util.Arrays;
 
@@ -68,6 +68,7 @@ class Vector extends Var {
     @Override
     public Var div(Var other) {
         if (other instanceof Vector) {
+            System.out.println("Операция невозможна");
             return super.div(other);
         } else if (other instanceof Scalar && ((Scalar) other).getValue() != 0) {
             double[] div = Arrays.copyOf(value, value.length);
