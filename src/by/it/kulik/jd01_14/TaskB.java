@@ -11,24 +11,24 @@ public class TaskB {
         String filename = src + "JD01_14/text.txt";
         File f = new File(filename);
         BufferedReader BR=null;
-        int n = 0, marks = 0;
+        int words = 0, marks = 0;
         try {
             BR = new BufferedReader(new FileReader(f));
             String res;
             while ((res=BR.readLine())!=null){
-                Pattern p=Pattern.compile("[!.,-]");
+                Pattern p=Pattern.compile("[.!?,:;-]+");
                 Matcher m=p.matcher(res);
                 while(m.find()){
                     marks++;
                 }
-                Pattern p1=Pattern.compile("[ .]");
+                Pattern p1=Pattern.compile("[а-яА-ЯёЁ]+");
                 Matcher m1=p1.matcher(res);
                 while(m1.find()){
-                    n++;
+                    words++;
                 }
             }
             System.out.println();
-            System.out.println("\npunctuation marks="+marks+" words="+n);
+            System.out.println("\npunctuation marks="+marks+" words="+words);
             } catch (IOException e) {
             System.err.println(" Ошибка файла:" + e);
         } finally {
