@@ -18,7 +18,7 @@ public class Test_jd01_02 {
     public void testTaskA() throws Exception {
         System.out.println("\n\nПроверка на минимум и максимум");
         checkMethod("TaskA", "static step1", int[].class);
-        run("-1 2 3 4 567 567 4 3 2 -1 4 4").include("-1 567");
+        Test_jd01_02 include = run("-1 2 3 4 567 567 4 3 2 -1 4 4").include("-1 567");
 
         System.out.println("\n\nПроверка на вывод значений меньше среднего");
         checkMethod("TaskA", "static step2", int[].class);
