@@ -187,6 +187,6 @@ class Matrix extends Var {
 
     @Override
     protected int getSize() {
-        return 0;
+        return value[0].length;
     }
 }
