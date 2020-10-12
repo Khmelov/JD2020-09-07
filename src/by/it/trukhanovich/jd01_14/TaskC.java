@@ -12,7 +12,6 @@ public class TaskC {
     public static void main(String[] args) {
         String rootProject = System.getProperty("user.dir");
         String myPackageAddress=rootProject.concat("\\src\\by\\it\\trukhanovich");
-//        String myPackageAddress="F:\\IT_academy\\Java_1\\work\\JD2020-09-07\\src\\by\\it\\trukhanovich";
         System.out.println(myPackageAddress);
         File myPackage=new File(myPackageAddress);
         ArrayList <String>arrayList = new ArrayList();
