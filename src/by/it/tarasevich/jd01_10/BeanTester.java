@@ -8,5 +8,7 @@ public class BeanTester {
         Constructor<Bean> constructor = beanClass.getConstructor();
         Bean bean = constructor.newInstance();
 
+        System.out.println(bean);
+
     }
 }
