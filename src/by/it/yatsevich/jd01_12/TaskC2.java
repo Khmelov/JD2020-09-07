@@ -11,7 +11,7 @@ public class TaskC2 {
         return result;
     }
     static Set<?> getCross(Set<?> one,Set<?> two,Set<?> tree) {
-        HashSet<Object> result = new HashSet<>(one);
+        HashSet<Double> result = new HashSet<Double>();
         result.retainAll(two);
         result.retainAll(tree);
         return result;
