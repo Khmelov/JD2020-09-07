@@ -1,44 +1,51 @@
 package by.it.adryneuski.jd01_07;
 
-import java.util.Arrays;
+import java.util.regex.Pattern;
 
 class Vector extends Var
 {
     private static double[] value;
 
-
     public Vector(double[] value)
+
     {
         this.value = value;
     }
 
     public Vector(Vector vector)
+
     {
         this.value = vector.value;
     }
 
     public Vector(String strVector)
     {
-        double[] value1 = Arrays.stream(strVector.split(" ")).mapToDouble(Double::parseDouble).toArray();
+        StringBuilder st = new StringBuilder("{1.0, 2.0, 4.0}");
+        st.deleteCharAt(0);
+        st.deleteCharAt(st.length() - 1);
+        Pattern pattern = Pattern.compile(",");
+        String[] arrStr = pattern.split(st);
 
-        this.value = value1;
+        for (int i = 0; i < arrStr.length; i++)
+        {
+            this.value[i] = Double.parseDouble(arrStr[i]);
+        }
     }
-
-
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder("{");
-        String delimiter = "";
-
-        for (double element:value)
-
+        StringBuilder st = new StringBuilder("{");
+        String delimeter = "";
+        for (double element: value)
         {
-            sb.append(delimiter).append(element);
-            delimiter = ", ";
+            st.append(delimeter).append(element);
+            delimeter = ", ";
         }
-        sb.append("}");
-        return sb.toString();
 
+        st.append("}");
+
+        return  st.toString();
     }
+
+
 }
