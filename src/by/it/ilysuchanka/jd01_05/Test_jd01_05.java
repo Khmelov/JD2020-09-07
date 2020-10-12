@@ -18,7 +18,7 @@ public class Test_jd01_05 {
     @Test(timeout = 5000)
     public void testTaskA1__TaskA() throws Exception {
         System.out.println("Ожидается -11392.************");
-        run("").include("4516");
+        Test_jd01_05 include = run("").include("4516");
     }
 
     @Test(timeout = 5000)
