@@ -1,5 +1,6 @@
 package by.it.hryntsaliou.jd01_08;
 
+
 class Scalar extends Var {
 
     private double value;
