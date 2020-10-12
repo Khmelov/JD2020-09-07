@@ -56,7 +56,12 @@ class Scalar extends Var {
             }
             return new Scalar(div);
         } else
-            return other.add(this);
+            return super.div(other);
+    }
+
+    @Override
+    protected int getSize() {
+        return 0;
     }
 
     @Override

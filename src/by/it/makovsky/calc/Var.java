@@ -41,6 +41,7 @@ abstract class Var implements Operation, Patterns {
         throw new CalcException("Невозможно создать "+operand);
     }
 
+    protected abstract int getSize();
     @Override
     public String toString() {
         return "Это абстрактный класс Var";

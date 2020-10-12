@@ -66,6 +66,11 @@ class Matrix extends Var {
     }
 
     @Override
+    protected int getSize() {
+        return value[0].length;
+    }
+
+    @Override
     public String toString() {
         StringBuilder line = new StringBuilder("{");
         for (int i = 0; i < this.value.length; i++) {

@@ -42,6 +42,10 @@ class Vector extends Var {
         out.append("}");
         return out.toString();
     }
+    @Override
+    protected int getSize() {
+        return value.length;
+    }
 
     @Override
     public Var add(Var other) throws CalcException {
@@ -53,14 +57,16 @@ class Vector extends Var {
             return new Vector(result);
         } else if (other instanceof Vector) {
             double[] result = Arrays.copyOf(value, value.length);
+            if (value.length!= other.getSize()){
+                throw new CalcException("длины векторов не равны");
+            }
             for (int i = 0; i < result.length; i++) {
-                result[i] += ((Vector) other).value[i];
+                result[i]=result[i]+((Vector) other).value[i];
             }
             return new Vector(result);
-        } else {
-            return super.add(other);
         }
-    }
+        else return super.add(other);
+        }
 
     @Override
     public Var sub(Var other) throws CalcException {
@@ -72,6 +78,9 @@ class Vector extends Var {
             return new Vector(result);
         } else if (other instanceof Vector) {
             double[] result = Arrays.copyOf(value, value.length);
+            if (value.length!= other.getSize()){
+                throw new CalcException("длины векторов не равны");
+            }
             for (int i = 0; i < result.length; i++) {
                 result[i] -= ((Vector) other).value[i];
             }
@@ -92,6 +101,9 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             double res = 0.0;
+            if (value.length!= other.getSize()){
+                throw new CalcException("длины векторов не равны");
+            }
             for (int i = 0; i < this.value.length; i++) {
                 res = res + this.value[i]*((Vector) other).value[i];
             }
@@ -109,6 +121,8 @@ class Vector extends Var {
             }
             return new Vector(res);
         }
-        else return super.div(other);
+        else if (other instanceof Vector){  return super.div(other);}
+        else if (other instanceof Matrix){  return super.div(other);}
+        else  return super.div(other);
     }
 }
