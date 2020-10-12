@@ -10,13 +10,14 @@ public class TaskC {
     public static final String TASK_C_TXT = "resultTaskC.txt";
 
     public static void main(String[] args) {
-        String s=getPath(TaskC.class);
-        String trukhanovich="F:\\IT_academy\\Java_1\\work\\JD2020-09-07\\src\\by\\it\\trukhanovich";
-        File packageTrukhanovich=new File(trukhanovich);
+        String rootProject = System.getProperty("user.dir");
+        String myPackageAddress=rootProject.concat("\\src\\by\\it\\trukhanovich");
+//        String myPackageAddress="F:\\IT_academy\\Java_1\\work\\JD2020-09-07\\src\\by\\it\\trukhanovich";
+        System.out.println(myPackageAddress);
+        File myPackage=new File(myPackageAddress);
         ArrayList <String>arrayList = new ArrayList();
-        File[] files = packageTrukhanovich.listFiles();
+        File[] files = myPackage.listFiles();
         getDirectory(arrayList, files);
-//        System.out.println(arrayList);
         String path=getPath(TaskC.class)+TASK_C_TXT;
         printToTxt(arrayList,path);
         for (String s1 : arrayList) {
