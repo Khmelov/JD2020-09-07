@@ -74,16 +74,20 @@ class ListB<T> implements List<T> {
     }
 
 
-
-
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        Object[] a = c.toArray();
+        elements=Arrays.copyOf(elements,elements.length+a.length);
+        System.arraycopy(a, 0, elements, size, a.length);
+        size += a.length;
+        return a.length != 0;
     }
 
     @Override
     public T set(int index, T element) {
-        return null;
+        T old=elements[index];
+        elements[index]=element;
+        return old;
     }
 
 
