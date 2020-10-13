@@ -35,9 +35,9 @@ public class TaskA {
             if (array[i] == start) firstIndex = i;
             if (array[i] == finish) lastIndex = i;
         }
-        System.out.printf("Index of first element = %d " + "\n" +
-                "Index of last element = %d ", firstIndex, lastIndex);
+        System.out.printf("first element=%d" + "\n" +
+                "last element=%d", firstIndex, lastIndex);
     }
-    
+
 
 }
