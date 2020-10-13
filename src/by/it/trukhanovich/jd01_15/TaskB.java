@@ -1,57 +1,87 @@
 package by.it.trukhanovich.jd01_15;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
+
+
 
 public class TaskB {
     public static void main(String[] args) {
         String path = getPath(TaskB.class).concat(TaskB.class.getSimpleName()).concat(".java");
-        System.out.println(path);
-        //comment
-        //comment
-        /* comments
+/* comments
          *
          * */
-        /* comments
+/* comments
          *
          * */
-        /**
+/**
          * comment
          */
-        StringBuilder sb=new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))){
-            while (br.ready()){
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            while (br.ready()) {
                 sb.append(br.readLine());
                 sb.append("\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        Pattern compile = Pattern.compile("/\\*(?s:(?!\\*/).)*\\*/");
-//        Matcher m1=compile.matcher(sb);
-//        int pos=0;
-//        while (m1.find(pos)){
-//            sb.replace(m1.start(), m1.end(), "");
-//            pos=m1.start()+1;
-//        }
-//        Pattern compile1 = Pattern.compile("/+.+\\n");
-//        Matcher m2=compile1.matcher(sb);
-//        pos=0;
-//        while (m2.find(pos)){
-//            sb.replace(m2.start(), m2.end(), "");
-//            pos=m2.start()+1;
-//        }
-        printToTxt(sb,getPath(TaskB.class).concat(TaskB.class.getSimpleName()).concat(".txt"));
-        System.out.println(sb);
+        String s = sb.toString();
+
+
+        int b;
+        StringBuilder test = new StringBuilder();
+//многострочные коментарии
+        try (final BufferedReader br = new BufferedReader(new StringReader(s))) {
+            boolean m1 = false;
+            boolean m2 = false;
+            boolean comment = false;
+            while ((b = br.read()) != -1) {
+                if (comment == false) { test.append(((char) b)); }
+                if (comment == false && m1 == true && b != '*') { m1 = false; continue; }
+                if (comment == false && (b == '/') && (m1 == false)) { m1 = true; continue; }
+                if (comment == false && (b == '*') && (m1 == true)) {
+                    comment = true;
+                    m1 = false;
+                    test.delete(test.length() - 3, test.length()).append("\n");
+                    continue;
+                }
+                if (comment == true && b == '*') { m2 = true;continue; }
+                if (comment == true&&m2 == true && b != '/') { m2 = false; }
+                if (comment == true&&m2 == true && b == '/') {comment = false;}
+
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String s1 = test.toString();
+        StringBuilder result = new StringBuilder();
+//однострочные коментарии
+        try (final BufferedReader br = new BufferedReader(new StringReader(s1))) {
+            boolean o1 = false;
+            boolean commentO = false;
+            while ((b = br.read()) != -1) {
+                if (commentO == false) { result.append(((char) b)); }
+                if (commentO == false&&o1 == true && b != '/') { o1 = false; continue; }
+                if (commentO == false&&b == '/') {
+                    if (o1 == false) { o1 = true; continue; }
+                    if (o1 == true) {
+                        commentO = true;
+                        result.delete(result.length() - 2, result.length()).append("\n");
+                    }
+                }
+                if (commentO == true && b == '\n') { commentO = false; }
+            }
+            System.out.println(result);
+            printToTxt(result, getPath(TaskB.class).concat(TaskB.class.getSimpleName()).concat(".txt"));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
-
-    private static String getPath(Class<?> taskClass) {
+        private static String getPath(Class<?> taskClass) {
         String rootProject = System.getProperty("user.dir");
         String path = taskClass.getName().
                 replace(taskClass.getSimpleName(),"").
