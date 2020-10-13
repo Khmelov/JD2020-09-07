@@ -57,9 +57,7 @@ class TaskC {
         String relativePath = taskCClass.getName()
                 .replace(taskCClass.getSimpleName(), "")
                 .replace(".", File.separator);
-        return rootProject + File.separator + "src" + File.separator +
-                "by" + File.separator +
-                "it" + File.separator +
-                "hryntsaliou";
+        File file = new File(relativePath);
+        return rootProject + File.separator + "src" + File.separator + file.getParent();
     }
 }
