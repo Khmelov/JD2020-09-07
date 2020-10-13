@@ -1,5 +1,6 @@
 package by.it.trukhanovich.calc;
 
+import java.io.*;
 import java.util.*;
 
 abstract class Var implements Operation {
@@ -12,12 +13,51 @@ abstract class Var implements Operation {
 
     }
 
-    static Var saveVar (String name, Var var){
+    static Var saveVar (String name, Var var) throws CalcException {
         vars.put(name, var);
+        saveToTxt();
         return var;
     }
 
+    static void load () throws CalcException{
+    String path=getPath(Var.class)+"vars.txt";
+    ArrayList<String> lines=new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))){
+            while (br.ready()){
+                lines.add(br.readLine());
+            }
 
+        }
+        catch (FileNotFoundException e) {
+//            throw new RuntimeException("error read vars", e);
+        } catch (IOException e) {
+            throw new RuntimeException("error read vars",e);
+        }
+        Parser parser=new Parser();
+        for (String line : lines) {
+            parser.calc(line);
+        }
+    }
+    private static void saveToTxt () throws CalcException {
+        String path=getPath(Var.class)+"vars.txt";
+        try (PrintWriter writer = new PrintWriter(path))
+        {
+            for (Map.Entry<String, Var> pair : vars.entrySet()) {
+                writer.printf ("%s=%s\n",pair.getKey(),pair.getValue());
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new CalcException(e);
+        }
+    }
+    private static String getPath(Class<?> taskAClass) {
+        String rootProject = System.getProperty("user.dir");
+        String relativePath = taskAClass
+                .getName()
+                .replace(taskAClass.getSimpleName(), "")
+                .replace(".", File.separator);
+        return rootProject + File.separator + "src" + File.separator + relativePath;
+    }
 
     @Override
     public Var add(Var other) throws CalcException {
