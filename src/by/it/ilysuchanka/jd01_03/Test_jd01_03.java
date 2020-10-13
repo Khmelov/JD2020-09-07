@@ -37,7 +37,7 @@ public class Test_jd01_03 {
         ok.invoke(m, null, new Object[]{arr});
         for (double a : arr) {
             //перевод в Integer т.к. заранее неизвестно с printf или прямо будет сделан вывод
-            ok.include(Integer.toString((int) a));
+            Test_jd01_03 include = ok.include(Integer.toString((int) a));
         }
         System.out.println("Проверка вывода для массива завершена успешно");
     }

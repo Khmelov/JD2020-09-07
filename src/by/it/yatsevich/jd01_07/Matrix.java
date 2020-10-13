@@ -9,19 +9,29 @@ class Matrix extends Var {
 
     Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
+        for (int i = 0; i < this.value.length; i++) {
+            for (int j = 0; j < this.value[i].length; j++) {
+                this.value[i][j] = value[i][j];
+            }
+        }
     }
 
     Matrix(Matrix matrix) {
         this.value = Arrays.copyOf(matrix.value, matrix.value.length);
+        for (int i = 0; i < this.value.length; i++) {
+            for (int j = 0; j < this.value[i].length; j++) {
+                this.value[i][j] = matrix.value[i][j];
+            }
+        }
     }
 
     Matrix(String strMatrix) {
         StringBuilder sb = new StringBuilder(strMatrix);
         int row = getRow(sb);
-        int cols = (getColls(sb)+1)/ row;
+        int cols = (getColls(sb) + 1) / row;
         double[][] matrix = new double[row][cols];
 
-        this.value=getArray(sb, matrix,row);
+        this.value = getArray(sb, matrix, row);
     }
 
     private static double[][] getArray(StringBuilder sb, double[][] matrix, int row) {
@@ -72,7 +82,7 @@ class Matrix extends Var {
                 delimiter = ", ";
                 if (j == value[i].length - 1) delimiter = "";
             }
-            if (i < value.length-1) strBuild.append("}, ");
+            if (i < value.length - 1) strBuild.append("}, ");
             else strBuild.append("}");
             delimiter = "";
         }

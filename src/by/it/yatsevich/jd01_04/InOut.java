@@ -2,13 +2,12 @@ package by.it.yatsevich.jd01_04;
 
 class InOut {
     static double[ ] getArray(String line){
-        String lineWithoutSpaces = line.trim();
-        String[] arrayString = lineWithoutSpaces.split(" ");
-        double[] array = new double[arrayString.length];
-        for (int i = 0; i < array.length; i++) {
-            array[i]=Double.parseDouble(arrayString[i]);
+        String[] arrayString = line.split(" ");
+        double[] result = new double[arrayString.length];
+        for (int i = 0; i < result.length; i++) {
+            result[i]=Double.parseDouble(arrayString[i]);
         }
-        return array;
+        return result;
     }
 
     static void printArray(double[] arr) {
