@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class TaskC {
     public static void main(String[] args) {
         String path = getPath(TaskC.class);
-//        System.out.println(path);
         File file = new File(path);
+        System.out.println(file.getPath());
         for(;;){
             Scanner sc = new Scanner(System.in);
             String exception =sc.nextLine();
@@ -17,7 +17,7 @@ public class TaskC {
             File[] files = file.listFiles();
             if (strings.get(0).equals("end")){break;}
             else if (strings.get(0).equals("dir")){
-                System.out.println("содержимое "+path);
+                System.out.println("содержимое "+file.getName());
                 for (File f1 : files) {
                     if (f1.isDirectory()){
                         System.out.println("DIR: "+f1.getName());;
@@ -36,14 +36,12 @@ public class TaskC {
                         file= new File(path1);
                         if (file.exists()){
                             path=path1;
-                            System.out.println(path);
+//                            System.out.println(path);
                         }
                         if (!file.exists()){
                             file= new File(path);
 //                            System.out.println(path);
                         }
-
-
                     }
             }
             else System.out.println(path);
