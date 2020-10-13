@@ -13,25 +13,28 @@ public class TaskB {
 
     public static void main(String[] args) {
         String path = getPath(TaskB.class);
-        String fileName = path + FILENAME;
-        System.out.println(fileName);
+        String fullPath = path + FILENAME;
+        System.out.println(fullPath);
+        System.out.println("punctuation marks="+readTxt(fullPath));
 
 
-        }
-    private static void readTxt(String fileName) {
-        try (DataInputStream dis = new DataInputStream(
-                new BufferedInputStream(
-                        new FileInputStream(fileName)))) {
-            while (dis.available() > 0) {
 
-                Pattern pattern = Pattern.compile("[!.,;:?\\-]");
-                Matcher matcher = pattern.matcher((CharSequence) dis);
-                int count = 0;
-                while (matcher.find()){
+    }
+
+    private static int readTxt(String fullPath) {
+        try (BufferedReader dis = new BufferedReader(
+                new FileReader(fullPath))) {
+            String line = dis.readLine();
+            int count = 0;
+            while (line != null) {
+                Pattern pattern = Pattern.compile("\\.{3,} | [!.,;:?\\-]");
+                Matcher matcher = pattern.matcher(line);
+                while (matcher.find()) {
                     count++;
-                    System.out.println(count);
                 }
+                line = dis.readLine();
             }
+            return count;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
