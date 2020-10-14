@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class Vector extends Var {
 
-  private double [] value;
+    private double [] value;
 
     @Override
     public String getYourClass(Var other) {
@@ -16,24 +16,24 @@ class Vector extends Var {
     }
 
     public Vector(double[] value) {
-      this.value = Arrays.copyOf(value, value.length);
-  }
+        this.value = Arrays.copyOf(value, value.length);
+    }
 
- public Vector (Vector vector) {
-  this.value = vector.value;
- }
- public Vector (String strVector) {
+    public Vector (Vector vector) {
+        this.value = vector.value;
+    }
+    public Vector (String strVector) {
         StringBuilder sb= new StringBuilder(strVector);
         sb.deleteCharAt(0);
         sb.deleteCharAt(sb.length()-1);
-     strVector=sb.toString();
-     String []arrayString=strVector.split(",");
+        strVector=sb.toString();
+        String []arrayString=strVector.split(",");
 
-  this.value= new double[arrayString.length];
-    for (int i = 0; i < arrayString.length; i++) {
-  value[i]=Double.parseDouble(arrayString[i]);
-  }
- }
+        this.value= new double[arrayString.length];
+        for (int i = 0; i < arrayString.length; i++) {
+            value[i]=Double.parseDouble(arrayString[i]);
+        }
+    }
 
     @Override
     public Var add(Var other) {
@@ -96,7 +96,7 @@ class Vector extends Var {
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar){
-        double[]res=new double[value.length];
+            double[]res=new double[value.length];
             for (int i = 0; i < res.length; i++) {
                 res[i]=value[i]/((Scalar) other).getValue();
             }
@@ -108,14 +108,14 @@ class Vector extends Var {
     }
 
     @Override
- public String toString() {
-   StringBuilder sb= new StringBuilder("{");
-   String delimiter= "";
-  for (double v : value) {
-   sb.append(delimiter).append(v);
-   delimiter=", ";
-   }
-  sb.append("}");
-  return sb.toString();
- }
+    public String toString() {
+        StringBuilder sb= new StringBuilder("{");
+        String delimiter= "";
+        for (double v : value) {
+            sb.append(delimiter).append(v);
+            delimiter=", ";
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 }
