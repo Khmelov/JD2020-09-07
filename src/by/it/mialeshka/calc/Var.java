@@ -37,30 +37,26 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Опреация сложения "+ this + "+"+other+" невозможна");
-        return null;
+    public Var add(Var other)  throws CalcException{
+        throw new CalcException("Опреация сложения "+ this + "+"+other+" невозможна");
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Опреация вычитания "+ this + "-"+other+" невозможна");
-        return null;
+    public Var sub(Var other)  throws CalcException{
+        throw  new CalcException("Опреация вычитания "+ this + "-"+other+" невозможна");
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Опреация умножения "+ this + "*"+other+" невозможна");
-        return null;
+    public Var mul(Var other)  throws CalcException{
+        throw new CalcException("Опреация умножения "+ this + "*"+other+" невозможна");
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Опреация деления "+ this + "/"+other+" невозможна");
-        return null;
+    public Var div(Var other)  throws CalcException{
+        throw new CalcException("Опреация деления "+ this + "/"+other+" невозможна");
     }
 
-    static Var createVar(String strVar) {
+    static Var createVar(String strVar) throws CalcException{
         if (strVar.matches(Patterns.SCALAR)) {
             return new Scalar(strVar);
         }
@@ -74,8 +70,7 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            System.err.println("Неизвестная переменная " + strVar);
-            return null;
+            throw new CalcException("Неизвестная переменная " + strVar);
         }
     }
 }
