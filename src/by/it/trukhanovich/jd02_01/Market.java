@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Market {
     public static void main(String[] args) {
+        MarketHelper marketHelper = new MarketHelper();
+        marketHelper.getGoodToPrice();
         System.out.println("Market opened");
         ArrayList<Buyer> buyerArrayList = new ArrayList<>();
         int number=0;

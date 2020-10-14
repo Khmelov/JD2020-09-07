@@ -1,6 +1,7 @@
 package by.it.trukhanovich.jd02_01;
 
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class Helper {
@@ -9,6 +10,7 @@ public class Helper {
     static {
         rnd = new Random();
     }
+
 
     static int getRandom (int start, int stop){
         return start+ rnd.nextInt(stop-start+1);
