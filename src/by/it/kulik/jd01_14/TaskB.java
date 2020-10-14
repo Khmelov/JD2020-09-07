@@ -9,11 +9,14 @@ public class TaskB {
     public static void main(String[] args) {
         String src = System.getProperty("user.dir") + "/src/by/it/kulik/";
         String filename = src + "JD01_14/text.txt";
-        File f = new File(filename);
+        File fr = new File(filename);
+        File fw = new File(src+"jd01_14/ResultTaskB.txt");
         BufferedReader BR=null;
+        FileWriter fileWriter=null;
+
         int words = 0, marks = 0;
         try {
-            BR = new BufferedReader(new FileReader(f));
+            BR = new BufferedReader(new FileReader(fr));
             String res;
             while ((res=BR.readLine())!=null){
                 Pattern p=Pattern.compile("[.!?,:;-]+");
@@ -29,6 +32,9 @@ public class TaskB {
             }
             System.out.println();
             System.out.println("\npunctuation marks="+marks+" words="+words);
+            fw.createNewFile();
+            fileWriter=new FileWriter(fw);
+            fileWriter.write("\npunctuation marks="+marks+" words="+words);
             } catch (IOException e) {
             System.err.println(" Ошибка файла:" + e);
         } finally {
