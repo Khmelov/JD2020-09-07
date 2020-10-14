@@ -1,7 +1,5 @@
 package by.it.trukhanovich.jd02_01;
 
-
-import java.util.HashMap;
 import java.util.Random;
 
 public class Helper {
@@ -10,10 +8,11 @@ public class Helper {
     static {
         rnd = new Random();
     }
-
+    static boolean pensioneer;
 
     static int getRandom (int start, int stop){
-        return start+ rnd.nextInt(stop-start+1);
+        if (pensioneer)  return (int) ((start+ rnd.nextInt(stop-start+1))*1.5);
+        else return start+ rnd.nextInt(stop-start+1);
     }
 
     static int getRandom (int max){

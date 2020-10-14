@@ -13,6 +13,10 @@ public class Market {
             int countBuyer=Helper.getRandom(2);
             for (int j = 0; j < countBuyer; j++) {
                 Buyer buyer=new Buyer(++number);
+                if (number%4==0){
+                    Helper.pensioneer=true;
+//                    System.out.println("pensioneer"+number);
+                }
                 buyer.start();
                 buyerArrayList.add(buyer);
                 Dispatcher.BUYERS_IN_SHOP++;
