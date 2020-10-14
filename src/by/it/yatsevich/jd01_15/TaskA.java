@@ -1,7 +1,6 @@
 package by.it.yatsevich.jd01_15;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.Random;
 
 class TaskA {
@@ -13,8 +12,8 @@ class TaskA {
                 matrix[i][j]=-15 + random.nextInt(31);
             }
         }
-        String path = getPath(TaskA.class)+"matrix.txt";
-        try(PrintWriter printWriter = new PrintWriter(path);) {
+        String path = getPath()+"matrix.txt";
+        try(PrintWriter printWriter = new PrintWriter(path)) {
             for (int[] row : matrix) {
                 for (int i : row) {
                     printWriter.printf("%3d ",i);
@@ -33,10 +32,10 @@ class TaskA {
         }
     }
 
-    private static String getPath(Class<TaskA> aClass) {
+    private static String getPath() {
         String projectDir = System.getProperty("user.dir");
-        String relativePath = aClass.getName()
-                .replace(aClass.getSimpleName(), "")
+        String relativePath = TaskA.class.getName()
+                .replace(TaskA.class.getSimpleName(), "")
                 .replace(".", File.separator);
         return projectDir + File.separator + "src" + File.separator + relativePath;
     }
