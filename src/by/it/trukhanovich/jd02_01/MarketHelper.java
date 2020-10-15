@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 class MarketHelper {
-    private static HashMap<String,Integer> priceGood=new HashMap<>();
+    private static final HashMap<String,Integer> priceGood=new HashMap<>();
 
     void getGoodToPrice (){
         priceGood.put("Bread", 1);
@@ -20,8 +20,7 @@ class MarketHelper {
         int numberInPrice=1;
         for (Map.Entry<String, Integer> entry : entries) {
             if (number==numberInPrice) {
-                Map.Entry<String, Integer> result = entry;
-                return result;
+                return entry;
             }
             numberInPrice++;
         }

@@ -3,7 +3,9 @@ package by.it.trukhanovich.jd02_01;
 import java.util.Map;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
-    boolean pensioneer=false;
+
+    private boolean pensioneer=false;
+
     public Buyer(int number) {
         super("Buyer №"+number);
     }
@@ -39,8 +41,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             timeout= (int) (Helper.getRandom(500,2000)*1.5);
         }
         else {
-            timeout=Helper.getRandom(500,2000)
-            ;}
+            timeout=Helper.getRandom(500,2000);
+            }
         Helper.mySleep(timeout);
         System.out.printf("%s finished to choose\n",this);
     }
@@ -58,8 +60,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             timeout= (int) (Helper.getRandom(500,2000)*1.5);
         }
         else {
-            timeout=Helper.getRandom(500,2000)
-            ;}
+            timeout=Helper.getRandom(500,2000);
+            }
         Helper.mySleep(timeout);
     }
 
