@@ -16,6 +16,7 @@ public class ConsoleRunner {
         }
         for (;;){
          String expression= sc.nextLine();
+         saveLogToTxt("log.txt",expression);
          if (expression.equals("printvar")){
              System.out.println(Var.vars);
          }
@@ -29,11 +30,13 @@ public class ConsoleRunner {
          try {
 
              result=parser.calc(expression);
+             saveLogToTxt("log.txt", String.valueOf(result));
          } catch (CalcException e) {
              System.out.println(e.getMessage());
              saveLogToTxt("log.txt",e.getMessage());
          }
             printer.print (result);
+
         }
 
     }
