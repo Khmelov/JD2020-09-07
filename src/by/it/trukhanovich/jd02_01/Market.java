@@ -12,7 +12,22 @@ public class Market {
         int second=0;
         ArrayList<Integer> buyerOfEverySecond = new ArrayList<>();
         for (int timeSecond = 1; timeSecond <=120; timeSecond++) {
-            int countBuyer=Helper.getRandom(2);
+            int countBuyer = 0;
+            int correct=0;
+            if (timeSecond==1) {
+                countBuyer=10;
+            }
+            if (timeSecond>60) {
+                correct=60;
+            }
+            if ((timeSecond<=30&&timeSecond>1)||(timeSecond<=90&&timeSecond>60)){
+                countBuyer=(timeSecond-correct+11)-Dispatcher.BUYERS_IN_SHOP;
+            }
+            if ((timeSecond<=60&&timeSecond>30)||(timeSecond<=120&&timeSecond>90)){
+                if (Dispatcher.BUYERS_IN_SHOP<=40+(30-timeSecond+correct)){
+                    countBuyer=(41+(30-timeSecond+correct))-Dispatcher.BUYERS_IN_SHOP;
+                }
+            }
             for (int j = 0; j < countBuyer; j++) {
                 Buyer buyer=new Buyer(++number);
                 buyer.start();
@@ -23,6 +38,7 @@ public class Market {
             second++;
             buyerOfEverySecond.add(Dispatcher.BUYERS_IN_SHOP);
         }
+
         while (Dispatcher.BUYERS_IN_SHOP>0){
             Thread.yield();
         }
