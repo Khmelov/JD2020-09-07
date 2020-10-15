@@ -1,18 +1,16 @@
 package by.it.trukhanovich.jd02_01;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
-
+    boolean pensioneer=false;
     public Buyer(int number) {
         super("Buyer №"+number);
     }
 
     @Override
     public void run() {
+        if (Helper.getRandom(1,4)==1){pensioneer=true;}
         enterToMarket();
         takeBasket();
         int numberOfGoods=Helper.getRandom(1,4);
@@ -34,19 +32,15 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         System.out.printf("%s started to choose\n",this);
         int goodInPrice=MarketHelper.priceGood.size();
         int numberGood=Helper.getRandom(1,goodInPrice);
-        if(numberGood==1) {
-            System.out.printf("%s take Bread for a price %d$\n",this, MarketHelper.priceGood.get("Bread"));
+        Map.Entry<String, Integer> randomGood = MarketHelper.takeOneRandomGood(numberGood);
+        System.out.printf("%s take %s for price %d\n",this, randomGood.getKey(), randomGood.getValue());
+        int timeout;
+        if (pensioneer){
+            timeout= (int) (Helper.getRandom(500,2000)*1.5);
         }
-        if(numberGood==2) {
-            System.out.printf("%s take Milk for a price %d$\n",this, MarketHelper.priceGood.get("Milk"));
-        }
-        if(numberGood==3) {
-            System.out.printf("%s take Eggs for a price %d$\n",this, MarketHelper.priceGood.get("Eggs"));
-        }
-        if(numberGood==4) {
-            System.out.printf("%s take Sugar for a price %d$\n",this, MarketHelper.priceGood.get("Sugar"));
-        }
-        int timeout=Helper.getRandom(500,2000);
+        else {
+            timeout=Helper.getRandom(500,2000)
+            ;}
         Helper.mySleep(timeout);
         System.out.printf("%s finished to choose\n",this);
     }
@@ -59,14 +53,26 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void takeBasket() {
         System.out.printf("%s take basket\n",this);
-        int timeout=Helper.getRandom(500,2000);
+        int timeout;
+        if (pensioneer){
+            timeout= (int) (Helper.getRandom(500,2000)*1.5);
+        }
+        else {
+            timeout=Helper.getRandom(500,2000)
+            ;}
         Helper.mySleep(timeout);
     }
 
     @Override
     public void putGoodsToBasket() {
         System.out.printf("%s put good to basket\n",this);
-        int timeout=Helper.getRandom(500,2000);
+        int timeout;
+        if (pensioneer){
+            timeout= (int) (Helper.getRandom(500,2000)*1.5);
+        }
+        else {
+            timeout=Helper.getRandom(500,2000)
+            ;}
         Helper.mySleep(timeout);
     }
 

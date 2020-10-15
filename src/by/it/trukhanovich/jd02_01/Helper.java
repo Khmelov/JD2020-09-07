@@ -8,13 +8,13 @@ public class Helper {
     static {
         rnd = new Random();
     }
-    static boolean pensioneer=false;
+//    static boolean pensioneer=false;
 
     static int getRandom (int start, int stop){
-        if (pensioneer)  {
+/*        if (pensioneer)  {
             return (int) ((start+ rnd.nextInt(stop-start+1))*1.5);
         }
-        else return start+ rnd.nextInt(stop-start+1);
+        else*/ return start+ rnd.nextInt(stop-start+1);
     }
 
     static int getRandom (int max){
