@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 class MarketHelper {
-    static HashMap<String,Integer> priceGood=new HashMap<>();
+    private static HashMap<String,Integer> priceGood=new HashMap<>();
 
     void getGoodToPrice (){
         priceGood.put("Bread", 1);
@@ -33,4 +33,7 @@ class MarketHelper {
         System.out.println("Market have price");
     }
 
+    public static int priceGoodSize (){
+        return priceGood.size();
+    }
 }

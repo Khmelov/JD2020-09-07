@@ -30,7 +30,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void chooseGoods() {
         System.out.printf("%s started to choose\n",this);
-        int goodInPrice=MarketHelper.priceGood.size();
+        int goodInPrice=MarketHelper.priceGoodSize();
         int numberGood=Helper.getRandom(1,goodInPrice);
         Map.Entry<String, Integer> randomGood = MarketHelper.takeOneRandomGood(numberGood);
         System.out.printf("%s take %s for price %d\n",this, randomGood.getKey(), randomGood.getValue());
