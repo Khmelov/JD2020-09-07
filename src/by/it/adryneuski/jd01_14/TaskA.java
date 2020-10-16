@@ -3,7 +3,7 @@ package by.it.adryneuski.jd01_14;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-////
+
 class TaskA {
 
     static final String FILENAME = "dataTaskA.bin";
