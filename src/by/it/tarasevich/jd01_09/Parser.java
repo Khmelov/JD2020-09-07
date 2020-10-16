@@ -24,10 +24,10 @@ import java.util.regex.Pattern;
             String operation = matcherOperation.group();
             switch (operation){
 
-                case "+": left.add(right);
-                case "-": left.sub(right);
-                case "*": left.mul(right);
-                case "/": left.div(right);
+                case "+": return left.add(right);
+                case "-": return left.sub(right);
+                case "*": return left.mul(right);
+                case "/": return left.div(right);
                 default: return null;
 
             }
