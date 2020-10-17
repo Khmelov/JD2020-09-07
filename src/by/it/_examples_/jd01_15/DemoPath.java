@@ -3,7 +3,7 @@ package by.it._examples_.jd01_15;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class PathDemo {
+public class DemoPath {
     public static void main(String[] args) {
         String src = System.getProperty("user.dir") + "/src/by/it/akhmelev/";
         String fileInTxt = src + "jd0l_15/in.txt";
