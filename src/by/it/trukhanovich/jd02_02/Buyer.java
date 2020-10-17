@@ -1,5 +1,7 @@
 package by.it.trukhanovich.jd02_02;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
@@ -8,13 +10,19 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private boolean isWait;
 
+    private List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
+
+    public List<Map.Entry<String, Integer>> getGoodsInBasket() {
+        return goodsInBasket;
+    }
+
     public void setWait(boolean wait) {
         isWait = wait;
     }
 
     public void setPensioneer() {
         pensioneer = true;
-        System.out.printf("%s is pensioneer \n",this);
+        System.out.printf("\t%s is pensioneer \n",this);
     }
 
     public Buyer(int number) {
@@ -25,9 +33,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void run() {
-        if (Helper.getRandom(1,4)==1){
-            setPensioneer();
-        }
+        if (Helper.getRandom(1,4)==1){setPensioneer();}
         enterToMarket();
         takeBasket();
         int numberOfGoods= Helper.getRandom(1,4);
@@ -61,6 +67,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             }
         Helper.mySleep(timeout);
         System.out.printf("%s finished to choose\n",this);
+        goodsInBasket.add(randomGood);
     }
 
     @Override
@@ -99,6 +106,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
+        // TODO перенести goodsInBasket.add(randomGood) из chooseGoods сюда
         System.out.printf("%s put good to basket\n",this);
         int timeout;
         if (pensioneer){

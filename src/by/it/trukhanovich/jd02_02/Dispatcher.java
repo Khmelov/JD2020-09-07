@@ -9,6 +9,14 @@ public class Dispatcher {
 
     private static final int PLAN=100;
 
+    private volatile static int countActivCashiers=0;
+    static synchronized void cashiersTurnOn(){
+        countActivCashiers++;
+    }
+    static synchronized void cashiersTurnOff(){
+        countActivCashiers--;
+    }
+
     static synchronized void buyerEnterToMarket(){
         countEnterToMarket++;
     }

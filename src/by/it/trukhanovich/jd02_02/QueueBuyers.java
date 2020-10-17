@@ -8,16 +8,21 @@ public class QueueBuyers {
     private QueueBuyers() {
     }
 
-    private final static Deque<Buyer> QUEUE=new ArrayDeque<>();
+    private final static Deque<Buyer> QUEUE_BUYERS =new ArrayDeque<>();
 
     static void add (Buyer buyer) {
-        synchronized (QUEUE) {
-            QUEUE.addLast(buyer);
+        synchronized (QUEUE_BUYERS) {
+            QUEUE_BUYERS.addLast(buyer);
         }
     }
     static Buyer extract () {
-        synchronized (QUEUE) {
-             return QUEUE.pollFirst();
+        synchronized (QUEUE_BUYERS) {
+             return QUEUE_BUYERS.pollFirst();
         }
+
+    }
+
+    public static int getSizeQUEUE_BUYERS() {
+        return QUEUE_BUYERS.size();
     }
 }
