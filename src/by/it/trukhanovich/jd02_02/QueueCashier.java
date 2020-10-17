@@ -20,11 +20,11 @@ public class QueueCashier {
         }
     }
 
-    public static int getSizeQUEUE_CASHIER() {
-        return QUEUE_CASHIER.size();
-    }
+//    public static int getSizeQUEUE_CASHIER() {
+//        return QUEUE_CASHIER.size();
+//    }
 
-    public static Deque<Cashier> getQueueCashier() {
-        return QUEUE_CASHIER;
-    }
+//    public static Deque<Cashier> getQueueCashier() {
+//        return QUEUE_CASHIER;
+//    }
 }

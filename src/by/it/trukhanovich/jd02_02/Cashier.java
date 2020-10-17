@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class Cashier implements Runnable{
 
-    private String name;
+    private final String name;
 
 
-    private int number;
+    private final int number;
 
     private boolean isWait;
 
@@ -26,13 +26,11 @@ public class Cashier implements Runnable{
     public void run() {
         System.out.printf("%s opened\n", this);
             while (!Dispatcher.marketIsClosed()){
-                Buyer buyer = null;
+                Buyer buyer;
                 if (QueueBuyersPensioneer.getSizeQUEUE_BUYERS_PENSIONEER()!=0){
                     buyer=QueueBuyersPensioneer.extractPensioneer();
                 }
-                else if (QueueBuyersPensioneer.getSizeQUEUE_BUYERS_PENSIONEER()==0) {
-                    buyer = QueueBuyers.extract();
-                }
+                else buyer = QueueBuyers.extract();
                 Manager.cashiersTurnOn();
                 if (buyer!=null) {
                     System.out.printf("%s started to sevice %s\n", this, buyer);
@@ -55,7 +53,7 @@ public class Cashier implements Runnable{
         List<Map.Entry<String, Integer>> goodsInBasket = buyer.getGoodsInBasket();
         int sumInCheck=0;
         StringBuilder check= new StringBuilder();
-        check.append("Check for " + buyer.getName() +"\n");
+        check.append("Check for ").append(buyer.getName()).append("\n");
         check.append("Cashier №1      ")
                 .append("Cashier №2      ")
                 .append("Cashier №3      ")
@@ -68,12 +66,12 @@ public class Cashier implements Runnable{
                 check.append("\t\t\t\t");
             }
             sumInCheck+=good.getValue();
-            check.append(good.getKey()+": "+good.getValue()+"\n");
+            check.append(good.getKey()).append(": ").append(good.getValue()).append("\n");
         }
         for (int i = 1; i <number; i++) {
             check.append("\t\t\t\t");
         }
-        check.append("Sum: "+sumInCheck+"\n");
+        check.append("Sum: ").append(sumInCheck).append("\n");
 
         MarketHelper.setSumForMarket(sumInCheck);
 
@@ -83,7 +81,7 @@ public class Cashier implements Runnable{
         check.append(QueueBuyers.getSizeQUEUE_BUYERS());
         if (QueueBuyers.getSizeQUEUE_BUYERS()<10) check.append("       \t\t");
         if (QueueBuyers.getSizeQUEUE_BUYERS()>10) check.append("      \t\t");
-        check.append(MarketHelper.getSumForMarket()+"\n");
+        check.append(MarketHelper.getSumForMarket()).append("\n");
         System.out.printf("%s",check);
     }
 

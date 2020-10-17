@@ -2,7 +2,7 @@ package by.it.trukhanovich.jd02_02;
 
 public class Manager implements Runnable{
 
-    private String name;
+    private final String name;
 
     public Manager(String name) {
         this.name = name;

@@ -13,9 +13,9 @@ public class Helper {
          return start+ rnd.nextInt(stop-start+1);
     }
 
-    static int getRandom (int max){
-        return getRandom(0,max);
-    }
+//    static int getRandom (int max){
+//        return getRandom(0,max);
+//    }
 
     static void mySleep(int millis) {
         try {

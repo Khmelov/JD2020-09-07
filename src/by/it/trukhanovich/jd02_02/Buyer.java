@@ -10,7 +10,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private boolean isWait;
 
-    private List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
+    private final List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
 
     public List<Map.Entry<String, Integer>> getGoodsInBasket() {
         return goodsInBasket;
