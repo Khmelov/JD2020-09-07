@@ -6,13 +6,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private boolean pensioneer=false;
 
+    public void setPensioneer() {
+        pensioneer = true;
+        System.out.printf("%s is pensioneer \n",this);
+    }
+
     public Buyer(int number) {
         super("Buyer №"+number);
     }
 
     @Override
     public void run() {
-        if (Helper.getRandom(1,4)==1){pensioneer=true;}
+        if (Helper.getRandom(1,4)==1){setPensioneer();}
         enterToMarket();
         takeBasket();
         int numberOfGoods=Helper.getRandom(1,4);

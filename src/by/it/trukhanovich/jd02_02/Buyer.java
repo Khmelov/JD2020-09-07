@@ -6,13 +6,28 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private boolean pensioneer=false;
 
+    private boolean isWait;
+
+    public void setWait(boolean wait) {
+        isWait = wait;
+    }
+
+    public void setPensioneer() {
+        pensioneer = true;
+        System.out.printf("%s is pensioneer \n",this);
+    }
+
     public Buyer(int number) {
         super("Buyer №"+number);
+        isWait=false;
+        Dispatcher.buyerEnterToMarket();
     }
 
     @Override
     public void run() {
-        if (Helper.getRandom(1,4)==1){pensioneer=true;}
+        if (Helper.getRandom(1,4)==1){
+            setPensioneer();
+        }
         enterToMarket();
         takeBasket();
         int numberOfGoods= Helper.getRandom(1,4);
@@ -20,8 +35,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             chooseGoods();
             putGoodsToBasket();
         }
+        goToQueue();
         goOut();
-        Dispatcher.BUYERS_IN_SHOP--;
+        Dispatcher.buyerLeaveMarket();
     }
 
     @Override
@@ -45,6 +61,22 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             }
         Helper.mySleep(timeout);
         System.out.printf("%s finished to choose\n",this);
+    }
+
+    @Override
+    public void goToQueue() {
+        System.out.printf("%s go to queue\n", this);
+        synchronized (this){
+            QueueBuyers.add(this);
+            isWait=true;
+            while (isWait){
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     @Override
