@@ -21,4 +21,12 @@ public class Dispatcher {
     static boolean marketIsClosed (){
         return countOutFromMarket==PLAN;
     }
+
+    public synchronized static int getCountEnterToMarket() {
+        return countEnterToMarket;
+    }
+
+    public synchronized static int getCountOutFromMarket() {
+        return countOutFromMarket;
+    }
 }

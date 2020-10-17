@@ -14,6 +14,15 @@ class MarketHelper {
         priceGood.put("Sugar", 4);
 
     }
+    volatile static int sumForMarket;
+
+    public static int getSumForMarket() {
+        return sumForMarket;
+    }
+
+    static synchronized void setSumForMarket( int sumInCheck){
+        sumForMarket=sumForMarket+sumInCheck;
+    }
 
     static public Map.Entry<String, Integer> takeOneRandomGood(int number) {
         Set<Map.Entry<String, Integer>> entries = priceGood.entrySet();

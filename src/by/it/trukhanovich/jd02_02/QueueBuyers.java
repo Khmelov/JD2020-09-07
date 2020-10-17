@@ -25,4 +25,5 @@ public class QueueBuyers {
     public static int getSizeQUEUE_BUYERS() {
         return QUEUE_BUYERS.size();
     }
+    
 }

@@ -74,7 +74,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void goToQueue() {
         System.out.printf("%s go to queue\n", this);
         synchronized (this){
-            QueueBuyers.add(this);
+            if (!pensioneer)QueueBuyers.add(this);
+            else QueueBuyersPensioneer.addPensioneer(this);
             isWait=true;
             while (isWait){
                 try {

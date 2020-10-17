@@ -7,6 +7,9 @@ public class Cashier implements Runnable{
 
     private String name;
 
+
+    private int number;
+
     private boolean isWait;
 
     public void setWait(boolean wait) {
@@ -15,6 +18,7 @@ public class Cashier implements Runnable{
 
     public Cashier(int number) {
         name="\tCashier №"+number;
+        this.number=number;
         isWait=false;
     }
 
@@ -22,12 +26,13 @@ public class Cashier implements Runnable{
     public void run() {
         System.out.printf("%s opened\n", this);
             while (!Dispatcher.marketIsClosed()){
-//                StringBuilder coutnThread= new StringBuilder();
-//                coutnThread.append("\t\t\t\t\t\t\t\t\t\t\t\tРаботало кассиров "
-//                        +Manager.getCountActivCashiers()+". Размер очереди "
-//                        +QueueBuyers.getSizeQUEUE_BUYERS());
-//                System.out.println(coutnThread);
-                Buyer buyer = QueueBuyers.extract();
+                Buyer buyer = null;
+                if (QueueBuyersPensioneer.getSizeQUEUE_BUYERS_PENSIONEER()!=0){
+                    buyer=QueueBuyersPensioneer.extractPensioneer();
+                }
+                else if (QueueBuyersPensioneer.getSizeQUEUE_BUYERS_PENSIONEER()==0) {
+                    buyer = QueueBuyers.extract();
+                }
                 Manager.cashiersTurnOn();
                 if (buyer!=null) {
                     System.out.printf("%s started to sevice %s\n", this, buyer);
@@ -40,7 +45,6 @@ public class Cashier implements Runnable{
                     Helper.mySleep(Helper.getRandom(2000,5000));
                     goToQueueCashier();
                 }
-                //TODO
                 else goToQueueCashier();
 
             }
@@ -52,11 +56,34 @@ public class Cashier implements Runnable{
         int sumInCheck=0;
         StringBuilder check= new StringBuilder();
         check.append("Check for " + buyer.getName() +"\n");
+        check.append("Cashier №1      ")
+                .append("Cashier №2      ")
+                .append("Cashier №3      ")
+                .append("Cashier №4      ")
+                .append("Cashier №5      ")
+                .append("Queue size      ")
+                .append("Total           \n");
         for (Map.Entry<String, Integer> good : goodsInBasket) {
+            for (int i = 1; i <number; i++) {
+                check.append("\t\t\t\t");
+            }
             sumInCheck+=good.getValue();
             check.append(good.getKey()+": "+good.getValue()+"\n");
         }
-        check.append("Total: "+sumInCheck+"\n");
+        for (int i = 1; i <number; i++) {
+            check.append("\t\t\t\t");
+        }
+        check.append("Sum: "+sumInCheck+"\n");
+
+        MarketHelper.setSumForMarket(sumInCheck);
+
+        for (int i = 1; i <6; i++) {
+            check.append("\t\t\t\t");
+        }
+        check.append(QueueBuyers.getSizeQUEUE_BUYERS());
+        if (QueueBuyers.getSizeQUEUE_BUYERS()<10) check.append("       \t\t");
+        if (QueueBuyers.getSizeQUEUE_BUYERS()>10) check.append("      \t\t");
+        check.append(MarketHelper.getSumForMarket()+"\n");
         System.out.printf("%s",check);
     }
 

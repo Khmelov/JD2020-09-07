@@ -11,7 +11,6 @@ public class Market {
         System.out.println("Market opened");
         int number=0;
         ArrayList<Thread> threads=new ArrayList<>();
-//        ThreadGroup cashiers=new ThreadGroup("Группа потоков cashier");
         for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i);
             Thread threadCashier = new Thread(cashiers,cashier);
@@ -22,11 +21,10 @@ public class Market {
         Thread threadManager = new Thread(manager);
         threadManager.setDaemon(true);
         threadManager.start();
-
-        StringBuilder coutnThread= new StringBuilder();
-        int second=0;
+        int timeSecond=0;
+        ArrayList<Integer> buyerOfEverySecond = new ArrayList<>();
         for (;;){
-            int countBuyer=Helper.getRandom(2);
+            int countBuyer=getCountBuyer(timeSecond);
             for (int j = 0; j < countBuyer&& Dispatcher.marketIsOpenedForNewBuyer(); j++) {
                 Buyer buyer=new Buyer(++number);
                 buyer.start();
@@ -36,11 +34,8 @@ public class Market {
                 break;
             }
             Helper.mySleep(1000);
-//            coutnThread.append("На секунде "+ second +" работало кассиров "
-//                    +cashiers.activeCount()+". Размер очереди "
-//                    +QueueBuyers.getSizeQUEUE()+"\n");
-
-            second++;
+            buyerOfEverySecond.add(Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
+            timeSecond++;
         }
 
         for (Thread th : threads) {
@@ -51,6 +46,30 @@ public class Market {
             }
         }
         System.out.println("Market closed");
-        System.out.println(coutnThread);
+        for (int i = 0; i < buyerOfEverySecond.size(); i++) {
+            System.out.printf("В секунду %d в магазине было %d\n", i, buyerOfEverySecond.get(i));
+        }
+    }
+    private static int getCountBuyer(int timeSecond) {
+        int countBuyer = 0;
+        int correct=0;
+        if (timeSecond ==1) {
+            countBuyer=10;
+        }
+        if (timeSecond >60) {
+            correct=60;
+        }
+        if (timeSecond >60) {
+            correct=60;
+        }
+        if ((timeSecond <=30&& timeSecond >1)||(timeSecond <=90&& timeSecond >60)){
+            countBuyer=(timeSecond -correct+10)- (Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
+        }
+        if (timeSecond <= 60 && timeSecond > 30 || timeSecond > 90){
+            if ((Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket())<=40+(30- timeSecond +correct)){
+                countBuyer=(40+(30- timeSecond +correct))- (Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
+            }
+        }
+        return countBuyer;
     }
 }
