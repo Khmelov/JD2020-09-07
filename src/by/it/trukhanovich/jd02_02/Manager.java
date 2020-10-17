@@ -7,6 +7,18 @@ public class Manager implements Runnable{
     public Manager(String name) {
         this.name = name;
     }
+    private volatile static int countActivCashiers=0;
+
+    public static int getCountActivCashiers() {
+        return countActivCashiers;
+    }
+
+    static synchronized void cashiersTurnOn(){
+        countActivCashiers++;
+    }
+    static synchronized void cashiersTurnOff(){
+        countActivCashiers--;
+    }
 
     @Override
     public void run() {
@@ -14,34 +26,30 @@ public class Manager implements Runnable{
             int sizeQUEUE_buyers = QueueBuyers.getSizeQUEUE_BUYERS();
             if (sizeQUEUE_buyers==0){
                 activateCashier();
+                Helper.mySleep(100);
             }
-            if (sizeQUEUE_buyers>0&&sizeQUEUE_buyers<=5) {
-                int activCashiers = Market.cashiers.activeCount();
-                for (int i = 0; i < 1; i++) {
+            if (sizeQUEUE_buyers>0&&sizeQUEUE_buyers<=5&&countActivCashiers!=1) {
+                for (int i = 0; i < 1-countActivCashiers; i++) {
                     activateCashier();
                 }
             }
-            else if (sizeQUEUE_buyers>5&&sizeQUEUE_buyers<=10) {
-                int activCashiers = Market.cashiers.activeCount();
-                for (int i = 0; i < 2; i++) {
+            else if (sizeQUEUE_buyers>5&&sizeQUEUE_buyers<=10&countActivCashiers!=2) {
+                for (int i = 0; i < 2-countActivCashiers; i++) {
                     activateCashier();
                 }
             }
-            else if (sizeQUEUE_buyers>10&&sizeQUEUE_buyers<=15) {
-                int activCashiers = Market.cashiers.activeCount();
-                for (int i = 0; i < 3; i++) {
+            else if (sizeQUEUE_buyers>10&&sizeQUEUE_buyers<=15&countActivCashiers!=3) {
+                for (int i = 0; i < 3-countActivCashiers; i++) {
                     activateCashier();
                 }
             }
-            else if (sizeQUEUE_buyers>15&&sizeQUEUE_buyers<=20) {
-                int activCashiers = Market.cashiers.activeCount();
-                for (int i = 0; i < 4; i++) {
+            else if (sizeQUEUE_buyers>15&&sizeQUEUE_buyers<=20&countActivCashiers!=4) {
+                for (int i = 0; i < 4-countActivCashiers; i++) {
                     activateCashier();
                 }
             }
-            else if (sizeQUEUE_buyers>20) {
-                int activCashiers = Market.cashiers.activeCount();
-                for (int i = 0; i < 5; i++) {
+            else if (sizeQUEUE_buyers>20&countActivCashiers!=5) {
+                for (int i = 0; i < 5-countActivCashiers; i++) {
                     activateCashier();
                 }
             }
@@ -56,8 +64,9 @@ public class Manager implements Runnable{
                 cashier.setWait(false);
                 cashier.notify();
             }
-         } else{ System.out.println("\t\t\t\t\t\t\t\t\t\t\t Очередь"+QueueBuyers.getSizeQUEUE_BUYERS()+" но больше касс нет");
-         Helper.mySleep(1000);}
+         }
+         else{
+            Helper.mySleep(1);}
 
     }
 

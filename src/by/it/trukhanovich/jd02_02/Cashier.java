@@ -22,13 +22,14 @@ public class Cashier implements Runnable{
     public void run() {
         System.out.printf("%s opened\n", this);
             while (!Dispatcher.marketIsClosed()){
+//                StringBuilder coutnThread= new StringBuilder();
+//                coutnThread.append("\t\t\t\t\t\t\t\t\t\t\t\tРаботало кассиров "
+//                        +Manager.getCountActivCashiers()+". Размер очереди "
+//                        +QueueBuyers.getSizeQUEUE_BUYERS());
+//                System.out.println(coutnThread);
                 Buyer buyer = QueueBuyers.extract();
+                Manager.cashiersTurnOn();
                 if (buyer!=null) {
-                    StringBuilder coutnThread= new StringBuilder();
-                    coutnThread.append("\t\t\t\t\t\t\t\t\t\t\t\tРаботало кассиров "
-                            +Market.cashiers.activeCount()+". Размер очереди "
-                            +QueueBuyers.getSizeQUEUE_BUYERS());
-                    System.out.println(coutnThread);
                     System.out.printf("%s started to sevice %s\n", this, buyer);
                     checkBasket(buyer);
                     System.out.printf("%s finished to sevice %s\n", this, buyer);
@@ -64,6 +65,7 @@ public class Cashier implements Runnable{
         synchronized (this){
             QueueCashier.add(this);
             isWait=true;
+            Manager.cashiersTurnOff();
             while (isWait){
                 try {
                     this.wait();
