@@ -57,17 +57,15 @@ public class Market {
             countBuyer=10;
         }
         if (timeSecond >60) {
-            correct=60;
+            correct=timeSecond/60*60;
         }
-        if (timeSecond >60) {
-            correct=60;
-        }
-        if ((timeSecond <=30&& timeSecond >1)||(timeSecond <=90&& timeSecond >60)){
+
+        if ((timeSecond <=30+correct&& timeSecond >1+correct)||(timeSecond <=90+correct&& timeSecond >60+correct)){
             countBuyer=(timeSecond -correct+10)- (Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
         }
         if (timeSecond <= 60 && timeSecond > 30 || timeSecond > 90){
             if ((Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket())<=40+(30- timeSecond +correct)){
-                countBuyer=(40+(30- timeSecond +correct))- (Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
+                countBuyer=(39+(30- timeSecond +correct))- (Dispatcher.getCountEnterToMarket()-Dispatcher.getCountOutFromMarket());
             }
         }
         return countBuyer;
