@@ -2,7 +2,7 @@ package by.it.adryneuski.jd01_13;
 
 import java.util.HashMap;
 
-public class  TaskA {
+public class TaskA {
     public static void main(String[] args) {
         try {
             if (Math.random() > 0.5)
