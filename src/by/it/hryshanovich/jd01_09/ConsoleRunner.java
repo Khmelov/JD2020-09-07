@@ -2,17 +2,18 @@ package by.it.hryshanovich.jd01_09;
 
 import java.util.Scanner;
 
-public class ConsoleRunner {
-    public static void main(String[] args) throws CalcException {
-        Scanner scan = new Scanner(System.in);
-        String line;
+class ConsoleRunner {
+     public static void main(String[] args) {
+         Scanner sc=new Scanner(System.in);
+         String line;
 
-        Parser parser = new Parser();
-        Printer printer = new Printer();
+         Parser parser = new Parser();
+         Printer printer = new Printer();
 
-        while (!(line=scan.nextLine()).equals("end")){
-            Var result = parser.calc(line);
-            printer.print(result);
-        }
-    }
+         while (!(line=sc.nextLine()).equals("end")) {
+             Var result = parser.calc(line);
+             printer.print(result);
+         }
+
+     }
 }

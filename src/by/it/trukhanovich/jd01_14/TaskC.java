@@ -10,8 +10,9 @@ public class TaskC {
     public static final String TASK_C_TXT = "resultTaskC.txt";
 
     public static void main(String[] args) {
-        String rootProject = System.getProperty("user.dir");
-        String myPackageAddress=rootProject.concat("\\src\\by\\it\\trukhanovich");
+        String myPackageAddress=getPath(TaskC.class);
+        System.out.println(myPackageAddress);
+        myPackageAddress = new File(myPackageAddress).getParent();
         System.out.println(myPackageAddress);
         File myPackage=new File(myPackageAddress);
         ArrayList <String>arrayList = new ArrayList();
