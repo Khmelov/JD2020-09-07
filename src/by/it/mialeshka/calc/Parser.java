@@ -12,6 +12,7 @@ class Parser {
         }
         Var right = Var.createVar(parts[1]);
         if(expression.contains("=")){
+            Logs.saveLog(expression);
             return Var.saveVar(parts[0], right);
         }
         Var left = Var.createVar(parts[0]);
@@ -22,16 +23,25 @@ class Parser {
         Matcher matcherOperation = patternOperation.matcher(expression);
         if (matcherOperation.find()){
             String strOperation = matcherOperation.group();
+            Var result;
             switch (strOperation){
                 case ("+"):
-                    return left.add(right);
+                    result = left.add(right);
+                    break;
                 case ("-"):
-                    return left.sub(right);
+                    result = left.sub(right);
+                    break;
                 case ("*"):
-                  return left.mul(right);
+                    result = left.mul(right);
+                    break;
                 case ("/"):
-                  return left.div(right);
+                    result = left.div(right);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + strOperation);
             }
+            Logs.saveLog(expression+"="+result);
+            return result;
         }
         throw new CalcException("Некорректное выражение");
     }
