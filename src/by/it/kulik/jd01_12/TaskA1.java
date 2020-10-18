@@ -1,7 +1,5 @@
 package by.it.kulik.jd01_12;
 
-import javafx.concurrent.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
