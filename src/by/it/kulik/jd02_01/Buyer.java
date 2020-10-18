@@ -1,9 +1,7 @@
 package by.it.kulik.jd02_01;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
 
@@ -30,6 +28,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public void chooseGoods() {
         System.out.printf("%s started to choose\n", this);
         int timeout = Helper.getRandom(500, 2000);
+        Thread.yield();
         Helper.mySleep(timeout);
         System.out.printf("%s finished to choose\n", this);
     }
@@ -53,17 +52,19 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void putGoodsToTheBasket() {
         int goodsAmount = Helper.getRandom(0, 4);
-        Map<String, Integer> basket = new HashMap<>();
-        basket.put("milk", 1);
-        basket.put("bread", 2);
-        basket.put("meat", 3);
-        basket.put("chocolate", 4);
-        Set<String >keys=basket.keySet();
-        Iterator<String> iterator=keys.iterator();
-        while (iterator.hasNext()){
-            String s= iterator.next();
-            System.out.printf("%s put %s in basket\n",this,s);
+        int count=0;
+        Map<String, Integer> assort = new HashMap<>();
+        assort.put("milk", 1);
+        assort.put("bread", 2);
+        assort.put("meat", 3);
+        assort.put("chocolate", 4);
+        for(Map.Entry<String,Integer>entry:assort.entrySet()) {
+            if (count==goodsAmount)
+                break;
+            System.out.printf("%s put %s in basket\n",this,entry.getKey());
+            count++;
         }
+        Helper.mySleep(Helper.getRandom(500, 2000));
     }
 }
 
