@@ -1,18 +1,43 @@
 package by.it.kulik.jd02_01;
 
-public class Buyer extends Thread implements Runnable, IBuyer {
-    int num;    //номер покупателя
-    public Buyer(int num) {
-        this.num=num;
-        this.setName("Покупатель № "+ num+ " ");
-        start();
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+class Buyer extends Thread implements IBuyer, IUseBasket {
+
+    public Buyer(int number) {
+        super("Buyer №" + number);
     }
 
-    @Override //покупатель приходит в магазин и выбирает товары
+    @Override
     public void run() {
         enterToMarket();
+        takeBasket();
         chooseGoods();
-        goToOut();
+        putGoodsToTheBasket();
+        goOut();
+        Dispatcher.BUYERS_IN_SHOP--;
+    }
+
+    @Override
+    public void enterToMarket() {
+        System.out.printf("%s enter to market\n", this);
+    }
+
+    @Override
+    public void chooseGoods() {
+        System.out.printf("%s started to choose\n", this);
+        int timeout = Helper.getRandom(500, 2000);
+        Helper.mySleep(timeout);
+        System.out.printf("%s finished to choose\n", this);
+    }
+
+    @Override
+    public void goOut() {
+        System.out.printf("%s leaved market\n", this);
+
     }
 
     @Override
@@ -21,24 +46,25 @@ public class Buyer extends Thread implements Runnable, IBuyer {
     }
 
     @Override
-    public void enterToMarket() {
-        System.out.println(this + " вошел в магазин");
+    public void takeBasket() {
+        System.out.printf("%s took basket\n", this);
     }
 
     @Override
-    public void chooseGoods() {
-try {
-    //вызываем свой генератор случайных чисел
-    int pause=random.fromTo(500, 2000);
-    Thread.sleep(pause);
-} catch (InterruptedException e) {
-    System.out.println(this + " некорректное завершение ожидания");
-}
-        System.out.println(this + " выбрал товар");
+    public void putGoodsToTheBasket() {
+        int goodsAmount = Helper.getRandom(0, 4);
+        Map<String, Integer> basket = new HashMap<>();
+        basket.put("milk", 1);
+        basket.put("bread", 2);
+        basket.put("meat", 3);
+        basket.put("chocolate", 4);
+        Set<String >keys=basket.keySet();
+        Iterator<String> iterator=keys.iterator();
+        while (iterator.hasNext()){
+            String s= iterator.next();
+            System.out.printf("%s put %s in basket\n",this,s);
+        }
     }
+}
 
-    @Override
-    public void goToOut() {
-        System.out.println(this + " вышел из магазина");
-    }
-}
+
