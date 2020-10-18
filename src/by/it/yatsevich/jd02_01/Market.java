@@ -27,6 +27,13 @@ class Market {
             }
             Helper.buyerSleep(1000);
         }
+                for (Buyer buyer : buyers) {
+            try {
+                buyer.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     while (Supervisor.BUYER_IN_THE_SHOP>0)Thread.yield();
         System.out.println("##Market closed##");
     }

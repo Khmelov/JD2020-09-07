@@ -14,7 +14,6 @@ class Buyer extends Thread implements IBayer,IUseBasket {
         chooseGoods();
         putGoodsToBasket();
         goOut();
-//        Supervisor.COUNTS_OF_GOODS=1;
         Supervisor.BUYER_IN_THE_SHOP--;
     }
 
