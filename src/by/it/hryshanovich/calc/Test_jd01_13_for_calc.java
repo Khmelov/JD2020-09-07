@@ -1,4 +1,4 @@
-package by.it.hryshanovich.jd01_09;
+package by.it.hryshanovich.calc;
 
 
 import org.junit.Test;

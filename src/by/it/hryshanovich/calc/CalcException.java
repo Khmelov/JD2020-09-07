@@ -1,4 +1,4 @@
-package by.it.hryshanovich.jd01_09;
+package by.it.hryshanovich.calc;
 
 public class CalcException extends Exception{
     public CalcException() {
