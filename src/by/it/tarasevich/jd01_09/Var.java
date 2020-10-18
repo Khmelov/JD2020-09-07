@@ -28,12 +28,12 @@ abstract class Var implements Operations {
     @Override
     public String toString() {
 
-        return "Это класс Var";
+        return "Это класс Var{}";
 
 
     }
 
-    static Var creadVar(String strVar) {
+    static Var createVar(String strVar) {
 
         if (strVar.matches(Patterns.SCALAR)) {
             return new Scalar(strVar);
