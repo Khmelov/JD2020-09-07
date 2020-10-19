@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class TaskB2 {
-    private static String reg = ",.?!-";
+    private static final String reg = ",.?!-";
 
     private static  boolean  checkWord (String  word){
         int start = word.charAt(0);
@@ -28,9 +28,20 @@ class TaskB2 {
         String[] arrString = pattern1.split(sb);
         for (int i = 0; i < arrString.length; i++) {
             arrString[i]=arrString[i].replaceAll("[^а-яА-яёЁ]"," ");
-            System.out.println(arrString[i]);
+            arrString[i] = arrString[i].replaceAll("[ ]{2,}", " ");
+            arrString[i] = arrString[i].trim();
         }
-
-
+        for (int i = arrString.length-1; i >= 1; i--) {
+            for (int j = 0; j < i; j++) {
+                if(arrString[j].length() > arrString[j+1].length()){
+                    String val = arrString[j];
+                    arrString[j] = arrString[j+1];
+                    arrString[j+1] = val;
+                }
+            }
+        }
+        for (String s : arrString) {
+            System.out.println(s);
+        }
     }
 }
