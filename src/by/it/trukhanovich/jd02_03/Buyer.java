@@ -14,7 +14,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     private final List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
 
     private final Dispatcher dispatcher;
-    private Semaphore semaphore=new Semaphore(20);
+    private Semaphore countBuersInShopingRoom =new Semaphore(20);
+    private Semaphore baskets =new Semaphore(20);
 
     public List<Map.Entry<String, Integer>> getGoodsInBasket() {
         return goodsInBasket;
@@ -40,8 +41,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void run() {
         try {
         if (Helper.getRandom(1,4)==1){setPensioneer();}
+        countBuersInShopingRoom.acquire();
         enterToMarket();
-        semaphore.acquire();
+        baskets.acquire();
         takeBasket();
         int numberOfGoods= Helper.getRandom(1,4);
         for (int i = 1; i <= numberOfGoods; i++) {
@@ -55,7 +57,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             throw new RuntimeException(e);
         }
         finally {
-            semaphore.release();
+            countBuersInShopingRoom.release();
+            baskets.release();
         }
 
     }
