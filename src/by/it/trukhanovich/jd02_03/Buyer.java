@@ -3,6 +3,7 @@ package by.it.trukhanovich.jd02_03;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
@@ -13,6 +14,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     private final List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
 
     private final Dispatcher dispatcher;
+    private Semaphore semaphore=new Semaphore(20);
 
     public List<Map.Entry<String, Integer>> getGoodsInBasket() {
         return goodsInBasket;
@@ -36,8 +38,10 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void run() {
+        try {
         if (Helper.getRandom(1,4)==1){setPensioneer();}
         enterToMarket();
+        semaphore.acquire();
         takeBasket();
         int numberOfGoods= Helper.getRandom(1,4);
         for (int i = 1; i <= numberOfGoods; i++) {
@@ -47,6 +51,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         goToQueue();
         goOut();
         dispatcher.buyerLeaveMarket();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            semaphore.release();
+        }
+
     }
 
     @Override

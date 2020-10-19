@@ -7,7 +7,7 @@ class Dispatcher {
 
     private final AtomicInteger countOutFromMarket= new AtomicInteger(0);
 
-    private final int totalBuyersCount;
+    public final int totalBuyersCount;
 
     public Dispatcher(int totalBuyersCount) {
         this.totalBuyersCount = totalBuyersCount;

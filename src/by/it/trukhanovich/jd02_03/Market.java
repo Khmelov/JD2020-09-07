@@ -17,24 +17,26 @@ public class Market {
         System.out.println("Market opened");
         int number=0;
         ArrayList<Thread> threads=new ArrayList<>();
-        ExecutorService executorService= Executors.newFixedThreadPool(5);
+        ExecutorService executorServiceCasheir= Executors.newFixedThreadPool(5);
         for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i, dispatcher);
-            executorService.execute(cashier);
+            executorServiceCasheir.execute(cashier);
         }
-        executorService.shutdown();
+        executorServiceCasheir.shutdown();
         Manager manager = new Manager("Manager");
         Thread threadManager = new Thread(manager);
         threadManager.setDaemon(true);
         threadManager.start();
         int timeSecond=0;
         ArrayList<Integer> buyerOfEverySecond = new ArrayList<>();
+        ExecutorService executorServiceBuyer= Executors.newFixedThreadPool(dispatcher.totalBuyersCount);
         for (;;){
             int countBuyer=getCountBuyer(timeSecond, dispatcher);
             for (int j = 0; j < countBuyer&& dispatcher.marketIsOpenedForNewBuyer(); j++) {
                 Buyer buyer=new Buyer(++number, dispatcher);
-                buyer.start();
-                threads.add(buyer);
+//                buyer.start();
+//                threads.add(buyer);
+                executorServiceBuyer.execute(buyer);
             }
             if (!dispatcher.marketIsOpenedForNewBuyer()) {
                 break;
@@ -43,9 +45,10 @@ public class Market {
             buyerOfEverySecond.add(dispatcher.getCountEnterToMarket()- dispatcher.getCountOutFromMarket());
             timeSecond++;
         }
+        executorServiceBuyer.shutdown();
         try {
 
-            while (!executorService.awaitTermination(1, TimeUnit.DAYS)){
+            while (!executorServiceCasheir.awaitTermination(1, TimeUnit.DAYS)){
 
             }
         } catch (InterruptedException e) {
