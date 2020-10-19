@@ -20,7 +20,7 @@ class TaskA {
     }
 
     private static void txtPrint(String path, List<Integer> list) {
-        try (PrintWriter writer = new PrintWriter(path + TASK_A_TXT)){
+        try (PrintWriter writer = new PrintWriter(path + TASK_A_TXT)) {
             double sum2 = 0;
             for (Integer integer : list) {
                 writer.printf("%d ", integer);
@@ -57,7 +57,7 @@ class TaskA {
         try (DataOutputStream dataOutputStream = new DataOutputStream(
                 new BufferedOutputStream(
                         new FileOutputStream(filename)))
-        ){
+        ) {
             for (int i = 0; i < 20; i++) {
                 int value = 10 + ((int) (Math.random() * 100));
                 dataOutputStream.writeInt(value);
