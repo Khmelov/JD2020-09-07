@@ -39,11 +39,22 @@ public class ConsoleRunner {
         }
 
     }
-    static int rowNumberInLog =0;
-    private static void saveLogToTxt (String name, String log) throws CalcException {
+
+    private static <e> void saveLogToTxt (String name, String log) throws CalcException {
         String path=getPath(ConsoleRunner.class)+name;
+        int rowNumberInLog =0;
         boolean flag=true;
-        if (rowNumberInLog >50) flag=false;
+        try (BufferedReader bf = new LineNumberReader(new FileReader(path))){
+            while (bf.readLine()!=null) {
+
+                rowNumberInLog++;
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (rowNumberInLog>50) flag=false;
         try (PrintWriter writer = new PrintWriter(new FileWriter(path,flag)))
         {
             writer.println(log);
