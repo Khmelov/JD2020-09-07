@@ -1,7 +1,5 @@
 package by.it.trukhanovich.jd02_03;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -22,11 +20,5 @@ public class QueueCashier {
             return QUEUE_CASHIER.pollFirst();
     }
 
-//    public static int getSizeQUEUE_CASHIER() {
-//        return QUEUE_CASHIER.size();
-//    }
 
-//    public static Deque<Cashier> getQueueCashier() {
-//        return QUEUE_CASHIER;
-//    }
 }

@@ -18,6 +18,7 @@ public class Manager implements Runnable{
 
     @Override
     public void run() {
+        //noinspection InfiniteLoopStatement
         for (; ; ) {
 
                 int sizeQueue = QueueBuyers.getSizeQUEUE_BUYERS()
@@ -53,7 +54,8 @@ public class Manager implements Runnable{
     private void activateCashier() {
          Cashier cashier = QueueCashier.extract();
          if (cashier != null) {
-            synchronized (cashier) {
+             //noinspection SynchronizationOnLocalVariableOrMethodParameter
+             synchronized (cashier) {
                 cashier.setWait(false);
                 cashier.notify();
             }

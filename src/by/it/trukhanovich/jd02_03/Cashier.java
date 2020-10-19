@@ -38,6 +38,7 @@ public class Cashier implements Runnable{
                     System.out.printf("%s started to sevice %s\n", this, buyer);
                     checkBasket(buyer);
                     System.out.printf("%s finished to sevice %s\n", this, buyer);
+                    //noinspection SynchronizationOnLocalVariableOrMethodParameter
                     synchronized (buyer){
                         buyer.setWait(false);
                         buyer.notify();
@@ -88,7 +89,6 @@ public class Cashier implements Runnable{
     }
 
     public void goToQueueCashier() {
-//        System.out.printf("%s go to queue\n", this);
         synchronized (this){
             QueueCashier.add(this);
             isWait=true;

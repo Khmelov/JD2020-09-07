@@ -1,7 +1,6 @@
 package by.it.trukhanovich.calc;
 
 import java.io.*;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -40,9 +39,12 @@ public class ConsoleRunner {
         }
 
     }
+    static int rowNumberInLog =0;
     private static void saveLogToTxt (String name, String log) throws CalcException {
         String path=getPath(ConsoleRunner.class)+name;
-        try (PrintWriter writer = new PrintWriter(new FileWriter(path,true)))
+        boolean flag=true;
+        if (rowNumberInLog >50) flag=false;
+        try (PrintWriter writer = new PrintWriter(new FileWriter(path,flag)))
         {
             writer.println(log);
 

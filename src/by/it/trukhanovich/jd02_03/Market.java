@@ -1,14 +1,11 @@
 package by.it.trukhanovich.jd02_03;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Market {
-    static ThreadGroup cashiers=new ThreadGroup("Группа потоков cashier");
 
     public static void main(String[] args) {
         Dispatcher dispatcher=new Dispatcher(100);
@@ -16,7 +13,6 @@ public class Market {
         marketHelper.getGoodToPrice();
         System.out.println("Market opened");
         int number=0;
-        ArrayList<Thread> threads=new ArrayList<>();
         ExecutorService executorServiceCasheir= Executors.newFixedThreadPool(5);
         for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i, dispatcher);
@@ -34,8 +30,6 @@ public class Market {
             int countBuyer=getCountBuyer(timeSecond, dispatcher);
             for (int j = 0; j < countBuyer&& dispatcher.marketIsOpenedForNewBuyer(); j++) {
                 Buyer buyer=new Buyer(++number, dispatcher);
-//                buyer.start();
-//                threads.add(buyer);
                 executorServiceBuyer.execute(buyer);
             }
             if (!dispatcher.marketIsOpenedForNewBuyer()) {
@@ -48,6 +42,7 @@ public class Market {
         executorServiceBuyer.shutdown();
         try {
 
+            //noinspection StatementWithEmptyBody
             while (!executorServiceCasheir.awaitTermination(1, TimeUnit.DAYS)){
 
             }

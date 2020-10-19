@@ -8,7 +8,7 @@ class Parser {
         String [] parts=expression.split(Patterns.OPERANIONS,2);
         if (parts.length!=2) {
             //TODO expression
-            return null;
+            throw new CalcException("неизвестная операция: "+expression);
         }
         Var right=Var.createVar(parts[1]);
         if (expression.contains("=")) {
@@ -16,7 +16,7 @@ class Parser {
         }
         Var left=Var.createVar(parts[0]);
         if (left==null||right==null){
-            return null;
+            throw new CalcException("неизвестная операция: "+expression);
         }
         Pattern patternOperation= Pattern.compile(Patterns.OPERANIONS);
         Matcher matcherOperation=patternOperation.matcher(expression);

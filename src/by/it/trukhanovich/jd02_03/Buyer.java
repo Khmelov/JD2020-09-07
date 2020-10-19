@@ -14,8 +14,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     private final List <Map.Entry<String, Integer>> goodsInBasket=new ArrayList<>();
 
     private final Dispatcher dispatcher;
-    private Semaphore countBuersInShopingRoom =new Semaphore(20);
-    private Semaphore baskets =new Semaphore(20);
+    private final Semaphore countBuersInShopingRoom =new Semaphore(20);
+    private final Semaphore baskets =new Semaphore(20);
 
     public List<Map.Entry<String, Integer>> getGoodsInBasket() {
         return goodsInBasket;

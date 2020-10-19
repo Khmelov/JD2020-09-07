@@ -1,7 +1,5 @@
 package by.it.trukhanovich.jd02_03;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
