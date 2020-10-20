@@ -10,13 +10,12 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         for (;;){
-
             String expression = scanner.nextLine();
             if (expression.equals("end")){
                 break;
             }
             Var result = parser.calc(expression);
-            printer.print(result);
+            printer.print (result);
         }
     }
 }
