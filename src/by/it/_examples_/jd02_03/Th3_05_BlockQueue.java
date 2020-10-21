@@ -2,6 +2,7 @@ package by.it._examples_.jd02_03;
 
 import java.util.concurrent.*;
 
+@SuppressWarnings("AnonymousHasLambdaAlternative")
 public class Th3_05_BlockQueue {
         public static void main(String[] args) {
             //указание что элементов в очереди будет только два
