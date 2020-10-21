@@ -8,21 +8,20 @@ public class Th2_01_not_syn {
     //это касса. Просто добавляет в баланс единицу
     static class Cashier extends Thread {
         //создадим видимость расчета
-        int calc(int in) {
-            int j = in;
-            for (int i = 0; i < 666; i++) j += (int) (Math.sqrt(i));
-            return in;
+        int calc() {
+            for (int i = 0; i < 666; i++) i = i + (int) (Math.sqrt(i / 1234.567));
+            return 1;
         }
 
         @Override
         public void run() {
             //не будет работать. Одновременный доступ.
-            balance += (calc(1));
+            balance += (calc());
         }
     }
 
     //создадим 4444 касс. Каждая добавит по 1. Сколько всего будет?
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         //Считаем сколько было потоков
         int thCount = Thread.activeCount();
 
@@ -30,9 +29,7 @@ public class Th2_01_not_syn {
             new Cashier().start();
         }
         //пока потоков больше чем было в начале просто ждем
-        while (Thread.activeCount() > thCount) {
-            Thread.sleep(100);
-        }
+        while (Thread.activeCount() > thCount) Thread.yield();
         System.out.print("Итого:" + balance);
     }
 }
