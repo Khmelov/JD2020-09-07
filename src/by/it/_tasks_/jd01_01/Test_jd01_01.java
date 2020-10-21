@@ -100,15 +100,14 @@ public class Test_jd01_01 {
         try {
             methodName = methodName.trim();
             Method m;
+            assert aClass != null;
             if (methodName.startsWith("static")) {
                 methodName = methodName.replace("static", "").trim();
-                assert aClass != null;
                 m = aClass.getDeclaredMethod(methodName, parameters);
-                if ((m.getModifiers() & Modifier.STATIC) != Modifier.STATIC) {
+                if (Modifier.isStatic(m.getModifiers())) {
                     fail("\nERROR:Метод " + m.getName() + " должен быть статическим");
                 }
             } else {
-                assert aClass != null;
                 m = aClass.getDeclaredMethod(methodName, parameters);
             }
             m.setAccessible(true);
@@ -150,13 +149,6 @@ public class Test_jd01_01 {
     }
 
     private Test_jd01_01 run(String in, boolean runMain) {
-//        StackTraceElement[] trace = t.getStackTrace();
-//        StackTraceElement element;
-//        int i = 0;
-//        do {
-//            element = trace[i++];
-//        }
-//        while (!element.getMethodName().contains("test"));
         StackTraceElement element = Stream.of(new Throwable().getStackTrace())
                 .filter(e -> e.getMethodName().startsWith("test"))
                 .findFirst()
