@@ -8,11 +8,11 @@ class Th2_08_good_producer_consumer {
     private static final Consumer consumer = new Consumer();
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         producer.start();
         consumer.start();
         while (consumer.getState()!= Thread.State.TERMINATED)
-            Thread.sleep(100);
+            Thread.yield();
         System.out.println("producer consumer");
         System.out.println(producer.getState() + "  " + consumer.getState());
     }
