@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    private Map<String, Integer> pr = new HashMap<>();
+    private final Map<String, Integer> pr = new HashMap<>();
 
     {
         pr.put("=", 0);

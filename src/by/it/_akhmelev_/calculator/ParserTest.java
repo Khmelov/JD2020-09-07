@@ -2,16 +2,13 @@ package by.it._akhmelev_.calculator;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.File;
-
 import static org.junit.Assert.*;
 
 public class ParserTest {
     Parser parser;
 
+    @SuppressWarnings("RedundantThrows") //на будущее, если будут исключения
     @Before
     public void setUp() throws CalcException {
         parser = new Parser();
@@ -27,7 +24,7 @@ public class ParserTest {
 
     @After
     public void tearDown() throws CalcException {
-        new File("6788967987659865798").delete();
+        Var.clear();
     }
 
 }
