@@ -24,6 +24,7 @@ class Cashier implements Runnable {
         System.out.printf("%s opened\n", this);
         while (!Dispatcher.marketIsClosed()) {
             Buyer buyer = QueueBuyers.extract();
+            Cashiers.addCashier();
             if (buyer != null) {
                 System.out.printf("%s started to sevice %s\n", this, buyer);
                 Helper.mySleep(Helper.getRandom(2000, 5000));
@@ -32,18 +33,30 @@ class Cashier implements Runnable {
                     buyer.setWait(false);
                     buyer.notifyAll();
                 }
+                Helper.mySleep(Helper.getRandom(500, 2000));
+                addNewCashier();
 
             } else {
-                //???????
-                Helper.mySleep(1);
+                addNewCashier();
             }
         }
-
-
         System.out.printf("%s closed\n", this);
-
-
     }
+
+        public void addNewCashier() {
+            synchronized (this){
+                QueueCashiers.add(this);
+                isWait=true;
+                Cashiers.removeCashier();
+                while (isWait){
+                    try {
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
 
     @Override
     public String toString() {
