@@ -1,5 +1,7 @@
 package by.it.trukhanovich.jd02_04;
 
+import by.it.trukhanovich.calc.CalcException;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,12 +18,12 @@ class Parser {
     priority.put("/",2);
     }
 
-    Var calc (String expression) throws CalcException {
+    by.it.trukhanovich.calc.Var calc (String expression) throws by.it.trukhanovich.calc.CalcException {
         expression = expression.replace(" ", "").trim();
         List<String> operands = new ArrayList<>(
-                Arrays.asList(expression.split(Patterns.OPERANIONS))
+                Arrays.asList(expression.split(by.it.trukhanovich.calc.Patterns.OPERANIONS))
         );
-        Pattern patternOperation = Pattern.compile(Patterns.OPERANIONS);
+        Pattern patternOperation = Pattern.compile(by.it.trukhanovich.calc.Patterns.OPERANIONS);
         Matcher matcherOperation = patternOperation.matcher(expression);
         List<String> operations = new ArrayList<>();
         while (matcherOperation.find()) {
@@ -31,31 +33,36 @@ class Parser {
             int index = getIndexOperation(operations);
             boolean brackets=false;
             if (index!=0&&operations.get(index-1).equals("(")&&operations.get(index+1).equals(")")){
-            operations.remove(index+1);
-            if (index<operations.size()-2)operands.remove(index+2);
+                int numberBracketsInEnd=0;
+                for (int i = operations.size() - 1; i >= 0; i--) {
+                    if (operations.get(i).equals(")")) numberBracketsInEnd++;
+                    else break;
+                }
+                operations.remove(index+1);
+            if (index<operations.size()-numberBracketsInEnd)operands.remove(index+2);
             brackets=true;
             }
             String removeOperation = operations.remove(index);
             String leftOperand = operands.remove(index);
             String rightOperand = operands.remove(index);
 //            if (brackets) {operands.remove(index+2);}
-            Var result = calcOneOperation(leftOperand, removeOperation, rightOperand);
+            by.it.trukhanovich.calc.Var result = calcOneOperation(leftOperand, removeOperation, rightOperand);
             operands.add(index,result.toString());
             if (brackets) {
                 operations.remove(index-1);
                 operands.remove(index-1);
             }
         }
-        return Var.createVar(operands.get(0));
+        return by.it.trukhanovich.calc.Var.createVar(operands.get(0));
     }
 
 
-    private Var calcOneOperation(String leftOperand, String operation, String rightOperand) throws CalcException {
-        Var right=Var.createVar(rightOperand);
+    private by.it.trukhanovich.calc.Var calcOneOperation(String leftOperand, String operation, String rightOperand) throws by.it.trukhanovich.calc.CalcException {
+        by.it.trukhanovich.calc.Var right= by.it.trukhanovich.calc.Var.createVar(rightOperand);
         if (operation.contains("=")) {
-            return Var.saveVar(leftOperand,right);
+            return by.it.trukhanovich.calc.Var.saveVar(leftOperand,right);
         }
-        Var left=Var.createVar(leftOperand);
+        by.it.trukhanovich.calc.Var left= by.it.trukhanovich.calc.Var.createVar(leftOperand);
 
             switch (operation){
                 case "+": return left.add(right);

@@ -31,8 +31,13 @@ class Parser {
             int index = getIndexOperation(operations);
             boolean brackets=false;
             if (index!=0&&operations.get(index-1).equals("(")&&operations.get(index+1).equals(")")){
-            operations.remove(index+1);
-            if (index<operations.size()-2)operands.remove(index+2);
+                int numberBracketsInEnd=0;
+                for (int i = operations.size() - 1; i >= 0; i--) {
+                    if (operations.get(i).equals(")")) numberBracketsInEnd++;
+                    else break;
+                }
+                operations.remove(index+1);
+            if (index<operations.size()-numberBracketsInEnd)operands.remove(index+2);
             brackets=true;
             }
             String removeOperation = operations.remove(index);
