@@ -25,7 +25,7 @@ public class Th2_06_notify extends Thread {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        for (Integer i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             new Th2_06_notify("Поток "+i);
         }
         sleep(1000);

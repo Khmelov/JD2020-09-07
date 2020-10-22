@@ -24,7 +24,7 @@ public class Th3_04_CyclicBarierExample {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         //creating CyclicBarrier with 3 parties i.e. 3 Threads needs to call await()
         final CyclicBarrier cb = new CyclicBarrier(3, new Runnable() {

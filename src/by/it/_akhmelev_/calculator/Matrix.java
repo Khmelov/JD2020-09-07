@@ -1,7 +1,8 @@
 package by.it._akhmelev_.calculator;
 
 class Matrix extends Var {
-    public Matrix(String s) {
+    @SuppressWarnings("unused")
+    public Matrix(String string) {
         super();
     }
 
