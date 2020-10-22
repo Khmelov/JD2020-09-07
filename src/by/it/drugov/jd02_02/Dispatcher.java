@@ -6,7 +6,6 @@ class Dispatcher {
     private volatile static int countOutFromMarket = 0;
     volatile static int countBuyersInQueue = 0;
     static synchronized void buyerEnterToMarket() {
-        //Object monitor = Dispatcher.class;
         countEnterToMarket++;
     }
     static synchronized void buyerLeaveMarket() {

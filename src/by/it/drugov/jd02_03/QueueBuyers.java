@@ -12,7 +12,7 @@ public class QueueBuyers {
     static void add(Buyer buyer) {
         try {
             QUEUE.putLast(buyer);
-            System.out.println("kekekekeke"+QUEUE.size());
+            System.out.println(QUEUE.size());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
