@@ -57,34 +57,144 @@ public class ParserTest {
     }
     @Test
     public void checkB3() throws Exception {
-        Var expected = new Vector("{10,15}");
+        double [] expected = {10, 15};
         Parser parser= new Parser();
-        Var calcB3 = parser.calc("E={2,3}*(D/2)");
-        double actual = Double.parseDouble(calcB3.toString());
-        assertEquals(String.valueOf(expected), String.valueOf(actual));
+        Vector calcB3 = (Vector) parser.calc("E={2,3}*(D/2)");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
     }
     @Test
-    public void checkC1() throws Exception {
-        Var expected = new Matrix( "{{60.0, 72.0, 84.0}, {252.0, 312.0, 372.0}}");
+    public void checkScalarAddMulSubDivScalar() throws Exception {
+        double expected =12;
         Parser parser= new Parser();
-        Var actual = parser.calc("E={{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}*{{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}");
-        assertEquals(String.valueOf(expected), String.valueOf(actual));
+        Var calcA1 = parser.calc("A=2+((3*5)-(10/2))");
+        double actual = Double.parseDouble(calcA1.toString());
+        assertEquals(expected, actual, 1e-8);
     }
+
     @Test
-    public void checkC2() throws Exception {
-        Var expected = new Vector( "{5.0, 14.0}");
+    public void checkMatrixMulMatrix() throws Exception {
+        double[][] expected={{60.0, 72.0, 84.0}, {252.0, 312.0, 372.0}};
         Parser parser= new Parser();
-        Var actual = parser.calc("E={{1,2},{8,3}}*{1,2}");
-        assertEquals(String.valueOf(expected), String.valueOf(actual));
-    }
-    @Test
-    public void checkC3() throws Exception {
-        Var expected = new Matrix( "{{2,4},{16,6}}");
-        Parser parser= new Parser();
-        Var actual = parser.calc("AD={{1,2},{8,3}}+{{1,2},{8,3}}");
-        assertEquals(String.valueOf(expected), String.valueOf(actual));
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}*{{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
     }
 
 
-
+    @Test
+    public void checkMatrixMulVector() throws Exception {
+        double[]expected={5.0, 14.0};
+        Parser parser= new Parser();
+        Vector var = (Vector) parser.calc("E={{1,2},{8,3}}*{1,2}");
+        double[] actual= var.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkMatrixMulScalar() throws Exception {
+        double[][] expected={{4, 8.0, 12}, {28, 32, 36}};
+        Parser parser= new Parser();
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}*2");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
+    }
+    @Test
+    public void checkMatrixAddMatrix() throws Exception {
+        double[][] expected={{4, 8.0, 12}, {28, 32, 36}};
+        Parser parser= new Parser();
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}+{{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
+    }
+    @Test
+    public void checkMatrixAddScalar() throws Exception {
+        double[][] expected={{5, 7, 9}, {17, 19, 21}};
+        Parser parser= new Parser();
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}+3");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
+    }
+    @Test
+    public void checkMatrixSubMatrix() throws Exception {
+        double[][] expected={{0, 0, 0}, {0, 0, 0}};
+        Parser parser= new Parser();
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0},{14.0, 16.0, 18.0}}-{{2.0, 4.0, 6.0}, {14.0, 16.0, 18.0}}");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
+    }
+    @Test
+    public void checkMatrixSubScalar() throws Exception {
+        double[][] expected={{1, 3, 5}, {13, 15, 17}};
+        Parser parser= new Parser();
+        Matrix var = (Matrix)parser.calc("E={{2.0, 4.0, 6.0},{14.0, 16.0, 18.0}}-1");
+        double [][]actual=var.getValue();
+        for (int i = 0; i < actual.length; i++) {
+            assertArrayEquals(expected[i],actual[i],1e-8);
+        }
+    }
+    @Test
+    public void checkVectorAddScalar() throws Exception {
+        double [] expected = {3, 4};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}+1");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkVectorAddVector() throws Exception {
+        double [] expected = {4, 6};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}+{2,3}");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkVectorSubScalar() throws Exception {
+        double [] expected = {1, 2};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}-1");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkVectorSubVector() throws Exception {
+        double [] expected = {-10, -10};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}-{12,13}");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkVectorMulScalar() throws Exception {
+        double [] expected = {4, 6};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}*2");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
+    @Test
+    public void checkVectorMulVector() throws Exception {
+        double expected = 13;
+        Parser parser= new Parser();
+        Var actual = parser.calc("E={2,3}*{2,3}");
+        assertEquals(expected,Double.parseDouble(actual.toString()),1e-8);
+    }
+    @Test
+    public void checkVectorDivScalar() throws Exception {
+        double [] expected = {1, 1.5};
+        Parser parser= new Parser();
+        Vector calcB3 = (Vector) parser.calc("E={2,3}/2");
+        double [] actual = calcB3.getValue();
+        assertArrayEquals(expected,actual,1e-8);
+    }
 }

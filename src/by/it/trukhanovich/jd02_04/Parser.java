@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 class Parser {
     private Map <String,Integer> priority= new HashMap<>();
     {
+    priority.put("(",-1);
+    priority.put(")",-1);
     priority.put("=",0);
     priority.put("+",1);
     priority.put("-",1);
@@ -27,11 +29,22 @@ class Parser {
         }
         while (operations.size() > 0) {
             int index = getIndexOperation(operations);
+            boolean brackets=false;
+            if (index!=0&&operations.get(index-1).equals("(")&&operations.get(index+1).equals(")")){
+            operations.remove(index+1);
+            if (index<operations.size()-2)operands.remove(index+2);
+            brackets=true;
+            }
             String removeOperation = operations.remove(index);
             String leftOperand = operands.remove(index);
             String rightOperand = operands.remove(index);
+//            if (brackets) {operands.remove(index+2);}
             Var result = calcOneOperation(leftOperand, removeOperation, rightOperand);
             operands.add(index,result.toString());
+            if (brackets) {
+                operations.remove(index-1);
+                operands.remove(index-1);
+            }
         }
         return Var.createVar(operands.get(0));
     }
@@ -58,6 +71,9 @@ class Parser {
         int priorityCurrent=-1;
         for (int i = 0; i < operations.size(); i++) {
             Integer priorityTemp = priority.get(operations.get(i));
+            if (i!=0&&operations.get(i-1).equals("(")&&operations.get(i+1).equals(")")) {
+                return index = i;
+            }
             if (priorityTemp>priorityCurrent) {
                 priorityCurrent=priorityTemp;
                 index=i;
