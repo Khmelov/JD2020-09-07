@@ -1,4 +1,4 @@
-package by.it.trukhanovich.calc;
+package by.it.trukhanovich.jd02_04;
 
 import java.io.*;
 import java.util.Scanner;

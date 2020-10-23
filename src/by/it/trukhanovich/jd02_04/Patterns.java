@@ -1,4 +1,4 @@
-package by.it.trukhanovich.calc;
+package by.it.trukhanovich.jd02_04;
 
 interface Patterns {
     String SKALAR="-?\\d+(\\.\\d+)?";
