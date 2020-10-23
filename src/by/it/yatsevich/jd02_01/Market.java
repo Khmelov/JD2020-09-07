@@ -29,7 +29,7 @@ class Market {
         while (Supervisor.BUYER_IN_THE_SHOP > 0) Thread.yield();
         System.out.println("##Market closed##");
         for (int i = 0; i < buyers.size(); i++) {
-            System.out.printf("  In Market on %3d sec - %4d buyers\n", i, buyers.get(i));
+            System.out.printf("%3d sec - %4d buyers\n", i, buyers.get(i));
         }
     }
 
