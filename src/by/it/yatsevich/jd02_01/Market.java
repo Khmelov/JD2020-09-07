@@ -15,6 +15,7 @@ class Market {
         System.out.println("##Market open##");
         ArrayList<Integer> buyers = new ArrayList<>();
         int number = 0;
+        int countThread=Thread.activeCount();
         for (int time = 1; time <= 120; time++) {
             int countBuyer = getCountBuyers(time);
             for (int i = 0; i < countBuyer; i++) {
@@ -26,7 +27,7 @@ class Market {
             buyers.add(Supervisor.BUYER_IN_THE_SHOP);
 
         }
-        while (Supervisor.BUYER_IN_THE_SHOP > 0) Thread.yield();
+        while (countThread<Thread.activeCount()) Thread.yield();
         System.out.println("##Market closed##");
         for (int i = 0; i < buyers.size(); i++) {
             System.out.printf("%3d sec - %4d buyers\n", i, buyers.get(i));
