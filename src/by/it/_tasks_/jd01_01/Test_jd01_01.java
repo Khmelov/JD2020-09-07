@@ -6,11 +6,12 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
-@SuppressWarnings({"unused", "SameParameterValue", "UnconstructableJUnitTestCase"})
 
 //поставьте курсор на следующую строку и нажмите Ctrl+Shift+F10
 public class Test_jd01_01 {
@@ -75,8 +76,7 @@ public class Test_jd01_01 {
         assertEquals((Double) m.invoke(null, 100), 39.35, 1e-100);
         assertEquals((Double) m.invoke(null, 75), 29.51, 1e-100);
     }
-
-    /*
+/*
 ===========================================================================================================
 НИЖЕ ВСПОМОГАТЕЛЬНЫЙ КОД ТЕСТОВ. НЕ МЕНЯЙТЕ В ЭТОМ ФАЙЛЕ НИЧЕГО.
 Но изучить как он работает - можно, это всегда будет полезно.
@@ -95,7 +95,7 @@ public class Test_jd01_01 {
         return null;
     }
 
-    private Method checkMethod(String className, String methodName, Class<?>... parameters) {
+    protected Method checkMethod(String className, String methodName, Class<?>... parameters) {
         Class<?> aClass = this.findClass(className);
         try {
             methodName = methodName.trim();
@@ -144,7 +144,7 @@ public class Test_jd01_01 {
 
     //метод находит и создает класс для тестирования
     //по имени вызывающего его метода, testTaskA1 будет работать с TaskA1
-    private Test_jd01_01 run(String in) {
+    protected Test_jd01_01 run(String in) {
         return run(in, true);
     }
 
@@ -171,7 +171,7 @@ public class Test_jd01_01 {
     }
 
     //переменные теста
-    private Class<?> aClass; //тестируемый класс
+    public Class<?> aClass; //тестируемый класс
     private final PrintStream oldOut = System.out; //исходный поток вывода
     private final PrintStream newOut; //поле для перехвата потока вывода
     private final StringWriter strOut = new StringWriter(); //накопитель строки вывода
@@ -210,7 +210,7 @@ public class Test_jd01_01 {
         return this;
     }
 
-    private Test_jd01_01 include(String str) {
+    public Test_jd01_01 include(String str) {
         assertTrue("ERROR:Строка не найдена: " + str + "\n",
                 strOut.toString().contains(str));
         return this;
@@ -219,6 +219,19 @@ public class Test_jd01_01 {
     private Test_jd01_01 exclude(String str) {
         assertFalse("ERROR:Лишние данные в выводе: " + str + "\n",
                 strOut.toString().contains(str));
+        return this;
+    }
+
+    private Test_jd01_01 matches(String regexp) {
+        assertTrue("ERROR:вывод не соответствует паттерну: " + regexp + "\n",
+                strOut.toString().matches(regexp));
+        return this;
+    }
+
+    private Test_jd01_01 find(String regexp) {
+        Matcher matcher = Pattern.compile(regexp).matcher(strOut.toString());
+        assertFalse("ERROR:вывод не содержит паттерн: " + regexp + "\n",
+                matcher.find());
         return this;
     }
 
