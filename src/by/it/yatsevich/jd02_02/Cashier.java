@@ -23,12 +23,12 @@ public class Cashier implements Runnable {
                 System.out.println(this+" finished service"+getBuyer);
             }
             else {
-//                Helper.sleep(100);
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                Helper.sleep(100);
+//                try {
+//                    wait();
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
         }
 

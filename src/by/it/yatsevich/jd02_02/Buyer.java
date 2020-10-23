@@ -44,9 +44,6 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         synchronized (this) {
             Queue.add(this);
             try {
-                synchronized (Supervisor.MONITOR){
-
-                }
                 System.out.println(this+" add to queue");
                 wait();
                 System.out.println(this+" leave the queue");
