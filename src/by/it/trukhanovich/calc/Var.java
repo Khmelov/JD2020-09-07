@@ -1,7 +1,10 @@
 package by.it.trukhanovich.calc;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 abstract class Var implements Operation {
 
@@ -19,7 +22,7 @@ abstract class Var implements Operation {
         return var;
     }
 
-    static void load () throws CalcException{
+    static void load () throws CalcException {
     String path=getPath(Var.class)+"vars.txt";
     ArrayList<String> lines=new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))){

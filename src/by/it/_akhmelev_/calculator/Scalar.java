@@ -6,12 +6,13 @@ class Scalar extends Var {
         return value;
     }
 
-    private double value;
+    private final double value;
 
     public Scalar(double value) {
         this.value = value;
     }
 
+    @SuppressWarnings("unused")
     public Scalar(Scalar scalar) {
         this.value = scalar.value;
     }

@@ -16,7 +16,7 @@ class Buyer extends Thread implements IBuyer{
 
     @Override
     public void enterToMarket() {
-        System.out.printf("%s enter to market",this);
+        System.out.printf("%s enters the market",this);
     }
 
     @Override
@@ -29,7 +29,7 @@ class Buyer extends Thread implements IBuyer{
 
     @Override
     public void goOut() {
-        System.out.printf("%s leaved market\n",this);
+        System.out.printf("%s left the market\n",this);
 
     }
 
