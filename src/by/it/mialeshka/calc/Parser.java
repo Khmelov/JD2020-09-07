@@ -4,35 +4,45 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    Var calc(String expression){
+    Var calc(String expression) throws CalcException {
         String[] parts = expression.split(Patterns.OPERATION, 2);
 
         if (parts.length != 2){
-            return null;
+            throw new CalcException("Некорректное выражение");
         }
         Var right = Var.createVar(parts[1]);
         if(expression.contains("=")){
+            Logs.saveLog(expression);
             return Var.saveVar(parts[0], right);
         }
         Var left = Var.createVar(parts[0]);
         if (left == null || right == null) {
-            return null;
+            throw new CalcException("Некорректное выражение");
         }
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
         if (matcherOperation.find()){
             String strOperation = matcherOperation.group();
+            Var result;
             switch (strOperation){
                 case ("+"):
-                    return left.add(right);
+                    result = left.add(right);
+                    break;
                 case ("-"):
-                    return left.sub(right);
+                    result = left.sub(right);
+                    break;
                 case ("*"):
-                  return left.mul(right);
+                    result = left.mul(right);
+                    break;
                 case ("/"):
-                  return left.div(right);
+                    result = left.div(right);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + strOperation);
             }
+            Logs.saveLog(expression+"="+result);
+            return result;
         }
-        return null;
+        throw new CalcException("Некорректное выражение");
     }
 }
