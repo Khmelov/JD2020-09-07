@@ -22,21 +22,16 @@ class Cashier implements Runnable {
                 System.out.printf("%s started to service %s\n", this, buyer);
                 Helper.mySleep(Helper.getRandom(2000, 5000));
                 System.out.printf("%s finished to service %s\n", this, buyer);
-                //noinspection SynchronizationOnLocalVariableOrMethodParameter
                 synchronized (buyer){
                     buyer.setWait(false);
                     buyer.notifyAll();
                 }
             }
             else{
-                //???????
                 Helper.mySleep(1);
             }
         }
-
         System.out.printf("%s closed\n", this);
-
-
     }
 
     @Override

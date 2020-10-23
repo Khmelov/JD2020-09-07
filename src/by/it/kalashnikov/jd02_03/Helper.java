@@ -10,7 +10,6 @@ class Helper {
 
     private static final int K_SPEED = 100;
 
-
     static int getRandom(int start, int stop) {
         return start + rnd.nextInt(stop - start + 1);
     }

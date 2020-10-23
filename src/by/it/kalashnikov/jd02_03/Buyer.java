@@ -57,14 +57,11 @@ class Buyer extends Thread implements IBuyer {
                 }
             }
         }
-
-
     }
 
     @Override
     public void goOut() {
         System.out.printf("%s leaved market\n", this);
-
     }
 
     @Override
