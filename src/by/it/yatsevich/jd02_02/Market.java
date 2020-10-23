@@ -5,27 +5,34 @@ package by.it.yatsevich.jd02_02;
 import java.util.ArrayList;
 
 class Market {
-//    public static void main(String[] args) {
-//        Supervisor.BUYER_IN_THE_SHOP=0;
-//        for (int i = 0; i < 1000; i++) {
-//
-//            main1(args);
-//        }
-//    }
     public static void main(String[] args) {
         System.out.println("##Market open##");
-        ArrayList<Buyer> buyers=new ArrayList<>();
         int number=0;
-        for (int timesecond = 1; timesecond <=120 ; timesecond++) {
+        ArrayList<Thread> threads=new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            Cashier cashier = new Cashier(i);
+            Thread thread = new Thread(cashier);
+            threads.add(thread);
+            thread.start();
+        }
+        
+        while (Supervisor.shopOpened()){
             int countBuyer= Helper.getRandom(2);
-            for (int i = 0; i < countBuyer; i++) {
+            for (int i = 0;Supervisor.shopOpened()&& i < countBuyer; i++) {
                 Buyer buyer=new Buyer(++number);
-
                 buyer.start();
-                buyers.add(buyer);
+                threads.add(buyer);
                 Supervisor.BUYER_IN_THE_SHOP++;
+
             }
-            Helper.buyerSleep(1000);
+            Helper.sleep(1000);
+        }
+                for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     while (Supervisor.BUYER_IN_THE_SHOP>0)Thread.yield();
         System.out.println("##Market closed##");

@@ -9,10 +9,9 @@ class Helper {
         return start + random.nextInt(stop-start+1);
     }
 
-    static int getRandom(int max){
-        return getRandom(0,max);
-    }
-    static int getRandomGoods(){return 1 + random.nextInt(4);}
+//    static int getRandom(int max){
+//        return getRandom(0,max);
+//    }
 
     static void buyerSleep(int millis){
         try {
