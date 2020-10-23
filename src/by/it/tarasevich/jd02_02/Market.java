@@ -6,10 +6,12 @@ public class Market {
 
 
     public static void main(String[] args) {
+
         System.out.println("Market opened");
         ArrayList<Thread> threads = new ArrayList<>();
         for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i);
+            int number = 0;
+            Cashier cashier = new Cashier(i, number);
             Thread thread = new Thread(cashier);
             thread.start();
             threads.add(thread);
@@ -34,6 +36,7 @@ public class Market {
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
+
 
         }
         System.out.println("Market closed");

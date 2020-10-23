@@ -1,22 +1,22 @@
-package by.it.tarasevich.jd02_02;
+package by.it.tarasevich.jd02_03;
 
 public class Cashier implements Runnable {
     private final String name;
-    private final int number;
-    private boolean isWait;
+
+    private final Dispatcher dispatcher;
 
 
-    Cashier(int number, int number1) {
+    Cashier(int number, Dispatcher dispatcher) {
          name ="\t Cashier №"+ number;
 
-        this.number = number;
+        this.dispatcher = dispatcher;
     }
 
     @Override
     public void run() {
         System.out.printf("%s  opened\n", this);
 
-        while (!Dispatcher.marketIsCloused()){
+        while (!dispatcher.marketIsCloused()){
             Buyer buyer = QueueBuyers.extract();
             if (buyer != null){
                 System.out.printf("%s started to sevice %s\n", this, buyer);
@@ -37,8 +37,6 @@ public class Cashier implements Runnable {
 
     @Override
     public String toString() {
-        return "Cashier{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
