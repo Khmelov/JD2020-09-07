@@ -39,10 +39,14 @@ class Market {
         int modifier = 0;
         if (time > 60)
             modifier = 60;
-        if (time>0 && time <=60){
-            if (time==1) value =10;
-            if (time <30) value=10+time;
+        if (time == 1) value = 10;
+        if (time <= 30 || time > 60 && time <= 90) value = 10 + time-modifier - Supervisor.BUYER_IN_THE_SHOP;
+        if (time > 30 && time <= 60 || time > 90) {
+            if (Supervisor.BUYER_IN_THE_SHOP <= 40 + (30 - time + modifier)) {
+                value = 40 + (30 - time + modifier) - Supervisor.BUYER_IN_THE_SHOP;
+            }
         }
+
 
         return value;
     }
