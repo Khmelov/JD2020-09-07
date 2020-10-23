@@ -2,11 +2,11 @@ package by.it.tarasevich.calculator;
 
 class Scalar extends Var {
 
+    private final double value;
+
     public double getValue() {
         return value;
     }
-
-    private double value;
 
     public Scalar(double value) {
         this.value = value;
@@ -16,10 +16,10 @@ class Scalar extends Var {
         this.value = scalar.value;
     }
 
-
     public Scalar(String strScalar) {
         this.value = Double.parseDouble(strScalar);
     }
+
 
     @Override
     public Var add(Var other) throws CalcException {
@@ -42,21 +42,19 @@ class Scalar extends Var {
     @Override
     public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            double mul = this.value * ((Scalar) other).value;
-            return new Scalar(mul);
+            double sub = this.value * ((Scalar) other).value;
+            return new Scalar(sub);
         } else
-            return other.mul(this);
+            return other.mul(other);
     }
 
     @Override
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double zz = ((Scalar) other).value;
-            if (zz == 0) {
-                throw new CalcException("деление на ноль.");
-            }
-            double div = this.value / zz;
-            return new Scalar(div);
+            if (zz == 0) throw new CalcException("деление на ноль.");
+            double sub = this.value / ((Scalar) other).value;
+            return new Scalar(sub);
         } else
             return super.div(other);
     }
@@ -64,5 +62,10 @@ class Scalar extends Var {
     @Override
     public String toString() {
         return Double.toString(value);
+    }
+
+    @Override
+    protected int getSize() {
+        return -1;
     }
 }

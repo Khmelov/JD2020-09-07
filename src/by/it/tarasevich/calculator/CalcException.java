@@ -1,7 +1,6 @@
 package by.it.tarasevich.calculator;
 
-class CalcException extends Exception{
-
+public class CalcException extends Exception{
     public CalcException() {
     }
 

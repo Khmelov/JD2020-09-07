@@ -2,7 +2,7 @@ package by.it.trukhanovich.calc;
 
 class Scalar extends Var {
 
-     private double value;
+     private final double value;
 
     public double getValue() {
         return value;

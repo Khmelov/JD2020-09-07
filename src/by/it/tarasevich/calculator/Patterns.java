@@ -1,8 +1,9 @@
 package by.it.tarasevich.calculator;
 
-public interface Patterns {
-    String OPERATION="[-+*/=]";
-    String SCALAR="-?[0-9]+(\\.[0-9]+)?";
-    String VECTOR="\\{"+SCALAR+"(,\\s*"+SCALAR+")*}";
-    String MATRIX="\\{"+VECTOR+"(,\\s*"+VECTOR+")*}";
+interface Patterns {
+    String SKALAR="-?\\d+(\\.\\d+)?";
+    String VECTOR="\\{"+SKALAR+"(\\,\\s?"+SKALAR+")*}";
+    String MATRIX="\\{"+VECTOR+"(\\,\\s?"+VECTOR+")*}";
+    String OPERANIONS="(?<=[^{,=+*/-])[-+*/=]|[\\(\\)]";
+
 }
