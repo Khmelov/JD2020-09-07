@@ -13,33 +13,37 @@ class Market {
 //    }
     public static void main(String[] args) {
         System.out.println("##Market open##");
-        ArrayList<Buyer> buyers = new ArrayList<>();
+        ArrayList<Integer> buyers = new ArrayList<>();
         int number = 0;
-        for (int timesecond = 1; timesecond <= 120; timesecond++) {
-            int value;
-            if (timesecond % 60 == 0) value = timesecond + 10;
-            else if (timesecond % 30 == 0) value = 40 + (30 - timesecond);
-            else value =  10;
-//            int countBuyer = Helper.getRandom(value);
-            for (int i = 0; i < value; i++) {
-                if (Supervisor.COUNTS_OF_BUYERS<Supervisor.MAX_BUYERS){
+        for (int time = 1; time <= 120; time++) {
+            int countBuyer = getCountBuyers(time);
+            for (int i = 0; i < countBuyer; i++) {
                 Buyer buyer = new Buyer(++number);
                 buyer.start();
-                buyers.add(buyer);
-                Supervisor.COUNTS_OF_BUYERS++;
                 Supervisor.BUYER_IN_THE_SHOP++;
-                }
             }
             Helper.buyerSleep(1000);
-        }
-        for (Buyer buyer : buyers) {
-            try {
-                buyer.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            buyers.add(Supervisor.BUYER_IN_THE_SHOP);
+
         }
         while (Supervisor.BUYER_IN_THE_SHOP > 0) Thread.yield();
         System.out.println("##Market closed##");
+        for (int i = 0; i < buyers.size(); i++) {
+            System.out.printf("  In Market on %3d sec - %4d buyers\n", i, buyers.get(i));
+        }
+    }
+
+    private static int getCountBuyers(int time) {
+
+        int value = 0;
+        int modifier = 0;
+        if (time > 60)
+            modifier = 60;
+        if (time>0 && time <=60){
+            if (time==1) value =10;
+            if (time <30) value=10+time;
+        }
+
+        return value;
     }
 }

@@ -2,23 +2,22 @@ package by.it.yatsevich.jd02_01;
 
 class Buyer extends Thread implements IBayer, IUseBasket {
 
+    private static boolean pensioner = false;
+
     public Buyer(int number) {
         super("Bayer №" + number);
-
-
     }
 
     @Override
     public void run() {
         enterToMarket();
         takeBasket();
-        Supervisor.COUNTS_OF_GOODS = Helper.getRandom(1, 4);
         chooseGoods();
         putGoodsToBasket();
         goOut();
-        Supervisor.COUNTS_OF_BUYERS--;
         Supervisor.BUYER_IN_THE_SHOP--;
     }
+
 
     @Override
     public void enterToMarket() {
@@ -27,19 +26,20 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     @Override
     public void chooseGoods() {
-        if (Supervisor.BUYER_IN_THE_SHOP % 4 == 0) Helper.pensioner = true;
+
+        Supervisor.COUNTS = Helper.getRandom(1, 4);
+        if (Supervisor.BUYER_IN_THE_SHOP % 4 == 0) pensioner = true;
         int timeout;
-        if (Helper.pensioner==true) {
+        if (!pensioner) {
             System.out.printf("%s PENSIONER starting choose\n", this);
-            timeout = Supervisor.COUNTS_OF_GOODS *
-                    Helper.getRandom((int) (Helper.start * Helper.pensionValue), (int) (Helper.stop * Helper.pensionValue));
+            timeout = Supervisor.COUNTS * Helper.getRandom((int) (500 * 1.5), (int) (2000 * 1.5));
         } else {
             System.out.printf("%s starting choose\n", this);
-            timeout = Supervisor.COUNTS_OF_GOODS * Helper.getRandom(Helper.start, Helper.stop);
+            timeout = Supervisor.COUNTS * Helper.getRandom(500, 2000);
         }
         Helper.buyerSleep(timeout);
 
-        System.out.printf("%s wonna %d good\n", this, Supervisor.COUNTS_OF_GOODS);
+        System.out.printf("%s chose %d good\n", this,Supervisor.COUNTS);
 
     }
 
@@ -60,8 +60,8 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        System.out.printf("%s put %d goods to basket\n", this, Supervisor.COUNTS_OF_GOODS);
-        Basket.putToBasket(Supervisor.COUNTS_OF_GOODS);
+        System.out.printf("%s put %d goods to basket\n", this, Supervisor.COUNTS);
+        Basket.putToBasket(Supervisor.COUNTS);
         System.out.println(Basket.temp);
         System.out.printf("Total purchase value : %3d$\n", Basket.costOfGoods);
         System.out.printf("%s finished choose\n", this);
