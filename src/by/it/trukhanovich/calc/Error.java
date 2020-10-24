@@ -12,5 +12,6 @@ public interface Error {
     String IMPOSSIBLE_MUL="error.impossibleMul";
     String IMPOSSIBLE_DIV="error.impossibleDiv";
     String UNKNOWN_VARIABLE="error.unknownVariable";
+    String READ="error.read";
 
 }

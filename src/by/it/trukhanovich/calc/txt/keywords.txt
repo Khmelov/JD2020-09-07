@@ -9,3 +9,4 @@ error.impossibleSub=Operation %s - %s is impossible\n
 error.impossibleMul=Operation %s * %s is impossible\n
 error.impossibleDiv=Operation %s / %s is impossible\n
 error.unknownVariable=Unknown variable
+error.read=Error read file var.txt\n

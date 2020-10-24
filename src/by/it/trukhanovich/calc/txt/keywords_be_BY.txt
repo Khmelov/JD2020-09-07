@@ -9,3 +9,4 @@ error.impossibleSub=Аперацыя %s - %s немагчымы\n
 error.impossibleMul=Аперацыя %s * %s немагчымы\n
 error.impossibleDiv=Аперацыя %s / %s немагчымы\n
 error.unknownVariable=невядомая пераменная
+error.read=Памылка чытання файла var.txt\n

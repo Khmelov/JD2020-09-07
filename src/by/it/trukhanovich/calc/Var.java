@@ -36,7 +36,7 @@ abstract class Var implements Operation {
         catch (FileNotFoundException e) {
 //            throw new RuntimeException("error read vars", e);
         } catch (IOException e) {
-            throw new RuntimeException("error read vars",e);
+            throw new RuntimeException(resource.get(Error.READ),e);
         }
         Parser parser=new Parser();
         for (String line : lines) {

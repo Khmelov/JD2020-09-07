@@ -8,4 +8,5 @@ error.impossibleAdd=Операция %s + %s невозможна\n
 error.impossibleSub=Операция %s - %s невозможна\n
 error.impossibleMul=Операция %s * %s невозможна\n
 error.impossibleDiv=Операция %s / %s невозможна\n
-error.unknownVariable=Незвестная переменная 
+error.unknownVariable=Незвестная переменная
+error.read=Ошибка чтения файла var.txt\n
