@@ -10,6 +10,8 @@ abstract class Var implements Operation {
 
     static Map<String,Var> vars =new HashMap<>();
 
+    private static Lang resource = Lang.LANG;
+
     static TreeMap sortMap(){
         TreeMap treeMap = new TreeMap(vars);
                 return treeMap;
@@ -64,23 +66,23 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s + %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_ADD), this, other));
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_SUB), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_MUL), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_DIV), this, other));
 
     }
 
@@ -103,7 +105,7 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            throw new CalcException(String.format("Незвестная переменная "+strVar));
+            throw new CalcException(String.format(resource.get(Error.UNKNOWN_VARIABLE)+strVar));
 
         }
     }
