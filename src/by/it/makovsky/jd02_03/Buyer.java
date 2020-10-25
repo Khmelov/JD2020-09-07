@@ -1,5 +1,7 @@
 package by.it.makovsky.jd02_03;
 
+import java.util.concurrent.Semaphore;
+
 public class Buyer extends Thread implements IBuyer, IUseBasket {
     private final Dispatcher dispatcher;
 
@@ -18,16 +20,24 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void setWait(boolean wait) {
         isWait = wait;
     }
+    private final Semaphore semaphore =new Semaphore(20);
 
     @Override
     public void run() {
-        enterToMarket();
-        takeBasket();
-        chooseGoods();
-        putGoodsToBasket();
-        goToQue();
-        goOut();
-        dispatcher.buyerLeavesMarket();
+        try {
+            semaphore.acquire();
+            enterToMarket();
+            takeBasket();
+            chooseGoods();
+            putGoodsToBasket();
+            goToQue();
+            goOut();
+            dispatcher.buyerLeavesMarket();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            semaphore.release();
+        }
     }
 
     private void goToQue() {

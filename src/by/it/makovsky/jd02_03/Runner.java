@@ -8,13 +8,14 @@ public class Runner {
     public static void main(String[] args) {
         Dispatcher dispatcher=new Dispatcher(100);
         System.out.println("Магазин открыт");
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        ExecutorService executorServiceForCashier = Executors.newFixedThreadPool(5);
         for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i, dispatcher);
-            executorService.execute(cashier);
+            executorServiceForCashier.execute(cashier);
         }
-        executorService.shutdown();
+        executorServiceForCashier.shutdown();
 
+        ExecutorService executorServiceForBuyers= Executors.newFixedThreadPool(dispatcher.totalBuyersCount);
         int number = 0;
         for (; ; ) {
             int countBuyer = Rnd.getRandom(2);
@@ -26,9 +27,10 @@ public class Runner {
                 break;
             Rnd.mySleep(1000);
         }
+        executorServiceForBuyers.shutdown();
         try {
             //noinspection StatementWithEmptyBody
-            while (!executorService.awaitTermination(10, TimeUnit.DAYS)){
+            while (!executorServiceForCashier.awaitTermination(10, TimeUnit.DAYS)){
 
             }
         } catch (InterruptedException e) {

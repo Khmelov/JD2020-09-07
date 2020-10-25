@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Basket {
 
-    private final static Map<Integer,String> GOODS = new HashMap<>();
+    private static final Map<Integer,String> GOODS = new HashMap<>();
 
     public static String addGoods(){
         GOODS.put(1,"хлеб за 1,2 руб.");

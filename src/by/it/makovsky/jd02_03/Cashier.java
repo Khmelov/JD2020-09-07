@@ -21,6 +21,7 @@ public class Cashier implements Runnable {
                 System.out.printf("%s начал обслуживать %s\n", this, buyer);
                 Rnd.mySleep(Rnd.fromTo(2000, 5000));
                 System.out.printf("%s закончил обслуживать %s\n", this, buyer);
+                System.out.println("Сумма чека:");
                 synchronized (buyer){
                     buyer.setWait(false);
                     buyer.notifyAll();

@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 class Dispatcher {
 
-    private final int totalBuyersCount;
+    public final int totalBuyersCount;
 
     public Dispatcher(int totalBuyersCount) {
         this.totalBuyersCount = totalBuyersCount;
