@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 class Basket {
-    static HashMap<String,Integer> temp = new HashMap<>();
+    static final HashMap<String,Integer> temp = new HashMap<>();
     static int costOfGoods;
 
     public static void putToBasket(int countsOfGoods) {

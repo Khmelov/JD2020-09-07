@@ -9,7 +9,7 @@ class Market {
         System.out.println("##Market open##");
         int number=0;
         ArrayList<Thread> threads=new ArrayList<>();
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier);
             threads.add(thread);
@@ -23,18 +23,17 @@ class Market {
                 buyer.start();
                 threads.add(buyer);
                 Supervisor.BUYER_IN_THE_SHOP++;
-
             }
             Helper.sleep(1000);
         }
-                for (Thread thread : threads) {
+        for (Thread thread : threads) {
             try {
                 thread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-    while (Supervisor.BUYER_IN_THE_SHOP>0)Thread.yield();
+    while (!Supervisor.planComplete())Thread.yield();
         System.out.println("##Market closed##");
     }
 }

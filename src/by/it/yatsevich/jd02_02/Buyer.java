@@ -1,5 +1,7 @@
 package by.it.yatsevich.jd02_02;
 
+import by.it.trukhanovich.jd02_02.QueueCashier;
+
 class Buyer extends Thread implements IBayer, IUseBasket {
 
     public Buyer(int number) {
@@ -7,6 +9,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         Supervisor.addBuyer();
     }
 
+    static final Object MONITOR=new Object();
     @Override
     public void run() {
         enterToMarket();
@@ -40,12 +43,13 @@ class Buyer extends Thread implements IBayer, IUseBasket {
     }
 
     @Override
-    public void goToQueue() {
+    public void goToQueue(){
         synchronized (this) {
-            Queue.add(this);
+            QueueBuyers.add(this);
             try {
                 System.out.println(this+" add to queue");
                 wait();
+                QueueCashiers.get().notify();
                 System.out.println(this+" leave the queue");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -66,9 +70,10 @@ class Buyer extends Thread implements IBayer, IUseBasket {
     @Override
     public void putGoodsToBasket() {
         System.out.printf("%s put %d goods to basket\n",this, Supervisor.COUNTS_OF_GOODS);
+        synchronized (Basket.temp){
         Basket.putToBasket(Supervisor.COUNTS_OF_GOODS);
         System.out.println(Basket.temp);
-        System.out.printf("Total purchase value : %3d$\n", Basket.costOfGoods);
+        System.out.printf("Total purchase value : %3d$\n", Basket.costOfGoods);}
         System.out.printf("%s finished choose\n",this);
     }
 }
