@@ -1,15 +1,10 @@
 package by.it.tarasevich.jd02_02;
 
 public class Cashier implements Runnable {
-    private final String name;
-    private final int number;
-    private boolean isWait;
+    private String name;
 
-
-    Cashier(int number, int number1) {
+    Cashier(int number) {
          name ="\t Cashier №"+ number;
-
-        this.number = number;
     }
 
     @Override

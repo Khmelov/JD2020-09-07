@@ -90,7 +90,7 @@ public class TaskB {
         }
     }
 
-    private static String getPath() {
+     private static String getPath() {
         String rootProgect = System.getProperty("user.dir");
         String path = TaskB.class.getName().replace(TaskB.class.getSimpleName(), "").
                 replace(".", File.separator);
@@ -98,7 +98,7 @@ public class TaskB {
         return rootProgect + File.separator + "srs" + File.separator + path;
     }
 
-    private static void printTXT(StringBuilder stringBuilder, String path) {
+     static void printTXT(StringBuilder stringBuilder, String path) {
         try (PrintWriter printWriter = new PrintWriter(path)) {
             printWriter.println(stringBuilder);
         } catch (FileNotFoundException e) {

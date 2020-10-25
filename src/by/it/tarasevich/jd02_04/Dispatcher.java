@@ -7,18 +7,23 @@ public class Dispatcher {
     private final AtomicInteger countOutFromMarket = new AtomicInteger(0);
     private final int totalBuyerCount;
 
-    public Dispatcher( int totalBuyerCount) {
+    public Dispatcher(int totalBuyerCount) {
         this.totalBuyerCount = totalBuyerCount;
     }
 
-     void buyerEnterToMarket() {
+    void buyerEnterToMarket() {
         countEnterMarket.getAndIncrement();
     }
-     void buyerOutToMarket() {
+
+    void buyerOutToMarket() {
         countOutFromMarket.getAndIncrement();
     }
 
-       boolean marketIsOpenForNewBuyer(){return countEnterMarket.get()!= totalBuyerCount ;}
+    boolean marketIsOpenForNewBuyer() {
+        return countEnterMarket.get() != totalBuyerCount;
+    }
 
-     boolean marketIsCloused(){return countOutFromMarket.get()==totalBuyerCount;}
+    boolean marketIsCloused() {
+        return countOutFromMarket.get() == totalBuyerCount;
+    }
 }

@@ -64,6 +64,7 @@ class Matrix extends Var {
 
     @Override
     public Var add(Var other) throws CalcException {
+
         if (other instanceof Matrix){
             double [][] s1=((Matrix) other).getValue();
             double [][] result=new double[value.length][value[0].length];
@@ -92,7 +93,7 @@ class Matrix extends Var {
     @Override
     public Var sub(Var other)throws CalcException {
         if (other instanceof Matrix){
-//            this.value=value;
+
             double [][] s1=((Matrix) other).getValue();
             double[][] result=new double[value.length][value[0].length];
             if (value[0].length!=s1[0].length){

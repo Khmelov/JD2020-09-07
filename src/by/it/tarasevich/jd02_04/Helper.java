@@ -6,13 +6,13 @@ class Helper {
 
     private Helper(){}
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
     private static final int K_SPEED = 100;
     static int getRandom(int start ,int stop) {
          return start+random.nextInt(stop-start + 1);
     }
-    static int getRandom(int max){
-        return getRandom(0,max);
+    static int getRandom(){
+        return getRandom(0, 2);
     }
     static void mySleep(int millis){
         try {

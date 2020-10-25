@@ -20,7 +20,7 @@ public class Market {
 
         int number = 0;
         for (; ; ) {
-            int countBuyer = Helper.getRandom(2);
+            int countBuyer = Helper.getRandom();
             for (int i = 0; i < countBuyer && dispatcher.marketIsOpenForNewBuyer(); i++) {
                 Buyer buyer = new Buyer(++number, dispatcher);
                 buyer.start();

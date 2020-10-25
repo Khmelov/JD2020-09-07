@@ -10,6 +10,7 @@ abstract class Var implements Operation {
 
     static Map<String,Var> vars =new HashMap<>();
 
+
     static TreeMap sortMap(){
         TreeMap treeMap = new TreeMap(vars);
                 return treeMap;
@@ -103,7 +104,7 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            throw new CalcException(String.format("Незвестная переменная "+strVar));
+            throw new CalcException("Незвестная переменная " + strVar);
 
         }
     }
