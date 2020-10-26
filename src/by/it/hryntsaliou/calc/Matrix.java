@@ -52,9 +52,12 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Matrix) {
             double[][] res = new double[value.length][value[0].length];
+            if (value[0].length!=res[0].length){
+                throw new CalcException("Недопустимый размер матриц!");
+            }
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[0].length; j++) {
                     res[i][j] = value[i][j];
@@ -85,9 +88,12 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Matrix) {
             double[][] res = new double[value.length][value[0].length];
+            if (value[0].length!=res[0].length){
+                throw new CalcException("Недопустимый размер матриц!");
+            }
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[0].length; j++) {
                     res[i][j] = value[i][j];
