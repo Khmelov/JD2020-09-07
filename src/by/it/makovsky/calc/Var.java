@@ -1,44 +1,86 @@
 package by.it.makovsky.calc;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
 
 abstract class Var implements Operation, Patterns {
 
-    private static Map<String,Var> vars=new HashMap <>();
-    private static Set<Map.Entry<String, Var>> entries = vars.entrySet();
+    private static final Map<String, Var> vars = new HashMap<>();
 
-    static Var saveVar(String name,Var var){
-        vars.put(name, var);
-        return var;
-    }
-    static void printVar(){
-        Iterator<Map.Entry<String, Var>> iterator = entries.iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String,Var> me=iterator.next();
-            String k= me.getKey();
-            Var v=me.getValue();
-        }
+
+    static Var save(String name, Var value) throws CalcException {
+        vars.put(name, value);
+        saveToTxt();
+        return value;
     }
 
-    static Var createVar(String operand) throws CalcException{
-        operand=operand.trim().replace("\\s+","");
-        if (operand.matches(SCALAR)){
-            return new Scalar(operand);
+    static void clear() throws CalcException {
+        try {
+            Path path = Paths.get(getPath() + "vars.txt");
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        } catch (IOException e) {
+            throw new CalcException("ERROR: clear vars", e);
         }
-        if (operand.matches(VECTOR)){
-            return new Vector(operand);
+    }
+
+    private static String getPath() {
+        String relativePath = Var.class
+                .getName()
+                .replace(Var.class.getSimpleName(), "")
+                .replace(".", File.separator);
+        return System.getProperty("user.dir") +
+                File.separator + "src" + File.separator + relativePath;
+    }
+
+    private static void saveToTxt() throws CalcException {
+        String path = getPath() + "vars.txt";
+        try (PrintWriter writer = new PrintWriter(path)) {
+            for (Map.Entry<String, Var> pair : vars.entrySet()) {
+                writer.printf("%s=%s\n", pair.getKey(), pair.getValue());
+            }
+        } catch (FileNotFoundException e) {
+            throw new CalcException(e);
         }
-        if (operand.matches(MATRIX)){
-            return new Matrix(operand);
+    }
+
+    static void load() throws CalcException {
+        Path path = Paths.get(getPath() + "vars.txt");
+        if (Files.exists(path)) {
+            try {
+                List<String> list = Files.lines(path).collect(Collectors.toList());
+                Parser parser = new Parser();
+                for (String line : list) parser.calc(line);
+            } catch (IOException e) {
+                throw new RuntimeException("error read vars", e);
+            }
         }
-        if (vars.containsKey(operand)){
-            return vars.get(operand);
+    }
+
+    static Var createVar(String strVar) throws CalcException {
+
+        if (strVar.matches(Patterns.SCALAR)) {
+            return new Scalar(strVar);
+        } else if (strVar.matches(VECTOR)) {
+            return new Vector(strVar);
+        } else if (strVar.matches(Patterns.MATRIX)) {
+            return new Matrix(strVar);
+        } else {
+            Var var = vars.get(strVar);
+            if (var != null)
+                return var;
+
         }
 
-        throw new CalcException("Невозможно создать "+operand);
+        throw new CalcException("Неизвестная переменная " + strVar);
     }
 
     protected abstract int getSize();
