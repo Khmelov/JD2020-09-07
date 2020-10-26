@@ -11,7 +11,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public Buyer(int number, boolean isPensioneer) {
         super("Buyer №" + number + (isPensioneer?" pensioneer":""));
         pensioneer = isPensioneer;
-        Manager.buyerAddToShop();
+        Dispatcher.buyerAddToShop();
     }
 
     @Override
@@ -53,7 +53,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goOut() {
-        Manager.buyerLeaveShop();
+        Dispatcher.buyerLeaveShop();
         System.out.println(this + " exit shop");
     }
 
@@ -70,7 +70,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void putGoodsToBasket() {
         int timeout = Helper.getRandom(500, 2000);
-        if (pensioneer) timeout = (int) Math.ceil(timeout * Manager.K_SPEED_PENSIONNER);
+        if (pensioneer) timeout = (int) Math.ceil(timeout * Dispatcher.K_SPEED_PENSIONNER);
         (new Goods()).addRandomGood(goods);
         Helper.sleep(timeout);
     }

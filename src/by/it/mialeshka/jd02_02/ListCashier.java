@@ -3,7 +3,7 @@ package by.it.mialeshka.jd02_02;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class ListCashier {
+class ListCashier {
     private static final Deque<Cashier> cashiers = new ArrayDeque<>();
     static synchronized void add(Cashier cashier){
         cashiers.add(cashier);

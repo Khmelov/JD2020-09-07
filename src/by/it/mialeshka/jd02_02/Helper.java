@@ -15,7 +15,7 @@ class Helper {
 
     public static void sleep(int timeout) {
         try {
-            Thread.sleep(timeout/ Manager.K_SPEED);
+            Thread.sleep(timeout/ Dispatcher.K_SPEED);
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted" + Thread.currentThread(), e);
         }

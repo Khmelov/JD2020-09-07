@@ -16,17 +16,17 @@ class Shop {
         threads.add(threadManager);
         threadManager.start();
 
-        for (int i = 1; i <= Manager.PLAN_CASHIER; i++) {
+        for (int i = 1; i <= Dispatcher.PLAN_CASHIER; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier);
             threads.add(thread);
             thread.start();
         }
 
-        while (Manager.shopOpened()){
+        while (Dispatcher.shopOpened()){
             for (int i = 1; i <= 60; i++) {
                 int count = getCountBuyers(i);
-                for (int j = 1; j <= count && Manager.shopOpened(); j++) {
+                for (int j = 1; j <= count && Dispatcher.shopOpened(); j++) {
                     isP++;
                     Buyer byer;
                     if (isP % 4 == 0) byer = new Buyer(++nBuyer, true);
@@ -52,7 +52,7 @@ class Shop {
     private static int getCountBuyers(int time) {
         int res;
         int countActive;
-        countActive = Manager.IN_COUNT - Manager.OUT_COUNT;
+        countActive = Dispatcher.IN_COUNT - Dispatcher.OUT_COUNT;
 
         if (time == 1)
             return 10;
