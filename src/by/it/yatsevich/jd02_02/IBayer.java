@@ -5,4 +5,5 @@ interface IBayer {
     void enterToMarket();
     void chooseGoods();
     void goOut();
+    void goToQueue();
 }

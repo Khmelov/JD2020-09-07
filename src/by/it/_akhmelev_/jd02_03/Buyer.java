@@ -33,20 +33,20 @@ class Buyer extends Thread implements IBuyer {
 
     @Override
     public void enterToMarket() {
-        System.out.printf("%s enter to market", this);
+        System.out.printf("%s entered the market", this);
     }
 
     @Override
     public void chooseGoods() {
-        System.out.printf("%s started to choose\n", this);
+        System.out.printf("%s started to choose goods\n", this);
         int timeout = Helper.getRandom(500, 2000);
         Helper.mySleep(timeout);
-        System.out.printf("%s finished to choose\n", this);
+        System.out.printf("%s finished to choose goods\n", this);
     }
 
     @Override
     public void goToQueue() {
-        System.out.printf("%s go to queue\n", this);
+        System.out.printf("%s went to the queue\n", this);
         synchronized (this) {
             QueueBuyers.add(this);
             isWait = true;
@@ -64,7 +64,7 @@ class Buyer extends Thread implements IBuyer {
 
     @Override
     public void goOut() {
-        System.out.printf("%s leaved market\n", this);
+        System.out.printf("%s left the market\n", this);
 
     }
 

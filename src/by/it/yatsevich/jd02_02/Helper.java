@@ -14,7 +14,7 @@ class Helper {
     }
     static int getRandomGoods(){return 1 + random.nextInt(4);}
 
-    static void buyerSleep(int millis){
+    static void sleep(int millis){
         try {
             Thread.sleep(millis/ Supervisor.MORE_FAST);
         } catch (InterruptedException e) {

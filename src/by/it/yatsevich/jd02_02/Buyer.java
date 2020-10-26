@@ -4,6 +4,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     public Buyer(int number) {
         super("Bayer №"+number);
+        Supervisor.addBuyer();
     }
 
     @Override
@@ -13,8 +14,8 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         Supervisor.COUNTS_OF_GOODS= Helper.getRandomGoods();
         chooseGoods();
         putGoodsToBasket();
+        goToQueue();
         goOut();
-//        Supervisor.COUNTS_OF_GOODS=1;
         Supervisor.BUYER_IN_THE_SHOP--;
     }
 
@@ -28,14 +29,28 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         System.out.printf("%s starting choose\n",this);
 //        Supervisor.COUNTS_OF_GOODS=Helper.getRandomGoods();
         int timeout= Supervisor.COUNTS_OF_GOODS * Helper.getRandom(500,2000);
-        Helper.buyerSleep(timeout);
-        System.out.printf("%s wonna %d good\n",this, Supervisor.COUNTS_OF_GOODS);
-
+        Helper.sleep(timeout);
+        System.out.printf("%s want %d good\n",this, Supervisor.COUNTS_OF_GOODS);
     }
 
     @Override
     public void goOut() {
         System.out.printf("%s buyer go out\n",this);
+        Supervisor.deleteBuyer();
+    }
+
+    @Override
+    public void goToQueue() {
+        synchronized (this) {
+            Queue.add(this);
+            try {
+                System.out.println(this+" add to queue");
+                wait();
+                System.out.println(this+" leave the queue");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
