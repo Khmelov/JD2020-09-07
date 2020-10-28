@@ -1,6 +1,7 @@
 package by.it.trukhanovich.calc;
 
 import java.io.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -8,6 +9,7 @@ public class ConsoleRunner {
         Scanner sc=new Scanner(System.in);
         Parser parser=new Parser();
         Printer printer=new Printer();
+        Lang resource = Lang.LANG;
         try {
             Var.load();
         } catch (CalcException e) {
@@ -16,11 +18,25 @@ public class ConsoleRunner {
         for (;;){
          String expression= sc.nextLine();
          saveLogToTxt("log.txt",expression);
+         if (expression.equals("ru")){
+             resource.setLocale(new Locale("ru", "RU"));
+             continue;
+         }
+         if (expression.equals("be")){
+             resource.setLocale(new Locale("be", "BY"));
+             continue;
+         }
+         if (expression.equals("en")){
+             resource.setLocale(new Locale("en", "UK"));
+             continue;
+         }
          if (expression.equals("printvar")){
              System.out.println(Var.vars);
+             continue;
          }
          if (expression.equals("sortvar")){
              System.out.println(Var.sortMap());
+             continue;
          }
          if (expression.equals("end")){
              break;
