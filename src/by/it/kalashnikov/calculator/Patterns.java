@@ -1,9 +1,9 @@
 package by.it.kalashnikov.calculator;
 
-class Patterns {
+public interface Patterns {
 
-    static final String OPERATION= "[-=+/*]";
-    static final String SCALAR= "-?[0-9]+\\.?[0-9]*";
-    static final String VECTOR= "\\{((-?[0-9]+\\.?[0-9]*),?)+}";
-
+    String OPERATION="(?<=[^{,=+*/-])[-+*/=]|[\\(\\)]";
+    String SCALAR="-?\\d+(\\.\\d+)?";
+    String VECTOR="\\{"+SCALAR+"(\\,\\s?"+SCALAR+")*}";
+    String MATRIX="\\{"+VECTOR+"(\\,\\s?"+VECTOR+")*}";
 }
