@@ -1,6 +1,7 @@
 package by.it.yatsevich.jd02_02;
 
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,19 +15,18 @@ public class Cashier implements Runnable {
         name = "Cashier №: " + number;
     }
 
-    static boolean inWait= false;
-    private static int checkCounter=0;
+    static boolean inWait = false;
+    private static int checkCounter = 0;
 
     @Override
     public void run() {
         System.out.println(this + " worked");
         while (!Supervisor.planComplete()) {
-            Buyer getPensioner=QueuePensioners.get();
+            Buyer getPensioner = QueuePensioners.get();
             Buyer getBuyer = QueueBuyers.get();
             if (getPensioner != null) {
                 servicePensioner(getPensioner);
-            }else
-            if (getBuyer != null) {
+            } else if (getBuyer != null) {
                 serviceBuyer(getBuyer);
             } else {
                 sleeper();
@@ -41,9 +41,9 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getBuyer) {
             getBuyer.notify();
-            int goods=Buyer.GOODS;
+            int goods = Buyer.GOODS;
             QueueBuyers.BUYERS_IN_QUEUE--;
-            printCheck(goods,getBuyer);
+            printCheck(goods, getBuyer);
         }
         Helper.sleep(timer);
         System.out.println(this + " finished service" + getBuyer);
@@ -51,28 +51,34 @@ public class Cashier implements Runnable {
 
     private void printCheck(int goods, Buyer buyer) {
         checkCounter++;
-        StringBuilder check=new StringBuilder();
+        StringBuilder check = new StringBuilder();
         check.append("Check №:        ").append("Cashier №1:     ")
                 .append("Cashier №2:     ")
                 .append("Cashier №3:     ")
                 .append("Cashier №4:     ")
                 .append("Cashier №5:     ").append("Queue size:     ").append("Total sum:      \n");
         check.append(checkCounter).append("\n").append(buyer.getName()).append("\n");
-        Basket.putToBasket(goods);
-        Set<Map.Entry<String, Integer>> entries = Basket.temp.entrySet();
-        for (Map.Entry<String, Integer> entry : entries) {
-            check.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+        synchronized (this) {
+            Basket.putToBasket(goods);
+            Set<Map.Entry<String, Integer>> entries = Basket.temp.entrySet();
+            Iterator<Map.Entry<String, Integer>> iterator = entries.iterator();
+            for (int i = 0; i < goods; i++) {
+                if (iterator.hasNext()) {
+                    Map.Entry<String, Integer> entry = iterator.next();
+                    check.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                }
+            }
+            for (int i = 0; i < number; i++) {
+                check.append("\t\t\t\t");
+            }
+            check.append("Check sum:").append(Basket.getSum(goods));
+            for (int i = 0; i < 6 - number; i++) {
+                check.append("\t\t\t\t");
+            }
+            check.append(QueueBuyers.BUYERS_IN_QUEUE).append("\t\t\t\t").append(Basket.GLOBAL_SUM).append("\n");
+            System.out.flush();
+            System.out.println(check);
         }
-        for (int i = 0; i < number; i++) {
-            check.append("\t\t\t\t");
-        }
-        check.append("Check sum:"+Basket.costOfGoods);
-        for (int i = 0; i < 6-number; i++) {
-            check.append("\t\t\t\t");
-        }
-        check.append(QueueBuyers.BUYERS_IN_QUEUE).append("\t\t\t\t").append(Basket.GLOBAL_SUM+"\n");
-        System.out.flush();
-        System.out.println(check);
     }
 
     private void servicePensioner(Buyer getPensioner) {
@@ -80,7 +86,7 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getPensioner) {
             getPensioner.notify();
-            int goods=Buyer.GOODS;
+            int goods = Buyer.GOODS;
             QueueBuyers.BUYERS_IN_QUEUE--;
             printCheck(goods, getPensioner);
         }
@@ -91,7 +97,7 @@ public class Cashier implements Runnable {
     private void sleeper() {
         synchronized (this) {
             QueueCashiers.add(this);
-            inWait=true;
+            inWait = true;
 //            System.out.println(this+"Cashier close");
             try {
                 this.wait();
