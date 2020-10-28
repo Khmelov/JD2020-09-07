@@ -1,8 +1,18 @@
 package by.it.shkatula.calculator;
 
-abstract class Var implements Operation {
+import java.util.HashMap;
+import java.util.Map;
 
-    static Var createVar(String operand) {
+class Var implements Operation {
+
+private static Map<String,Var> vars = new HashMap<>();
+
+static Var saveVar (String name, Var var) {
+
+    vars.put(name,var);
+return var;
+}
+    static Var createVar(String operand) throws CalcException{
 
         operand = operand.trim().replace("\\s+","");
         if (operand.matches(Patterns.SCALAR))
@@ -12,33 +22,36 @@ abstract class Var implements Operation {
             return new Vector(operand);
         }
 
-       else if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-       else return null;
+       else if (operand.matches(Patterns.MATRIX)){
+            return new Matrix(operand);}
+       else if (vars.containsKey(operand)){
+           return vars.get(operand);
+        }
+       else throw new CalcException("Невозможно создать " + operand);
 
     }
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения " + this + "+" + other + " невозможна");
-        return null;
+    public Var add(Var other) throws CalcException{
+        throw new CalcException("Операция сложения " + this + "+" + other + " невозможна");
+
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания " + this + "-" + other + " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException{
+        throw new CalcException("Операция вычитания " + this + "-" + other + " невозможна");
+
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения " + this + "*" + other + " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException{
+        throw new CalcException("Операция умножения " + this + "*" + other + " невозможна");
+
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления " + this + "/" + other + " невозможна");
-        return null;
+    public Var div(Var other) throws CalcException{
+        throw new CalcException("Операция деления " + this + "/" + other + " невозможна");
+
     }
 
 

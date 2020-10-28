@@ -1,0 +1,4 @@
+message.welcome=Прывiтанне у маім коде!
+message.question=Як сябе адчуваеш?
+user.firstName=Павел
+user.lastName=Тарасевіч
