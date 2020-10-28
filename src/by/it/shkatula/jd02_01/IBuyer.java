@@ -1,9 +1,7 @@
 package by.it.shkatula.jd02_01;
 
-interface IBuyer {
-
-    void enterToMarket();
+public interface IBuyer {
+    void enterStore();
     void chooseGoods();
-    void goOut();
-
+    void leaveStore();
 }
