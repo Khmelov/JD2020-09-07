@@ -54,7 +54,8 @@ class Parser {
                 operands.remove(index-1);
             }
         }
-        return Var.createVar(operands.get(0));
+        return VarCreator.createVar(operands.get(0));
+//        return Var.createVar(operands.get(0));
     }
 
 
@@ -63,7 +64,8 @@ class Parser {
         if (operation.contains("=")) {
             return Var.saveVar(leftOperand,right);
         }
-        Var left= Var.createVar(leftOperand);
+        Var left= VarCreator.createVar(leftOperand);
+//        Var left= Var.createVar(leftOperand);
 
             switch (operation){
                 case "+": return left.add(right);

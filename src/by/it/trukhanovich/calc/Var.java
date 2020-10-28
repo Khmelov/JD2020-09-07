@@ -10,7 +10,7 @@ abstract class Var implements Operation {
 
     static Map<String,Var> vars =new HashMap<>();
 
-    private static Lang resource = Lang.LANG;
+    static Lang resource = Lang.LANG;
 
     static TreeMap sortMap(){
         TreeMap treeMap = new TreeMap(vars);
