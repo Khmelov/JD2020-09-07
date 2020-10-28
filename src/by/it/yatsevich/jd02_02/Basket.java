@@ -5,27 +5,31 @@ import java.util.Iterator;
 
 class Basket {
     static final HashMap<String,Integer> temp = new HashMap<>();
-    static int costOfGoods;
+    static volatile int costOfGoods;
+    static volatile int GLOBAL_SUM=0;
 
     public static void putToBasket(int countsOfGoods) {
         temp.putAll(Good.goodsList);
+    synchronized (temp) {
         Iterator<String> iterator = temp.keySet().iterator();
         int counts;
-        if (countsOfGoods==4)counts=0;
-        else if (countsOfGoods==3)counts=1;
-        else if (countsOfGoods==2)counts=2;
-        else counts=3;
+        if (countsOfGoods == 4) counts = 0;
+        else if (countsOfGoods == 3) counts = 1;
+        else if (countsOfGoods == 2) counts = 2;
+        else counts = 3;
         for (int i = 0; i < counts; i++) {
-            if (iterator.hasNext()){
+            if (iterator.hasNext()) {
                 iterator.next();
                 iterator.remove();
             }
         }
+    }
         int sum=0;
         for (Integer value : temp.values()) {
             sum+=value;
         }
         costOfGoods=sum;
+        GLOBAL_SUM+=countsOfGoods;
         //        System.out.println(temp);
     }
 }

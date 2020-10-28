@@ -4,8 +4,8 @@ class Supervisor {
     static final Object MONITOR=new Object();
 
     static final int MORE_FAST = 1000;
-    static int BUYER_IN_THE_SHOP=0;
-    static int COUNTS_OF_GOODS;
+    static volatile int BUYER_IN_THE_SHOP=0;
+    static volatile int COUNTS_OF_GOODS;
 
 
     private static final int PLAN=100;
