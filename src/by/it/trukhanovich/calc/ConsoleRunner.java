@@ -45,10 +45,12 @@ public class ConsoleRunner {
          try {
 
              result=parser.calc(expression);
+//             Logger.log(String.valueOf(result));
              saveLogToTxt("log.txt", String.valueOf(result));
          } catch (CalcException e) {
              System.out.println(e.getMessage());
-             saveLogToTxt("log.txt",e.getMessage());
+//             saveLogToTxt("log.txt",e.getMessage());
+             Logger.log(e.getMessage());
          }
             printer.print (result);
 
@@ -56,7 +58,7 @@ public class ConsoleRunner {
 
     }
 
-    private static <e> void saveLogToTxt (String name, String log) throws CalcException {
+    private static void saveLogToTxt (String name, String log) throws CalcException {
         String path=getPath(ConsoleRunner.class)+name;
         int rowNumberInLog =0;
         boolean flag=true;
