@@ -6,7 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Matrix extends Var {
-     private double [][] value;
+
+    private double [][] value;
+
+    private Lang resource = Lang.LANG;
+
     public double[][] getValue() {
         return value;
     }
@@ -71,7 +75,7 @@ class Matrix extends Var {
             double [][] s1=((Matrix) other).getValue();
             double [][] result=new double[value.length][value[0].length];
             if (value[0].length!=s1[0].length){
-                throw new CalcException("недопустимый размер матриц.");
+                throw new CalcException(resource.get(Error.TWO_MATRIX));
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -99,7 +103,7 @@ class Matrix extends Var {
             double [][] s1=((Matrix) other).getValue();
             double[][] result=new double[value.length][value[0].length];
             if (value[0].length!=s1[0].length){
-                throw new CalcException("недопустимый размер матриц.");
+                throw new CalcException(resource.get(Error.TWO_MATRIX));
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -136,7 +140,7 @@ class Matrix extends Var {
             double result[] = new double[value.length];
             double[] vetc = Arrays.copyOf(((Vector) other).getValue(), ((Vector) other).getValue().length);
             if (value[0].length!=vetc.length){
-                throw new CalcException("недопустимый размер матрицы и вектора.");
+                throw new CalcException(resource.get(Error.MATRIX_AND_VECTOR));
             }
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[i].length; j++) {
@@ -149,7 +153,7 @@ class Matrix extends Var {
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).getValue();
             if (matrixLeft[0].length!=matrixRight[0].length){
-                throw new CalcException("недопустимый размер матриц.");
+                throw new CalcException(resource.get(Error.TWO_MATRIX));
             }
             double[][] result = new double[matrixLeft.length][matrixRight[0].length];
             for (int i = 0; i < matrixLeft.length; i++) {
