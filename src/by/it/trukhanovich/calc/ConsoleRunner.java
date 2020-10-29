@@ -1,11 +1,21 @@
 package by.it.trukhanovich.calc;
 
+
+import by.it.trukhanovich.calc.Report.RunnerReport;
+
+
 import java.io.*;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+    public static Date DATE_START;
+    public static Date DATE_FINISH;
     public static void main(String[] args) throws CalcException {
+        DATE_START=new Date();
+        ConsoleRunner cs=new ConsoleRunner();
+        cs.clearLogs();
         Scanner sc=new Scanner(System.in);
         Parser parser=new Parser();
         Printer printer=new Printer();
@@ -39,13 +49,13 @@ public class ConsoleRunner {
              continue;
          }
          if (expression.equals("end")){
+             DATE_FINISH=new Date();
              break;
          }
          Var result=null;
          try {
 
              result=parser.calc(expression);
-//             Logger.log(String.valueOf(result));
              saveLogToTxt("log.txt", String.valueOf(result));
          } catch (CalcException e) {
              System.out.println(e.getMessage());
@@ -56,6 +66,7 @@ public class ConsoleRunner {
             printer.print (result);
 
         }
+        RunnerReport.main(args);
 
     }
 
@@ -82,6 +93,7 @@ public class ConsoleRunner {
             throw new CalcException(e);
         }
     }
+
     private static String getPath(Class<?> taskAClass) {
         String rootProject = System.getProperty("user.dir");
         String relativePath = taskAClass
@@ -89,5 +101,25 @@ public class ConsoleRunner {
                 .replace(taskAClass.getSimpleName(), "")
                 .replace(".", File.separator);
         return rootProject + File.separator + "src" + File.separator + relativePath;
+    }
+    private void clearLogs() throws CalcException {
+        String pathLog=getPath(ConsoleRunner.class)+"log.txt";
+        String pathErr=getPath(ConsoleRunner.class)+"log errror.txt";
+        try (PrintWriter writer = new PrintWriter(new FileWriter(pathLog,false)))
+        {
+            writer.println("");
+
+        } catch (IOException e) {
+            throw new CalcException(e);
+        }
+        try (PrintWriter writer = new PrintWriter(new FileWriter(pathErr,false)))
+        {
+            writer.println("");
+
+        } catch (IOException e) {
+            throw new CalcException(e);
+        }
+
+
     }
 }
