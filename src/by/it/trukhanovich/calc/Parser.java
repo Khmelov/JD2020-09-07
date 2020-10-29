@@ -60,7 +60,7 @@ class Parser {
 
 
     private Var calcOneOperation(String leftOperand, String operation, String rightOperand) throws CalcException {
-        Var right= Var.createVar(rightOperand);
+        Var right= VarCreator.createVar(rightOperand);
         if (operation.contains("=")) {
             return Var.saveVar(leftOperand,right);
         }

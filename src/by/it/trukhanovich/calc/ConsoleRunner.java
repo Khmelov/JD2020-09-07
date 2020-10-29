@@ -49,7 +49,7 @@ public class ConsoleRunner {
              saveLogToTxt("log.txt", String.valueOf(result));
          } catch (CalcException e) {
              System.out.println(e.getMessage());
-//             saveLogToTxt("log.txt",e.getMessage());
+             saveLogToTxt("log.txt",e.getMessage());
              Logger.log(e.getMessage());
          }
             printer.print (result);

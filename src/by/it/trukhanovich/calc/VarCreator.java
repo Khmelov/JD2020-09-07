@@ -3,7 +3,7 @@ package by.it.trukhanovich.calc;
 public class VarCreator {
 
     static Var createVar (String strVar) throws CalcException {
-        Var var=null;
+        Var var;
         if (strVar.matches(Patterns.SKALAR)){
             var= new Scalar(strVar);
         }

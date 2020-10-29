@@ -91,24 +91,24 @@ abstract class Var implements Operation {
         return "Это класс Var{}";
     }
 
-    static Var createVar (String strVar) throws CalcException {
-        if (strVar.matches(Patterns.SKALAR)){
-            return new Scalar(strVar);
-        }
-       else if (strVar.matches(Patterns.VECTOR)){
-            return new Vector(strVar);
-        }
-        else if (strVar.matches(Patterns.MATRIX)){
-            return new Matrix(strVar);
-        }
-        else if(vars.containsKey(strVar)){
-            return vars.get(strVar);
-        }
-        else {
-            throw new CalcException(String.format(resource.get(Error.UNKNOWN_VARIABLE)+strVar));
-
-        }
-    }
+//    static Var createVar (String strVar) throws CalcException {
+//        if (strVar.matches(Patterns.SKALAR)){
+//            return new Scalar(strVar);
+//        }
+//       else if (strVar.matches(Patterns.VECTOR)){
+//            return new Vector(strVar);
+//        }
+//        else if (strVar.matches(Patterns.MATRIX)){
+//            return new Matrix(strVar);
+//        }
+//        else if(vars.containsKey(strVar)){
+//            return vars.get(strVar);
+//        }
+//        else {
+//            throw new CalcException(String.format(resource.get(Error.UNKNOWN_VARIABLE)+strVar));
+//
+//        }
+//    }
 
     protected abstract int getSize();
 
