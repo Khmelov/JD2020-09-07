@@ -6,12 +6,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-public enum  Logger {
-
-    LOGGER;
+public class  Logger {
+// enum
+//    LOGGER;
 
     private final static String fileName="log errror.txt";
 
+//On Demand Holder idiom
+    public  static  class LoggerHolder {
+        public static final Logger LOGGER_INSTANCE=new Logger();
+}
+    public static Logger getInstance (){
+        return LoggerHolder.LOGGER_INSTANCE;
+    }
+
+
+// Double Checked Lock & volatile
 //    private static volatile Logger logger;
 //
 //    private Logger() {

@@ -50,6 +50,7 @@ public class ConsoleRunner {
          } catch (CalcException e) {
              System.out.println(e.getMessage());
              saveLogToTxt("log.txt",e.getMessage());
+             Logger.getInstance();
              Logger.log(e.getMessage());
          }
             printer.print (result);
