@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Vector extends Var {
-    private double[] value;
+    private final double[] value;
 
     public double[] getValue() {
         return value;
@@ -23,10 +23,6 @@ class Vector extends Var {
             line[i] = Double.parseDouble(strVector.trim().split(",\\s*")[i]);
         }
         this.value = line;
-    }
-
-    Vector(Vector vector) {
-        this.value = Arrays.copyOf(vector.value, vector.value.length);
     }
 
     Vector(double[] value) {

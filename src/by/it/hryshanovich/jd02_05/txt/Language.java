@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public enum Language {
     RB;
-    private static final String KEYWORDS = "by.it.drugov.jd02_05.resources.keywords";
+    private static final String KEYWORDS = "by.it.hryshanovich.jd02_05.resources.keywords";
     private Locale locale;
     private ResourceBundle resourceBundle;
 

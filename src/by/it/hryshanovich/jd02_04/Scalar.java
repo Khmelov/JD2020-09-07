@@ -2,7 +2,7 @@ package by.it.hryshanovich.jd02_04;
 
 
 class Scalar extends Var {
-    private double value;
+    private final double value;
 
     public double getValue() {
         return value;
@@ -19,10 +19,6 @@ class Scalar extends Var {
 
     Scalar(String strScalar) {
         this.value = Double.parseDouble(strScalar);
-    }
-
-    Scalar(Scalar scalar) {
-        this.value = scalar.value;
     }
 
     @Override
