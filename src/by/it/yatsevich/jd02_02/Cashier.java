@@ -41,15 +41,14 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getBuyer) {
             getBuyer.notify();
-            int goods = Buyer.GOODS;
             QueueBuyers.BUYERS_IN_QUEUE--;
-            printCheck(goods, getBuyer);
+            printCheck(getBuyer);
         }
         Helper.sleep(timer);
         System.out.println(this + " finished service" + getBuyer);
     }
 
-    private void printCheck(int goods, Buyer buyer) {
+    private void printCheck(Buyer buyer) {
         checkCounter++;
         StringBuilder check = new StringBuilder();
         check.append("Check №:        ").append("Cashier №1:     ")
@@ -59,10 +58,9 @@ public class Cashier implements Runnable {
                 .append("Cashier №5:     ").append("Queue size:     ").append("Total sum:      \n");
         check.append(checkCounter).append("\n").append(buyer.getName()).append("\n");
         synchronized (this) {
-            Basket.putToBasket(goods);
             Set<Map.Entry<String, Integer>> entries = Basket.temp.entrySet();
             Iterator<Map.Entry<String, Integer>> iterator = entries.iterator();
-            for (int i = 0; i < goods; i++) {
+            for (int i = 0; i < Supervisor.COUNTS_OF_GOODS; i++) {
                 if (iterator.hasNext()) {
                     Map.Entry<String, Integer> entry = iterator.next();
                     check.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
@@ -71,7 +69,7 @@ public class Cashier implements Runnable {
             for (int i = 0; i < number; i++) {
                 check.append("\t\t\t\t");
             }
-            check.append("Check sum:").append(Basket.getSum(goods));
+            check.append("Check sum:").append(Basket.costOfGoods);
             for (int i = 0; i < 6 - number; i++) {
                 check.append("\t\t\t\t");
             }
@@ -86,9 +84,8 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getPensioner) {
             getPensioner.notify();
-            int goods = Buyer.GOODS;
             QueueBuyers.BUYERS_IN_QUEUE--;
-            printCheck(goods, getPensioner);
+            printCheck(getPensioner);
         }
         Helper.sleep(timer);
         System.out.println(this + " finished service" + getPensioner);
@@ -98,7 +95,7 @@ public class Cashier implements Runnable {
         synchronized (this) {
             QueueCashiers.add(this);
             inWait = true;
-//            System.out.println(this+"Cashier close");
+//          System.out.println(this+"Cashier close");
             try {
                 this.wait();
                 CashierManager.CASHIERS_COUNTER--;

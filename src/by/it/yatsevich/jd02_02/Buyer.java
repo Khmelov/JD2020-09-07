@@ -4,19 +4,18 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     private static boolean pensioner = false;
 
-    volatile static int GOODS;
+    static volatile int goods;
 
     public Buyer(int number) {
         super("Bayer №" + number);
         Supervisor.addBuyer();
     }
 
-
     @Override
     public void run() {
         enterToMarket();
         takeBasket();
-//        Supervisor.COUNTS_OF_GOODS = Helper.getRandomGoods();
+
         chooseGoods();
         putGoodsToBasket();
         goToQueue();
@@ -29,22 +28,21 @@ class Buyer extends Thread implements IBayer, IUseBasket {
     }
 
     @Override
-    public int chooseGoods() {
-        Supervisor.COUNTS_OF_GOODS = Helper.getRandom(1, 4);
-        GOODS=Supervisor.COUNTS_OF_GOODS;
+    public void chooseGoods() {
+        Supervisor.COUNTS_OF_GOODS=Helper.getRandom(1,4);
         if (Supervisor.BUYER_IN_THE_SHOP % 4 == 0) pensioner = true;
         int timeout;
         if (!pensioner) {
             System.out.printf("%s PENSIONER starting choose\n", this);
-            timeout = GOODS * (int) (Helper.getRandom(500, 2000) * 1.5);
+            timeout = Supervisor.COUNTS_OF_GOODS * (int) (Helper.getRandom(500, 2000) * 1.5);
         } else {
             System.out.printf("%s starting choose\n", this);
-            timeout = GOODS * Helper.getRandom(500, 2000);
+            timeout = Supervisor.COUNTS_OF_GOODS * Helper.getRandom(500, 2000);
         }
         Helper.sleep(timeout);
 
         System.out.printf("%s chose %d good\n", this, Supervisor.COUNTS_OF_GOODS);
-        return GOODS;
+
     }
 
     @Override
@@ -96,9 +94,9 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        System.out.printf("%s put %d goods to basket\n", this, GOODS);
+        System.out.printf("%s put %d goods to basket\n", this, Supervisor.COUNTS_OF_GOODS);
 //        synchronized (Basket.temp) {
-//            Basket.putToBasket(goods);
+        Basket.putToBasket(Supervisor.COUNTS_OF_GOODS);
 //            System.out.println(Basket.temp);
 //            System.out.printf("%s Total purchase value : %3d$\n",this, goods);
 //        }
