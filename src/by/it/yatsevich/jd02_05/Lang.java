@@ -5,18 +5,20 @@ import java.util.ResourceBundle;
 
 public enum Lang {
     RB;
-    private static final String KEYWORDS ="by.it.yatsevich.resources.keywords";
-
+    public static final String BASE_NAME = "by.it.yatsevich.jd02_05.resources.keywords";
     private Locale locale;
+    private ResourceBundle bundle;
 
-    private ResourceBundle resourceBundle;
-
-    Lang(){ setLocale(Locale.getDefault()); }
-
-    public void setLocale(Locale locale){
-        this.locale=locale;
-        resourceBundle = ResourceBundle.getBundle(KEYWORDS,locale);
+    Lang() {
+        locale = Locale.getDefault();
+        setLocale(locale);
     }
 
-    public  String get(String key) { return  resourceBundle.getString(key); }
+    public void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle(
+                BASE_NAME, locale);
+    }
+    public String get(String key){
+        return bundle.getString(key);
+    }
 }
