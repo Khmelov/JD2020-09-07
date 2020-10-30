@@ -1,0 +1,3 @@
+message.hello = Прывитанне!
+message.firstName = Кирыл
+message.lastName = Калашникау
