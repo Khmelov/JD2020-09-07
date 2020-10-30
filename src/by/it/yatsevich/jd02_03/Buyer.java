@@ -1,10 +1,14 @@
-package by.it.yatsevich.jd02_02;
+package by.it.yatsevich.jd02_03;
 
 class Buyer extends Thread implements IBayer, IUseBasket {
 
-    private static boolean pensioner = false;
+    static boolean pensioner = false;
+    private static int goods;
 
-    static volatile int goods;
+
+    static void setGoods(int goods) {
+        Buyer.goods = goods;
+    }
 
     public Buyer(int number) {
         super("Bayer №" + number);
@@ -15,7 +19,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
     public void run() {
         enterToMarket();
         takeBasket();
-
+        setGoods(Helper.getRandomGoods());
         chooseGoods();
         putGoodsToBasket();
         goToQueue();
@@ -29,19 +33,18 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     @Override
     public void chooseGoods() {
-        Supervisor.COUNTS_OF_GOODS=Helper.getRandom(1,4);
-        if (Supervisor.BUYER_IN_THE_SHOP % 4 == 0) pensioner = true;
+        if (goods % 4 == 0) pensioner = true;
         int timeout;
         if (!pensioner) {
             System.out.printf("%s PENSIONER starting choose\n", this);
-            timeout = Supervisor.COUNTS_OF_GOODS * (int) (Helper.getRandom(500, 2000) * 1.5);
+            timeout = goods * (int) (Helper.getRandom(500, 2000) * 1.5);
         } else {
             System.out.printf("%s starting choose\n", this);
-            timeout = Supervisor.COUNTS_OF_GOODS * Helper.getRandom(500, 2000);
+            timeout = goods * Helper.getRandom(500, 2000);
         }
         Helper.sleep(timeout);
 
-        System.out.printf("%s chose %d good\n", this, Supervisor.COUNTS_OF_GOODS);
+        System.out.printf("%s chose %d good\n", this, goods);
 
     }
 
@@ -50,7 +53,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         synchronized (this) {
             System.out.printf("%s buyer go out\n", this);
             Supervisor.deleteBuyer();
-            Supervisor.BUYER_IN_THE_SHOP--;
+            Supervisor.BUYER_IN_THE_SHOP.getAndDecrement();
         }
     }
 
@@ -59,7 +62,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
         synchronized (this) {
             if (pensioner) {
                 QueuePensioners.add(this);
-                QueueBuyers.BUYERS_IN_QUEUE++;
+                QueueBuyers.BUYERS_IN_QUEUE.getAndIncrement();
                 try {
                     System.out.println(this + " add to QueuePensioners");
                     wait();
@@ -70,7 +73,7 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
             } else {
                 QueueBuyers.add(this);
-                QueueBuyers.BUYERS_IN_QUEUE++;
+                QueueBuyers.BUYERS_IN_QUEUE.getAndIncrement();
                 try {
                     System.out.println(this + " add to queue");
                     wait();
@@ -94,12 +97,12 @@ class Buyer extends Thread implements IBayer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        System.out.printf("%s put %d goods to basket\n", this, Supervisor.COUNTS_OF_GOODS);
-//        synchronized (Basket.temp) {
-        Basket.putToBasket(Supervisor.COUNTS_OF_GOODS);
+        System.out.printf("%s put %d goods to basket\n", this, goods);
+        synchronized (this) {
+        Basket.putToBasket(goods);
 //            System.out.println(Basket.temp);
 //            System.out.printf("%s Total purchase value : %3d$\n",this, goods);
-//        }
+        }
         System.out.printf("%s finished choose\n", this);
     }
 }

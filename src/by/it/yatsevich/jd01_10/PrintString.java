@@ -3,7 +3,8 @@ package by.it.yatsevich.jd01_10;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-class PrintString {
+class
+PrintString {
 
     public static void main(String[] args) {
         Class<String> stringClassStructure = String.class;

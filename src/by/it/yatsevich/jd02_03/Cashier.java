@@ -1,4 +1,4 @@
-package by.it.yatsevich.jd02_02;
+package by.it.yatsevich.jd02_03;
 
 
 import java.util.Iterator;
@@ -41,7 +41,7 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getBuyer) {
             getBuyer.notify();
-            QueueBuyers.BUYERS_IN_QUEUE--;
+            QueueBuyers.BUYERS_IN_QUEUE.getAndDecrement();
             printCheck(getBuyer);
         }
         Helper.sleep(timer);
@@ -60,20 +60,19 @@ public class Cashier implements Runnable {
         synchronized (this) {
             Set<Map.Entry<String, Integer>> entries = Basket.temp.entrySet();
             Iterator<Map.Entry<String, Integer>> iterator = entries.iterator();
-            for (int i = 0; i < Supervisor.COUNTS_OF_GOODS; i++) {
                 if (iterator.hasNext()) {
                     Map.Entry<String, Integer> entry = iterator.next();
                     check.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
                 }
-            }
+
             for (int i = 0; i < number; i++) {
                 check.append("\t\t\t\t");
             }
-            check.append("Check sum:").append(Basket.costOfGoods);
+            check.append("Check sum:").append(Basket.costOfGoods.get());
             for (int i = 0; i < 6 - number; i++) {
                 check.append("\t\t\t\t");
             }
-            check.append(QueueBuyers.BUYERS_IN_QUEUE).append("\t\t\t\t").append(Basket.GLOBAL_SUM).append("\n");
+            check.append(QueueBuyers.BUYERS_IN_QUEUE.get()).append("\t\t\t\t").append(Basket.GLOBAL_SUM.get()).append("\n");
             System.out.flush();
             System.out.println(check);
         }
@@ -84,7 +83,7 @@ public class Cashier implements Runnable {
         int timer = Helper.getRandom(2000, 5000);
         synchronized (getPensioner) {
             getPensioner.notify();
-            QueueBuyers.BUYERS_IN_QUEUE--;
+            QueueBuyers.BUYERS_IN_QUEUE.getAndDecrement();
             printCheck(getPensioner);
         }
         Helper.sleep(timer);
@@ -98,7 +97,7 @@ public class Cashier implements Runnable {
 //          System.out.println(this+"Cashier close");
             try {
                 this.wait();
-                CashierManager.CASHIERS_COUNTER--;
+                CashierManager.CASHIERS_COUNTER.getAndDecrement();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
