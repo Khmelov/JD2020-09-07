@@ -31,7 +31,7 @@ public class Logger {
 
 
         private static String getFileName(Class<?> aClass, String simpleName){
-        String path = System.getProperty("user.dir") + File.separator + "srс" + File.separator;
+        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
             path = path  + aClass.getName().replace(".",File.separator);
         path = path.replace(aClass.getSimpleName(),"");
         return path + simpleName;
