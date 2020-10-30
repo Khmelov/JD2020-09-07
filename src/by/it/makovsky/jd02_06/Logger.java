@@ -1,6 +1,7 @@
 package by.it.makovsky.jd02_06;
 
 import java.io.*;
+import java.util.Date;
 
 class Logger {
     private final String filename="log.txt";
@@ -27,7 +28,8 @@ class Logger {
         try (
             PrintWriter writer=new PrintWriter(new FileWriter(fn,true));
         ) {
-            writer.println(text);
+            Date date= new Date();
+            writer.println(date.toString()+" "+text);
         }
         catch (IOException e) {
             throw new RuntimeException(e);
