@@ -4,14 +4,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    private final VarCreator varCreator;
+
+    public Parser(VarCreator varCreator) {
+        this.varCreator = varCreator;
+    }
+
     Var calc(String expression) throws CalcException{
 
         String[] operand = expression.split(Patterns.OPERATION);
-        Var second = Var.createVar(operand[1]);
+        Var second = varCreator.createVar(operand[1]);
         if (expression.contains("=")){
-            return Var.saveVar(operand[0],second);
+            return varCreator.saveVar(operand[0],second);
         }
-        Var first = Var.createVar(operand[0]);
+        Var first = varCreator.createVar(operand[0]);
 
         if (first==null || second==null) {
             return null;
