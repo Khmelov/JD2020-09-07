@@ -4,11 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException{
 
         String[] operand = expression.split(Patterns.OPERATION);
-        Var first = Var.createVar(operand[0]);
         Var second = Var.createVar(operand[1]);
+        if (expression.contains("=")){
+            return Var.saveVar(operand[0],second);
+        }
+        Var first = Var.createVar(operand[0]);
+
         if (first==null || second==null) {
             return null;
                     }

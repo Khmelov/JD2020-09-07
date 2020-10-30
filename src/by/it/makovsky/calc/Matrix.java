@@ -27,42 +27,43 @@ class Matrix extends Var {
 
     }
 
-    Matrix(String strMatrix) {
-        Pattern pattern = Pattern.compile("\\{");
-        Matcher matcher = pattern.matcher(strMatrix);
-        while (matcher.find()) {
-            strMatrix = matcher.replaceFirst("");
-            break;
-        }
-        StringBuilder sbLine = new StringBuilder(strMatrix);
-        sbLine.reverse();
-        pattern = Pattern.compile("[}]");
-        matcher = pattern.matcher(sbLine);
-        matcher.reset();
-        while (matcher.find()) {
-            strMatrix = matcher.replaceFirst("");
-            break;
-        }
-        sbLine = new StringBuilder(strMatrix);
-        sbLine.reverse();
-        strMatrix = sbLine.toString();
-        strMatrix = strMatrix.trim();
-        String[] array = strMatrix.split("},");
-        double[][] temp = new double[array.length][array.length];
-        for (int i = 0; i < array.length; i++) {
-            pattern = Pattern.compile("[{}]");
-            matcher = pattern.matcher(array[i]);
-            while (matcher.find()) {
-                array[i] = matcher.replaceAll(" ");
-            }
-            String[] line = array[i].trim().split(",\\s*");
-            double[][] tempArr = new double[array.length][line.length];
-            for (int j = 0; j < line.length; j++) {
-                tempArr[i][j] = Double.parseDouble(line[j]);
-                temp[i][j] = tempArr[i][j];
-            }
-        }
-        this.value = temp;
+    public Matrix(String strMatrix) {
+        StringBuilder sb= new StringBuilder(strMatrix);
+        int row = findRow(sb);
+        int collum = findCollum(sb);
+        double[][] matrix=new double[row][(((collum)/row)+1)];
+        this.value= matrix;
+        getArrayStringToDouble(sb,matrix);
+    }
+
+
+
+    private void getArrayStringToDouble(StringBuilder sb, double[][] matrix)
+    {
+        Pattern p3= Pattern.compile("(\\d+\\.\\d+)|(\\d+)");
+        Matcher m3= p3.matcher(sb);
+        int row=0;
+        int collum=0;
+        while (m3.find()) {
+            matrix[row][collum]=Double.parseDouble(m3.group());
+            if (collum<matrix[row].length-1) collum++;
+            else collum=0;
+            if (collum==0) row++;}
+    }
+    private int findCollum(StringBuilder sb) {
+        Pattern p2= Pattern.compile("\\d,");
+        Matcher m2= p2.matcher(sb);
+        int j=0;
+        while (m2.find()){j++;}
+        return j;
+    }
+
+    private int findRow(StringBuilder sb) {
+        Pattern p1= Pattern.compile("(\\}\\, \\{)|(\\}\\,\\{)");
+        Matcher m1= p1.matcher(sb);
+        int i=1;
+        while (m1.find()){i++;}
+        return i;
     }
 
     @Override
@@ -207,5 +208,8 @@ class Matrix extends Var {
         } else {
             return super.mul(other);
         }
+    }
+    public double[][] getValue() {
+        return value;
     }
 }

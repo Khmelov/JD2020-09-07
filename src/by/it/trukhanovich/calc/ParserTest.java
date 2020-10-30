@@ -20,6 +20,7 @@ public class ParserTest {
     public void checkA2() throws Exception {
         double expected =25.55;
         Parser parser= new Parser();
+        parser.calc("A=7.3");
         Var calcA2 = parser.calc("B=A*3.5");
         double actual = Double.parseDouble(calcA2.toString());
         assertEquals(expected, actual, 1e-8);
@@ -28,6 +29,7 @@ public class ParserTest {
     public void checkA3() throws Exception {
         double expected =25;
         Parser parser= new Parser();
+        parser.calc("B=25.55");
         Var calcA3 = parser.calc("B1=B+0.11*-5");
         double actual = Double.parseDouble(calcA3.toString());
         assertEquals(expected, actual, 1e-8);
@@ -36,6 +38,7 @@ public class ParserTest {
     public void checkA4() throws Exception {
         double expected =2.65;
         Parser parser= new Parser();
+        parser.calc("A=7.3");
         Var calcA4 = parser.calc("B2=A/2-1");
         double actual = Double.parseDouble(calcA4.toString());
         assertEquals(expected, actual, 1e-8);
@@ -44,6 +47,7 @@ public class ParserTest {
     public void checkB1() throws Exception {
         double expected =40.15;
         Parser parser= new Parser();
+        parser.calc("B=25.55");
         Var calcB1 = parser.calc("C=B+(A*2)");
         double actual = Double.parseDouble(calcB1.toString());
         assertEquals(expected, actual, 1e-8);
@@ -52,6 +56,7 @@ public class ParserTest {
     public void checkB2() throws Exception {
         double expected =10;
         Parser parser= new Parser();
+        parser.calc("C=40.15");
         Var calcB2 = parser.calc("D=((C-0.15)-20)/(7-5)");
         double actual = Double.parseDouble(calcB2.toString());
         assertEquals(expected, actual, 1e-8);
@@ -60,6 +65,7 @@ public class ParserTest {
     public void checkB3() throws Exception {
         double [] expected = {10, 15};
         Parser parser= new Parser();
+        parser.calc("D=10");
         Vector calcB3 = (Vector) parser.calc("E={2,3}*(D/2)");
         double [] actual = calcB3.getValue();
         assertArrayEquals(expected,actual,1e-8);

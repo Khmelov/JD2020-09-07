@@ -5,6 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
+
+    private Lang resource = Lang.LANG;
+
     private Map <String,Integer> priority= new HashMap<>();
     {
     priority.put("(",-1);
@@ -68,7 +71,7 @@ class Parser {
                 case "*": return left.mul(right);
                 case "/": return left.div(right);
             }
-        throw new CalcException("неизвестная операция: "+leftOperand+operation+rightOperand);
+        throw new CalcException(resource.get(Error.UNKNOWN_OPERATION)+leftOperand+operation+rightOperand);
     }
 
     private int getIndexOperation(List<String> operations) {
