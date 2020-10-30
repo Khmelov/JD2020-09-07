@@ -1,10 +1,10 @@
-package by.it.stefankin.jd20_04;
+package by.it.stefankin.jd02_04;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static by.it.stefankin.jd20_04.Var.*;
+import static by.it.stefankin.jd02_04.Var.*;
 
 public class Parser {
 

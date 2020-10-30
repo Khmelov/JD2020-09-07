@@ -1,4 +1,4 @@
-package by.it.stefankin.jd20_04;
+package by.it.stefankin.jd02_04;
 
 public class CalcException extends Exception {
     public CalcException() {
