@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Locale;
 
 class Logger {
     //    Если используем enum
 //    GET;
-    private final String fileName = "log.txt";
+    private final static String fileName = "log.txt";
     //    Классический пример без использования enum. Использование для понимания многопоточки.начало
     private static volatile Logger logger;
 
@@ -41,7 +42,8 @@ class Logger {
         String fn = getFilename(Logger.class, this.fileName);
         try (PrintWriter printWriter = new PrintWriter(
                 new FileWriter(fn, true))) {
-            printWriter.println(text);
+            Date date= new Date();
+            printWriter.println(text+"\n"+date.toString());
         } catch(IOException e) {
             throw  new RuntimeException(e);
         }

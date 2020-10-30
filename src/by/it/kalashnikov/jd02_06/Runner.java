@@ -11,15 +11,18 @@ class Runner {
         @Override
         public void run() {
             Logger logger = Logger.getInstance();
+
             logger.log(getName());
+
         }
     }
 
     public static void main(String[] args) {
         Logger logger = Logger.getInstance();
-        logger.log("one");
-        for (int i = 0; i < 10; i++) {
+
+        for (int i = 0; i < 4; i++) {
             new Th("th" + i).start();
         }
+
     }
 }
