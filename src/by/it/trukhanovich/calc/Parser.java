@@ -54,16 +54,18 @@ class Parser {
                 operands.remove(index-1);
             }
         }
-        return Var.createVar(operands.get(0));
+        return VarCreator.createVar(operands.get(0));
+//        return Var.createVar(operands.get(0));
     }
 
 
     private Var calcOneOperation(String leftOperand, String operation, String rightOperand) throws CalcException {
-        Var right= Var.createVar(rightOperand);
+        Var right= VarCreator.createVar(rightOperand);
         if (operation.contains("=")) {
             return Var.saveVar(leftOperand,right);
         }
-        Var left= Var.createVar(leftOperand);
+        Var left= VarCreator.createVar(leftOperand);
+//        Var left= Var.createVar(leftOperand);
 
             switch (operation){
                 case "+": return left.add(right);

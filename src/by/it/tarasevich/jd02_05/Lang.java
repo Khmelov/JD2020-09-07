@@ -15,7 +15,7 @@ public enum  Lang {
     private ResourceBundle resourceBundle;
 
     Lang() {
-        setLocale(Locale.getDefault());
+        setLocale(Locale.UK);
     }
 
     public void setLocale(Locale locale) {

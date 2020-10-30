@@ -2,21 +2,24 @@ package by.it.kalashnikov.calculator;
 
 class Scalar extends Var {
 
-    private double value;
-
     public double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    private final double value;
+
+    public Scalar(double value) {
         this.value = value;
     }
 
-    Scalar(double value) {this.value = value;}
 
-    Scalar(String str) {this.value = Double.parseDouble(str);}
+    public Scalar(Scalar scalar) {
+        this.value = scalar.value;
+    }
 
-    Scalar(Scalar scalar) {this.value = scalar.value;}
+    public Scalar(String strScalar) {
+        this.value = Double.parseDouble(strScalar);
+    }
 
     @Override
     public Var add(Var other) throws CalcException{
@@ -63,8 +66,6 @@ class Scalar extends Var {
         return super.div(other);
     }
     }
-
-
 
     @Override
     public String toString() {

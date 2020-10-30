@@ -1,8 +1,7 @@
 package by.it.kalashnikov.calculator;
 
  class CalcException extends Exception {
-     public CalcException() {
-     }
+
 
      public CalcException(String message) {
          super("ERROR: " + message);
@@ -13,10 +12,6 @@ package by.it.kalashnikov.calculator;
      }
 
      public CalcException(Throwable cause) {
-         super("ERROR: " + cause);
-     }
-
-     public CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-         super("ERROR: " + message, cause, enableSuppression, writableStackTrace);
+         super(cause);
      }
  }
