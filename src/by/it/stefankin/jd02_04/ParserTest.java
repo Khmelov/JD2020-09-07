@@ -62,18 +62,18 @@ public class ParserTest {
 
     @Test
     public void checkCalc7() throws Exception {
-        double expected =10;
         Parser parser = new Parser();
         Var var7 = parser.calc("D=((C-0.15)/(7-5))");
+        double expected =10.875;
         double actual = Double.parseDouble(var7.toString());
-        assertEquals(actual,expected,1-8);
+        assertEquals(expected,actual,1-8);
     }
 
     @Test
     public void checkCalcVector2() throws Exception {
         double[] expected ={10,15};
         Parser parser = new Parser();
-        Var vectorB2 = parser.calc("E={2,3}*(D/2)");
+        Var vectorB2 = parser.calc("E={2,3}*(10/2)");
         double[] actual =((Vector)vectorB2).getValue();
         assertArrayEquals(actual,expected,1-8);
     }
