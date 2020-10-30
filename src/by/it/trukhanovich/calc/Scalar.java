@@ -2,7 +2,9 @@ package by.it.trukhanovich.calc;
 
 class Scalar extends Var {
 
-     private double value;
+    private double value;
+
+    private Lang resource = Lang.LANG;
 
     public double getValue() {
         return value;
@@ -56,7 +58,7 @@ class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             double zz=((Scalar) other).value;
-            if (zz==0) throw new CalcException("деление на ноль.");
+            if (zz==0) throw new CalcException(resource.get(Error.DIV_NULL));
             double sub=this.value/((Scalar) other).value;
             return new Scalar(sub);
         }

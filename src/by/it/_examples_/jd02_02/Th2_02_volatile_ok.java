@@ -8,20 +8,21 @@ public class Th2_02_volatile_ok {
     //это касса. Просто добавляет в баланс единицу
     static class Cashier extends Thread {
         //создадим видимость расчета
-        int calc(int in) {
-            int j=0; for (int i = 0; i < 666; i++) {j=j+(int)((Math.sqrt(i)));}
-            return in;
+        int calc() {
+            for (int i = 0; i < 666; i++) i = i + (int) (Math.sqrt(i / 1234.567));
+            return 1;
         }
+        @SuppressWarnings("NonAtomicOperationOnVolatileField")
         @Override
         public  void run() {
             //так ПОЧТИ ВСЕГДА будет работать.
             // volatile - это ГАРАНТИЯ доступности, а не гарантия целостности.
-            int delta = (calc(1));
+            int delta = (calc());
             balance+=delta; //но потенциально проблема есть. Тут ТРИ операции, а не одна.
         }
     }
     //создадим 4444 касс. Каждая добавит по 1. Сколько всего будет?
-    public static void main(String[ ] args) throws InterruptedException {
+    public static void main(String[ ] args) {
         //Считаем сколько было потоков
         int thCount=Thread.activeCount();
 
@@ -29,7 +30,7 @@ public class Th2_02_volatile_ok {
             new Cashier().start();
         }
         //пока потоков больше чем было в начале просто ждем
-        while (Thread.activeCount()>thCount) {Thread.sleep(100);}
+        while (Thread.activeCount() > thCount) Thread.yield();
         System.out.print("Итого:"+balance);
     }
 }

@@ -1,7 +1,5 @@
 package by.it.kulik.jd01_14;
 
-import javafx.concurrent.Task;
-
 import java.io.*;
 
 public class TaskA {

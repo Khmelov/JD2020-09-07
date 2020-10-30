@@ -1,10 +1,16 @@
 package by.it.trukhanovich.calc;
 
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 abstract class Var implements Operation {
 
     static Map<String,Var> vars =new HashMap<>();
+
+    private static Lang resource = Lang.LANG;
 
     static TreeMap sortMap(){
         TreeMap treeMap = new TreeMap(vars);
@@ -12,32 +18,71 @@ abstract class Var implements Operation {
 
     }
 
-    static Var saveVar (String name, Var var){
+    static Var saveVar (String name, Var var) throws CalcException {
         vars.put(name, var);
+        saveToTxt();
         return var;
     }
 
+    static void load () throws CalcException {
+    String path=getPath(Var.class)+"vars.txt";
+    ArrayList<String> lines=new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))){
+            while (br.ready()){
+                lines.add(br.readLine());
+            }
 
+        }
+        catch (FileNotFoundException e) {
+//            throw new RuntimeException("error read vars", e);
+        } catch (IOException e) {
+            throw new RuntimeException(resource.get(Error.READ),e);
+        }
+        Parser parser=new Parser();
+        for (String line : lines) {
+            parser.calc(line);
+        }
+    }
+    private static void saveToTxt () throws CalcException {
+        String path=getPath(Var.class)+"vars.txt";
+        try (PrintWriter writer = new PrintWriter(path))
+        {
+            for (Map.Entry<String, Var> pair : vars.entrySet()) {
+                writer.printf ("%s=%s\n",pair.getKey(),pair.getValue());
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new CalcException(e);
+        }
+    }
+    private static String getPath(Class<?> taskAClass) {
+        String rootProject = System.getProperty("user.dir");
+        String relativePath = taskAClass
+                .getName()
+                .replace(taskAClass.getSimpleName(), "")
+                .replace(".", File.separator);
+        return rootProject + File.separator + "src" + File.separator + relativePath;
+    }
 
     @Override
     public Var add(Var other) throws CalcException {
-        System.out.printf("Операция %s + %s невозможна\n", this, other);
-        return null;
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_ADD), this, other));
+
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_SUB), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_MUL), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна\n", this, other));
+        throw new CalcException(String.format(resource.get(Error.IMPOSSIBLE_DIV), this, other));
 
     }
 
@@ -60,7 +105,7 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            throw new CalcException(String.format("Незвестная переменная "+strVar));
+            throw new CalcException(String.format(resource.get(Error.UNKNOWN_VARIABLE)+strVar));
 
         }
     }

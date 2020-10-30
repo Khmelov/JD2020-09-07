@@ -17,7 +17,7 @@ class Helper {
         try {
             Thread.sleep(millis/Dispatcher.K_SPEED);
         } catch (InterruptedException e) {
-            throw new RuntimeException("something stupid", e);
+            throw new RuntimeException(e);
         }
     }
 }

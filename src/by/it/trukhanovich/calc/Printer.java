@@ -6,5 +6,11 @@ class Printer {
             System.out.println(var);
         }
     }
+    String printTolog (Var var) throws CalcException {
+        if (var!=null) {
+            return var.toString();
+        }
+        throw new CalcException();
+    }
 
 }

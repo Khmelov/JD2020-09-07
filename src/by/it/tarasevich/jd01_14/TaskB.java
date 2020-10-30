@@ -1,55 +1,74 @@
 package by.it.tarasevich.jd01_14;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskB {
+
     public static final String TASK_B_TXT = "resultTaskB.txt";
-    static final String FILENAME = "dataTaskB.bin";
+    static final String FILE_NAME = "text.txt";
 
     public static void main(String[] args) {
-        String path = getPath(TaskB.class);
-        String fileName = path + FILENAME;
-        writeInt(fileName);
-        List<Integer> list = new ArrayList<>();
-        printToTxt(path,list);
+        String path=getPath(TaskB.class);
+        String fileName=path+ FILE_NAME;
+
+
+        int word=checkWords(fileName);
+        int punctuationMark=checkMarks(fileName);
+        printToTxt(word,punctuationMark,path);
+        System.out.printf("words=%d, punctuation marks=%d", word, punctuationMark);
 
 
     }
 
-    private static void writeInt(String fileName) {
-        try (
-                DataOutputStream dataOutputStream = new DataOutputStream(
-                        new BufferedOutputStream(
-                                new FileOutputStream(fileName)
-                        )
-                )
-        ) {
-            for (int i = 0; i < 20; i++) {
-                int value = 10 + (int) (Math.random() * 100);
-                dataOutputStream.writeInt(value);
+    private static int checkWords(String fileName) {
+        try (BufferedReader is = new BufferedReader(new FileReader(fileName)))
+        {
+            int word=0;
+            while (is.ready()){
+                String s=is.readLine();
+                Pattern words = Pattern.compile("[А-Яа-яЁё]+");
+                Matcher m1= words.matcher(s);
+                while (m1.find()){
+                    word++;}
             }
+            return word;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static int checkMarks(String fileName) {
+
+        try (BufferedReader is = new BufferedReader(new FileReader(fileName)))
+        {
+            int punctuationMark=0;
+            while (is.ready()){
+                String s=is.readLine();
+                Pattern punctuationMarks = Pattern.compile("[-,.:!?]+");
+                Matcher m1= punctuationMarks.matcher(s);
+                while (m1.find()){
+                    punctuationMark++;}
+            }
+            return punctuationMark;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private static String getPath(Class<TaskB> taskBClass) {
-        String rootProgect = System.getProperty("user.dir");
-        String relativePath = taskBClass.getName().replace(taskBClass.getSimpleName(), "")
-                .replace(".", File.separator);
-
-        return rootProgect + File.separator + "src" + File.separator + relativePath;
+        String rootProject = System.getProperty("user.dir");
+        String path = taskBClass.getName().
+                replace(taskBClass.getSimpleName(),"").
+                replace(".", File.separator);
+        return rootProject+File.separator+"src"+File.separator+path;
     }
-    private static void printToTxt(String path, List<Integer> list) {
-        try (PrintWriter printWriter = new PrintWriter(path + TASK_B_TXT)) {
-            double sum2 = 0;
-            for (Integer integer : list) {
-                printWriter.printf("%d ", integer);
-                sum2 = sum2 + integer;
-            }
-            printWriter.println("\nwords=" + sum2 / list.size());
+    private static void printToTxt(int word, int punctuationMark, String path) {
+        try(PrintWriter printWriter = new PrintWriter(path +TASK_B_TXT))
+        {
+            printWriter.printf("words=%d, punctuation marks=%d", word, punctuationMark);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

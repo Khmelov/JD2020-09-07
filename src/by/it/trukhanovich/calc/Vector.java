@@ -4,7 +4,9 @@ import java.util.Arrays;
 
 class Vector extends Var {
 
-  private double [] value;
+    private double [] value;
+
+    private Lang resource = Lang.LANG;
 
     public double[] getValue() {
         return value;
@@ -44,7 +46,7 @@ class Vector extends Var {
         else if (other instanceof Vector){
              double [] res=Arrays.copyOf(value,value.length);
             if (value.length!=((Vector) other).getSize()){
-                throw new CalcException("недопустимый размер векторов.");
+                throw new CalcException(resource.get(Error.TWO_VECTOR));
             }
             for (int i = 0; i < res.length; i++) {
                 res[i]=res[i]+((Vector) other).value[i];
@@ -65,7 +67,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             if (value.length!=((Vector) other).getSize()){
-                throw new CalcException("недопустимый размер векторов.");
+                throw new CalcException(resource.get(Error.TWO_VECTOR));
             }
             double [] res=Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
@@ -88,7 +90,7 @@ class Vector extends Var {
         else if (other instanceof Vector){
             double [] res=Arrays.copyOf(value,value.length);
             if (value.length!=other.getSize()){
-                throw new CalcException("недопустимый размер векторов.");
+                throw new CalcException(resource.get(Error.TWO_VECTOR));
             }
             double sum=0;
             for (int i = 0; i < res.length; i++) {
