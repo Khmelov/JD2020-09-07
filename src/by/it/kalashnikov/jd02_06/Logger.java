@@ -18,10 +18,10 @@ class Logger {
 
     static Logger getInstance() {
         Logger localLogger = Logger.logger;
-        if (localLogger != null) {
+        if (localLogger == null) {
             synchronized (Logger.class) {
                 localLogger = Logger.logger;
-                if (localLogger != null) {
+                if (localLogger == null) {
                     logger = localLogger = new Logger();
                 }
             }
