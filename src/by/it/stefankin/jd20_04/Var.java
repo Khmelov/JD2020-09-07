@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 
 public abstract class Var implements Operation {
 
-    private static final Map<String,Var> vs = new HashMap<>();
+    private static final Map<String,Var> valuesVar = new HashMap<>();
 
     static Var save(String name,Var value) throws CalcException {
-        vs.put(name, value);
+        valuesVar.put(name, value);
         saveToTxt();
         return value;
     }
@@ -30,7 +30,7 @@ public abstract class Var implements Operation {
             if (operand.matches(Patterns.VECTOR))
             return new Vector(operand);
             else {
-                Var var = vs.get(operand);
+                Var var = valuesVar.get(operand);
                 if (var != null)
                     return var;
 
@@ -74,7 +74,7 @@ public abstract class Var implements Operation {
     private static void saveToTxt() throws CalcException {
         String path = getPath() + "var.txt";
         try (PrintWriter writer = new PrintWriter(path)) {
-            for (Map.Entry<String,Var>  pair : vs.entrySet()) {
+            for (Map.Entry<String,Var>  pair : valuesVar.entrySet()) {
                 writer.printf("%s=%s\n", pair.getKey(), pair.getValue());
             }
         } catch (FileNotFoundException e) {

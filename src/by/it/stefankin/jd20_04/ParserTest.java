@@ -53,9 +53,9 @@ public class ParserTest {
 
     @Test
     public void checkCalc6() throws Exception {
-        double expected =40.15;
+        double expected =21.9;
         Parser parser = new Parser();
-        Var var6 = parser.calc("C=B+(A*2)");
+        Var var6 = parser.calc("C=A+(A*2)");
         double actual = Double.parseDouble(var6.toString());
         assertEquals(actual,expected,1-8);
     }
@@ -64,7 +64,7 @@ public class ParserTest {
     public void checkCalc7() throws Exception {
         double expected =10;
         Parser parser = new Parser();
-        Var var7 = parser.calc("D=((C-0.15)/(7-5)");
+        Var var7 = parser.calc("D=((C-0.15)/(7-5))");
         double actual = Double.parseDouble(var7.toString());
         assertEquals(actual,expected,1-8);
     }
