@@ -1,0 +1,3 @@
+message.hello = HELLO!
+message.firstName = Kirill
+message.lastName = Kalashnikov
