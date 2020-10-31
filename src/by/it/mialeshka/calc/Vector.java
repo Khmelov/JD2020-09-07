@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 class Vector extends Var {
     double[] var;
 
+
+
     public Vector(double[] var) {
         this.var = var;
     }

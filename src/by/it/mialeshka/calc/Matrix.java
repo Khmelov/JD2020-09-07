@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 class Matrix extends Var {
     double[][] var;
 
+    public double[][] getVar() {
+        return var;
+    }
+
     public Matrix(double[][] var) {
         this.var = var;
     }
@@ -21,10 +25,10 @@ class Matrix extends Var {
         strb.delete(strb.length()-2, strb.length());
         Pattern pattern = Pattern.compile("},[ ]*\\{");
         String[] arrStr = pattern.split(strb);
-        List<String[]> arrStr2 = new ArrayList<String[]>();
-        for (int i = 0; i < arrStr.length; i++) {
+        List<String[]> arrStr2 = new ArrayList<>();
+        for (String s : arrStr) {
             Pattern pattern1 = Pattern.compile(",[ ]*");
-            StringBuilder strb1 = new StringBuilder(arrStr[i]);
+            StringBuilder strb1 = new StringBuilder(s);
             arrStr2.add(pattern1.split(strb1));
         }
 
@@ -41,11 +45,11 @@ class Matrix extends Var {
         StringBuilder strb = new StringBuilder("{");
 
         String delimeterStr = "";
-        for (int i = 0; i < var.length; i++) {
+        for (double[] doubles : var) {
             strb.append(delimeterStr).append("{");
             String delimeter = "";
             for (int j = 0; j < var[0].length; j++) {
-                strb.append(delimeter).append(var[i][j]);
+                strb.append(delimeter).append(doubles[j]);
                 delimeter = ", ";
             }
             strb.append("}");

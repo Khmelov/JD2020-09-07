@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 abstract class Var implements Operation {
-    private static Map<String, Var> vars = new HashMap<>();
+    private static final Map<String, Var> vars = new HashMap<>();
 
     private static String dir(){
         return System.getProperty("user.dir") + File.separator + "src" + File.separator
@@ -48,7 +48,7 @@ abstract class Var implements Operation {
     }
 
     static void printSortMap(){
-        Map<String, Var> sortVars = new TreeMap();
+        Map<String, Var> sortVars = new TreeMap<>();
         for (String key: vars.keySet()
              ) {
             sortVars.put(key, vars.get(key));
