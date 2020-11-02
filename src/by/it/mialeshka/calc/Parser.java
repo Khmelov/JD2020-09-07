@@ -33,7 +33,7 @@ class Parser {
         }
 
         if (operands.size() == 0){
-            throw new CalcException("Некорректное выражение");
+            throw new CalcException(ErrMesages.res.get(ErrMesages.expressionUnknown));
         }
         Var result;
         while (operations.size() > 0){
@@ -59,7 +59,7 @@ class Parser {
         Var left = Var.createVar(leftStr);
 
         if (left == null || right == null) {
-            throw new CalcException("Некорректное выражение");
+            throw new CalcException(ErrMesages.res.get(ErrMesages.expressionUnknown));
         }
         Var result;
 
@@ -77,7 +77,7 @@ class Parser {
                 result = left.div(right);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + operation);
+                throw new IllegalStateException(ErrMesages.res.get(ErrMesages.expressionUnexpected)+ operation);
             }
             return result;
     }

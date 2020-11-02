@@ -1,4 +1,4 @@
-package by.it.mialeshka.jd02_05.calc;
+package by.it.mialeshka.calc;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ public enum ResMan {
         mapСountry.put("be", "BY");
         mapСountry.put("en", "US");
     }
-    public static final String BASE_NAME = "by/it/mialeshka/jd02_05/calc/res/language";
+    public static final String BASE_NAME = "by/it/mialeshka/calc/res/language";
     private ResourceBundle bundle;
     Locale locale;
 

@@ -60,7 +60,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcException{
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar){
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
@@ -72,7 +72,7 @@ class Matrix extends Var {
         }
         else if(other instanceof Matrix){
             if(this.var.length != ((Matrix) other).var.length || this.var[0].length != ((Matrix) other).var[0].length)
-                throw new CalcException("Размеры матриц не равны");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.sizeMatrix));
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
                 for (int j = 0; j < this.var[0].length; j++) {
@@ -86,7 +86,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcException{
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar){
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
@@ -98,7 +98,7 @@ class Matrix extends Var {
         }
         else if(other instanceof Matrix){
             if(this.var.length != ((Matrix) other).var.length || this.var[0].length != ((Matrix) other).var[0].length)
-                throw new CalcException("Размеры матриц не равны");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.sizeMatrix));
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
                 for (int j = 0; j < this.var[0].length; j++) {
@@ -112,7 +112,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcException{
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar){
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
@@ -124,7 +124,7 @@ class Matrix extends Var {
         }
         else if(other instanceof Vector){
             if(this.var[0].length != ((Vector) other).var.length)
-                throw new CalcException("Размер вектора не соответствует матрице");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.sizeVectorMatrix));
             double[] res = new double[this.var.length];
             double[] vector = ((Vector) other).getVar();
             for (int i = 0; i < this.var.length; i++) {
@@ -136,7 +136,7 @@ class Matrix extends Var {
         }
         else {
             if(this.var[0].length != ((Matrix) other).var.length)
-                throw new CalcException("Размер матриц не соответствует операции *");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.sizeMatrixMul));
             double[][] res = new double[this.var.length][((Matrix) other).var.length];
             for (int i = 0; i < this.var.length; i++) {
                 for (int j = 0; j < ((Matrix) other).var[0].length; j++) {
@@ -150,10 +150,10 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcException{
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             if(((Scalar) other).var == 0)
-                throw new CalcException("Деление на ноль");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.divZero));
             double[][] res = new double[this.var.length][this.var[0].length];
             for (int i = 0; i < this.var.length; i++) {
                 for (int j = 0; j < this.var[0].length; j++) {

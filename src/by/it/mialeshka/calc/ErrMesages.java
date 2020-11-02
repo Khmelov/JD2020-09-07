@@ -1,4 +1,4 @@
-package by.it.mialeshka.jd02_05.calc;
+package by.it.mialeshka.calc;
 
 public interface ErrMesages {
     ResMan res = ResMan.INSTANCE;
