@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 abstract class Var implements Operation {
-    private static Map<String, Var> vars = new HashMap<>();
+    private static final Map<String, Var> vars = new HashMap<>();
 
     private static String dir(){
         return System.getProperty("user.dir") + File.separator + "src" + File.separator
@@ -23,7 +23,7 @@ abstract class Var implements Operation {
                 fileToSave.println(key+"="+vars.get(key));
             }
         } catch (IOException e) {
-            throw new CalcException("Сохраниеть переменные не удалось.");
+            throw new CalcException(ErrMesages.res.get(ErrMesages.VarSave));
         }
     }
 
@@ -36,7 +36,7 @@ abstract class Var implements Operation {
                     saveVar(parts[0], createVar(parts[1]));
                 }
             } catch (IOException e) {
-                throw new CalcException("Не удалось прочитать файл.");
+                throw new CalcException(ErrMesages.res.get(ErrMesages.rideFile));
             }
         }
     }
@@ -48,7 +48,7 @@ abstract class Var implements Operation {
     }
 
     static void printSortMap(){
-        Map<String, Var> sortVars = new TreeMap();
+        Map<String, Var> sortVars = new TreeMap<>();
         for (String key: vars.keySet()
              ) {
             sortVars.put(key, vars.get(key));
@@ -62,27 +62,27 @@ abstract class Var implements Operation {
 
 
     public String toString() {
-        return "Это класс Var";
+        return ErrMesages.res.get(ErrMesages.var);
     }
 
     @Override
     public Var add(Var other)  throws CalcException{
-        throw new CalcException("Опреация сложения "+ this + "+"+other+" невозможна");
+        throw new CalcException(String.format(ErrMesages.res.get(ErrMesages.varAdd), this, other));
     }
 
     @Override
     public Var sub(Var other)  throws CalcException{
-        throw  new CalcException("Опреация вычитания "+ this + "-"+other+" невозможна");
+        throw  new CalcException(String.format(ErrMesages.res.get(ErrMesages.varSub), this, other));
     }
 
     @Override
     public Var mul(Var other)  throws CalcException{
-        throw new CalcException("Опреация умножения "+ this + "*"+other+" невозможна");
+        throw new CalcException(String.format(ErrMesages.res.get(ErrMesages.varMul), this, other));
     }
 
     @Override
     public Var div(Var other)  throws CalcException{
-        throw new CalcException("Опреация деления "+ this + "/"+other+" невозможна");
+        throw new CalcException(String.format(ErrMesages.res.get(ErrMesages.varDiv), this, other));
     }
 
     static Var createVar(String strVar) throws CalcException{
@@ -99,7 +99,7 @@ abstract class Var implements Operation {
             return vars.get(strVar);
         }
         else {
-            throw new CalcException("Неизвестная переменная " + strVar);
+            throw new CalcException(String.format(ErrMesages.res.get(ErrMesages.varUnknown), strVar));
         }
     }
 }

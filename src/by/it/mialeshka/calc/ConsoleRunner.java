@@ -1,6 +1,5 @@
 package by.it.mialeshka.calc;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -28,23 +27,28 @@ public class ConsoleRunner {
                     }
                     break;
                 }
+
                 if (expression.equals("printvar")) {
                     Var.printMap();
                 }
+
                 if (expression.equals("sortvar")) {
                     Var.printSortMap();
                 }
 
-                try {
-                    Var result = parser.calc(expression);
-                    printer.print(result);
-                    }
-                catch (CalcException e){
-                    System.out.println(e.getMessage());
-                    Logs.saveLog(e.getMessage());
+                if(expression.equals("en") || expression.equals("ru") || expression.equals("be")){
+                    ErrMesages.res.setLocale(expression);
                 }
-
-
+                else{
+                    try {
+                        Var result = parser.calc(expression);
+                        printer.print(result);
+                    }
+                    catch (CalcException e){
+                        System.out.println(e.getMessage());
+                        Logs.saveLog(e.getMessage());
+                    }
+                }
             }
     }
 }
