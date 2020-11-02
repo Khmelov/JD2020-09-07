@@ -1,0 +1,15 @@
+err.lengthVectorErr = "Даўжыня вектараў не роўная";
+err.divZero = "Дзяленне на нуль";
+err.VarSave = "Сахраниеть зменныя не ўдалося."
+err.rideFile = "Не атрымалася прачытаць файл."
+err.varAdd = "Аперацыя складання %s + %s немагчымая."
+err.varSub = "Аперацыя аднімання %s - %s немагчымая."
+err.varMul = "Аперацыя множання %s * %s немагчымая."
+err.varDiv = "Аперацыя дзялення %s / %s немагчымая"
+err.varUnknown = "Невядомая пераменная %s"
+err.expressionUnknown = "Некарэктны выраз."
+err.expressionUnexpected = "Некарэктнае значэнне:"
+err.sizeMatrix = "Памеры матрыц не роўны"
+err.sizeVectorMatrix = "Памер вектара не адпавядае матрыцы"
+err.sizeMatrixMul = "Памер матрыц не адпавядае аперацыі *"
+msg.var = "Гэта клас Var"
