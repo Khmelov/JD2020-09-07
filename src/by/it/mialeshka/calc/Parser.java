@@ -1,5 +1,7 @@
 package by.it.mialeshka.calc;
 
+import by.it.mialeshka.jd02_06.LoggerEnum;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,16 +49,16 @@ class Parser {
 
         Logs.saveLog(expression+"="+operands.get(0));
 
-        return Var.createVar(operands.get(0));
+        return VarCreator.createVar(operands.get(0));
     }
 
     static Var oneOperation (String leftStr, String operation, String rightStr) throws CalcException {
-        Var right = Var.createVar(rightStr);
+        Var right = VarCreator.createVar(rightStr);
         if(operation.equals("=")){
             Logs.saveLog(leftStr + operation + rightStr);
             return Var.saveVar(leftStr, right);        }
 
-        Var left = Var.createVar(leftStr);
+        Var left = VarCreator.createVar(leftStr);
 
         if (left == null || right == null) {
             throw new CalcException(ErrMesages.res.get(ErrMesages.expressionUnknown));
