@@ -1,5 +1,6 @@
 package by.it.mialeshka.calc;
 
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -8,23 +9,9 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         Printer printer = new Printer();
 
-        try{
-            Var.getFileVar();
-        }
-        catch (CalcException e){
-            System.out.println(e.getMessage());
-            Logs.saveLog(e.getMessage());
-        }
             for (; ; ) {
                 String expression = scanner.nextLine();
                 if (expression.equals("end")) {
-                    try {
-                        Var.saveInFile();
-                    }
-                    catch (CalcException e){
-                        System.out.println(e.getMessage());
-                        Logs.saveLog(e.getMessage());
-                    }
                     break;
                 }
 

@@ -11,7 +11,7 @@ public class VarTest {
         String expression = "10.45";
         String expected = "10.45";
         System.out.println("Check " +expression);
-        String actual = Var.createVar(expression).toString();
+        String actual = VarCreator.createVar(expression).toString();
         assertEquals(expected, actual);
         System.out.println(actual);
     }
@@ -21,7 +21,7 @@ public class VarTest {
         String expression = "{1,2,3,4}";
         String expected = "{1.0, 2.0, 3.0, 4.0}";
         System.out.println("Check " +expression);
-        String actual = Var.createVar(expression).toString();
+        String actual = VarCreator.createVar(expression).toString();
         assertEquals(expected, actual);
         System.out.println(actual);
     }
@@ -31,7 +31,7 @@ public class VarTest {
         String expression = "{{1.35,2,12.5},{8,9,0}}";
         String expected = "{{1.35, 2.0, 12.5}, {8.0, 9.0, 0.0}}";
         System.out.println("Check " +expression);
-        String actual = Var.createVar(expression).toString();
+        String actual = VarCreator.createVar(expression).toString();
         assertEquals(expected, actual);
         System.out.println(actual);
     }
