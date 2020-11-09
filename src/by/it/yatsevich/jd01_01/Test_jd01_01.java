@@ -46,7 +46,7 @@ public class Test_jd01_01 {
 
     @Test(timeout = 1500)
     public void testTaskB3() throws Exception {
-        run("").include("C Новым Годом");
+        run("").include("C началом курса");
     }
 
     @Test(timeout = 1500)
