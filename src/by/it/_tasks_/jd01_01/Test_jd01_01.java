@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("all")
 
 //поставьте курсор на следующую строку и нажмите Ctrl+Shift+F10
 public class Test_jd01_01 {
@@ -104,7 +105,7 @@ public class Test_jd01_01 {
             if (methodName.startsWith("static")) {
                 methodName = methodName.replace("static", "").trim();
                 m = aClass.getDeclaredMethod(methodName, parameters);
-                if (Modifier.isStatic(m.getModifiers())) {
+                if (!Modifier.isStatic(m.getModifiers())) {
                     fail("\nERROR:Метод " + m.getName() + " должен быть статическим");
                 }
             } else {
@@ -230,7 +231,7 @@ public class Test_jd01_01 {
 
     private Test_jd01_01 find(String regexp) {
         Matcher matcher = Pattern.compile(regexp).matcher(strOut.toString());
-        assertFalse("ERROR:вывод не содержит паттерн: " + regexp + "\n",
+        assertTrue("ERROR:вывод не содержит паттерн: " + regexp + "\n",
                 matcher.find());
         return this;
     }
