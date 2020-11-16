@@ -5,8 +5,12 @@ import org.junit.Test;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -342,14 +346,15 @@ public class Test_jd01_09 {
                 "{{2.0, 4.0}, {6.0, 8.0}}", v3.toString());
     }
 
-    /*
+/*
 ===========================================================================================================
 НИЖЕ ВСПОМОГАТЕЛЬНЫЙ КОД ТЕСТОВ. НЕ МЕНЯЙТЕ В ЭТОМ ФАЙЛЕ НИЧЕГО.
 Но изучить как он работает - можно, это всегда будет полезно.
 ===========================================================================================================
  */
+
     //-------------------------------  методы ----------------------------------------------------------
-    private Class findClass(String SimpleName) {
+    private Class<?> findClass(String SimpleName) {
         String full = this.getClass().getName();
         String dogPath = full.replace(this.getClass().getSimpleName(), SimpleName);
         try {
@@ -360,19 +365,21 @@ public class Test_jd01_09 {
         return null;
     }
 
-    private Method checkMethod(String className, String methodName, Class<?>... parameters) throws Exception {
-        Class aClass = this.findClass(className);
+    protected Method checkMethod(String className, String methodName, Class<?>... parameters) {
+        Class<?> aClass = this.findClass(className);
         try {
             methodName = methodName.trim();
             Method m;
+            assert aClass != null;
             if (methodName.startsWith("static")) {
                 methodName = methodName.replace("static", "").trim();
                 m = aClass.getDeclaredMethod(methodName, parameters);
-                if ((m.getModifiers() & Modifier.STATIC) != Modifier.STATIC) {
+                if (!Modifier.isStatic(m.getModifiers())) {
                     fail("\nERROR:Метод " + m.getName() + " должен быть статическим");
                 }
-            } else
+            } else {
                 m = aClass.getDeclaredMethod(methodName, parameters);
+            }
             m.setAccessible(true);
             return m;
 
@@ -380,11 +387,11 @@ public class Test_jd01_09 {
             System.err.println("\nERROR:Не найден метод " + methodName + " либо у него неверная сигнатура");
             System.err.println("ERROR:Ожидаемый класс: " + className);
             System.err.println("ERROR:Ожидаемый метод: " + methodName);
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
-    private Method findMethod(Class<?> cl, String name, Class... param) {
+    private Method findMethod(Class<?> cl, String name, Class<?>... param) {
         try {
             return cl.getDeclaredMethod(name, param);
         } catch (NoSuchMethodException e) {
@@ -407,20 +414,16 @@ public class Test_jd01_09 {
 
     //метод находит и создает класс для тестирования
     //по имени вызывающего его метода, testTaskA1 будет работать с TaskA1
-    private static Test_jd01_09 run(String in) {
+    protected Test_jd01_09 run(String in) {
         return run(in, true);
     }
 
-    private static Test_jd01_09 run(String in, boolean runMain) {
-        Throwable t = new Throwable();
-        StackTraceElement trace[] = t.getStackTrace();
-        StackTraceElement element;
-        int i = 0;
-        do {
-            element = trace[i++];
-        }
-        while (!element.getMethodName().contains("test"));
-
+    private Test_jd01_09 run(String in, boolean runMain) {
+        StackTraceElement element = Stream.of(new Throwable().getStackTrace())
+                .filter(e -> e.getMethodName().startsWith("test"))
+                .findFirst()
+                .orElse(null);
+        assert element != null;
         String[] path = element.getClassName().split("\\.");
         String nameTestMethod = element.getMethodName();
         String clName = nameTestMethod.replace("test", "");
@@ -435,24 +438,19 @@ public class Test_jd01_09 {
 
     //-------------------------------  тест ----------------------------------------------------------
     public Test_jd01_09() {
-        //Конструктор тестов
     }
 
     //переменные теста
-    private String className;
-    private Class<?> aClass;
-    private PrintStream oldOut = System.out; //исходный поток вывода
-    private PrintStream newOut; //поле для перехвата потока вывода
-    private StringWriter strOut = new StringWriter(); //накопитель строки вывода
+    public Class<?> aClass; //тестируемый класс
+    private final PrintStream oldOut = System.out; //исходный поток вывода
+    private final PrintStream newOut; //поле для перехвата потока вывода
+    private final StringWriter strOut = new StringWriter(); //накопитель строки вывода
 
     //Основной конструктор тестов
     private Test_jd01_09(String className, String in, boolean runMain) {
-        //this.className = className;
         aClass = null;
         try {
             aClass = Class.forName(className);
-            this.className = className;
-
         } catch (ClassNotFoundException e) {
             fail("ERROR:Не найден класс " + className + "\n");
         }
@@ -462,30 +460,48 @@ public class Test_jd01_09 {
 
         if (runMain) //если нужно запускать, то запустим, иначе оставим только вывод
             try {
-                Class[] argTypes = new Class[]{String[].class};
+                Class<?>[] argTypes = new Class[]{String[].class};
                 Method main = aClass.getDeclaredMethod("main", argTypes);
                 main.invoke(null, (Object) new String[]{});
                 System.setOut(oldOut); //возврат вывода, нужен, только если был запуск
-            } catch (Exception x) {
-                x.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                fail("ERROR:В классе " + aClass.getSimpleName() + " нет метода \"public static void main\"");
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                fail("ERROR:В классе " + aClass.getSimpleName() + "не удалось выполнить метод \"public static void main\"");
             }
     }
 
 
     //проверка вывода
     private Test_jd01_09 is(String str) {
-        assertTrue("ERROR:Ожидается такой вывод:\n<---начало---->\n" + str + "<---конец--->",
-                strOut.toString().equals(str));
+        assertEquals("ERROR:Ожидается такой вывод:\n<---начало---->\n" + str + "<---конец--->",
+                strOut.toString(),
+                str);
         return this;
     }
 
-    private Test_jd01_09 include(String str) {
-        assertTrue("ERROR:Строка не найдена: " + str + "\n", strOut.toString().contains(str));
+    public Test_jd01_09 include(String str) {
+        assertTrue("ERROR:Строка не найдена: " + str + "\n",
+                strOut.toString().contains(str));
         return this;
     }
 
     private Test_jd01_09 exclude(String str) {
-        assertTrue("ERROR:Лишние данные в выводе: " + str + "\n", !strOut.toString().contains(str));
+        assertFalse("ERROR:Лишние данные в выводе: " + str + "\n",
+                strOut.toString().contains(str));
+        return this;
+    }
+
+    private Test_jd01_09 matches(String regexp) {
+        assertTrue("ERROR:вывод не соответствует паттерну: " + regexp + "\n",
+                strOut.toString().matches(regexp));
+        return this;
+    }
+
+    private Test_jd01_09 find(String regexp) {
+        Matcher matcher = Pattern.compile(regexp).matcher(strOut.toString());
+        assertTrue("ERROR:вывод не содержит паттерн: " + regexp + "\n",
+                matcher.find());
         return this;
     }
 
@@ -493,14 +509,13 @@ public class Test_jd01_09 {
     //логический блок перехвата вывода
     {
         newOut = new PrintStream(new OutputStream() {
-            private byte bytes[] = new byte[1];
+            private byte[] bytes = new byte[1];
             private int pos = 0;
 
             @Override
-            public void write(int b) throws IOException {
+            public void write(int b) {
                 if (pos == 0 && b == '\r') //пропуск \r (чтобы win mac и linux одинаково работали
                     return;
-                //ок. теперь можно делать разбор
                 if (pos == 0) { //определим кодировку https://ru.wikipedia.org/wiki/UTF-8
                     if ((b & 0b11110000) == 0b11110000) bytes = new byte[4];
                     else if ((b & 0b11100000) == 0b11100000) bytes = new byte[3];
@@ -514,6 +529,7 @@ public class Test_jd01_09 {
                     oldOut.append(s); //копию в обычный вывод
                     pos = 0; //готовим новый символ
                 }
+
             }
         });
     }
