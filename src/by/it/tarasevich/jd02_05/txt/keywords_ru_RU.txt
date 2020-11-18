@@ -1,4 +1,0 @@
-message.welcome=Приветствую Вас в моем коде!
-message.question=Как себя чувствуете?
-user.firstName=Павел
-user.lastName=Тарасевич

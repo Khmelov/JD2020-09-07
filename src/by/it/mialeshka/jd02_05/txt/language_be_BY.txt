@@ -1,4 +1,0 @@
-message.hello = Прывітанне!
-message.question = Як справы?
-user.firstName = Ина
-user.lastName = Мялешка
