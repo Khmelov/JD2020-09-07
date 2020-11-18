@@ -4,14 +4,9 @@ package by.it._tasks_.jd01_10;
 import by.it.HomeWork;
 import org.junit.Test;
 
-import java.io.*;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
