@@ -5,16 +5,7 @@ import by.it.HomeWork;
 import org.junit.Test;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
 
 @SuppressWarnings("all")
 
